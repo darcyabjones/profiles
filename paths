@@ -1,0 +1,44 @@
+# Compiler and library paths
+PATH=/usr/local/bin:/usr/lib64/openmpi/bin:$PATH
+
+
+# program specific paths.
+BEAST=/home/darcyabjones/bin/beast/bin
+BLAST=/home/darcyabjones/bin/blast/bin
+BOWTIE2=/home/darcyabjones/bin/bowtie2/bin
+BWA=/home/darcyabjones/bin/bwa/bin
+CLC=/home/darcyabjones/bin/clc/bin
+CLUSTALO=/home/darcyabjones/bin/clustalo/bin
+CLUSTALW=/home/darcyabjones/bin/clustalw/bin
+CONSAN=/home/darcyabjones/bin/consan/bin
+DIALIGN=/home/darcyabjones/bin/dialign/bin
+DIALIGNTX=/home/darcyabjones/bin/dialign-tx/bin
+EDIRECT=/home/darcyabjones/bin/edirect
+FIGTREE=/home/darcyabjones/bin/figtree/bin
+GOR=/home/darcyabjones/bin/gor/bin
+HMMER=/home/darcyabjones/bin/hmmer/bin
+KALIGN=/home/darcyabjones/bin/kalign/bin
+KALIGNVU=/home/darcyabjones/bin/kalignvu/bin
+MAFFT=/home/darcyabjones/bin/mafft/bin
+MENDELEY=/home/darcyabjones/bin/mendeleydesktop/bin
+MRBAYES=/home/darcyabjones/bin/mrbayes/bin
+MSAPROBS=/home/darcyabjones/bin/msaprobs/bin
+MUGSY=/home/darcyabjones/bin/mugsy/bin
+MUMMER=/home/darcyabjones/bin/mummer/bin
+MUMSA=/home/darcyabjones/bin/mumsa/bin
+MUSCLE=/home/darcyabjones/bin/muscle/bin
+NINJA=/home/darcyabjones/bin/ninja/bin
+PATHOGEN=/home/darcyabjones/bin/path-o-gen/bin
+PHYLIP=/home/darcyabjones/bin/phylip/bin
+QUICKTREE=/home/darcyabjones/bin/quicktree/bin
+TCOFFEE=/home/darcyabjones/bin/tcoffee/bin
+TRACER=/home/darcyabjones/bin/tracer/bin
+TREESTAT=/home/darcyabjones/bin/treestat/bin
+TRIMAL=/home/darcyabjones/bin/trimal/bin
+
+
+export PATH=$PATH:$BEAST:$BLAST:$BOWTIE2:$BWA:$CLC:$CLUSTALO:$CLUSTALW:$CONSAN:$DIALIGN:$DIALIGNTX:$EDIRECT:$FIGTREE:$GOR:$HMMER:$KALIGN:$KALIGNVU:$MAFFT:$MENDELEY:$MRBAYES:$MSAPROBS:$MUGSY:$MUMMER:$MUMSA:$MUSCLE:$NINJA:$PATHOGEN:$PHYLIP:$QUICKTREE:$TCOFFEE:$TRACER:$TREESTAT:$TRIMAL
+
+
+# Other program specific path variables
+export PLUGINS_4_TCOFFEE=/home/darcyabjones/bin/tcoffee/10.00.r1613/plugins/linux
