@@ -20,11 +20,12 @@ bindkey -v
 
 # Paths
 
-source /home/darcyabjones/.paths
+source $HOME/.paths
 
 # Aliases
 
-source /home/darcyabjones/.aliases
+source $HOME/.aliases
 
-PERL_MB_OPT="--install_base \"/home/darcyabjones/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/darcyabjones/perl5"; export PERL_MM_OPT;
+3 ENV variables
+
+source $HOME/.env

@@ -16,4 +16,4 @@ fi
  
 # Paths
 
-source /home/darcyabjones/.paths 
+source $HOME/.paths 

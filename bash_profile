@@ -5,8 +5,8 @@ if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
 
-# User specific environment and startup programs
+# paths
+source $HOME/.paths
 
-PATH=$PATH:$HOME/.local/bin:$HOME/bin
-
-export PATH
+# Aliases
+source $HOME/.aliases
