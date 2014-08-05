@@ -4,9 +4,3 @@
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
-
-# paths
-source $HOME/.paths
-
-# Aliases
-source $HOME/.aliases

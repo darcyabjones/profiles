@@ -26,6 +26,6 @@ source $HOME/.paths
 
 source $HOME/.aliases
 
-3 ENV variables
+# ENV variables
 
 source $HOME/.env
