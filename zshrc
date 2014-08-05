@@ -14,10 +14,6 @@ SAVEHIST=1000
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
-# If not running interactively, do not do anything
-[[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
-
 # Paths
 
 source $HOME/.paths
@@ -29,3 +25,7 @@ source $HOME/.aliases
 # ENV variables
 
 source $HOME/.env
+
+# OH-MY-ZSH settings
+
+plugins=(git osx python)
