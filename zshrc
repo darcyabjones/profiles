@@ -28,4 +28,4 @@ source $HOME/.env
 
 # OH-MY-ZSH settings
 
-plugins=(git osx python)
+plugins=(git osx python brew docker git-extras pip tmux virtualenvwrapper yum)
