@@ -4,3 +4,4 @@ PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 export PLUGINS_4_TCOFFEE=$HOME/bin/tcoffee/10.00.r1613/plugins/linux
 
 export SHELL=/usr/local/bin/zsh
+export DIALIGN2_DIR=$HOME/bin/dialign/2.2.1/dialign2_dir
