@@ -86,5 +86,4 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Aliases
-
 source $HOME/.aliases
