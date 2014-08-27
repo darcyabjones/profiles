@@ -15,8 +15,10 @@ PATH=/usr/local/bin:/usr/lib64/openmpi/bin:$PATH
 ##########################################################################
 # Program specific paths
 MENDELEY=$HOME/bin/mendeleydesktop/bin
-
-export PATH=$PATH:MENDELEY
+TEX=/usr/local/texlive/2014/bin/x86_64-linux
+export PATH=$TEX:$PATH:MENDELEY
+export INFOPATH=$INFOPATH:/usr/local/texlive/2014/texmf-dist/doc/info
+export MANPATH=$MANPATH:/usr/local/texlive/2014/texmf-dist/doc/man
 
 ##########################################################################
 # Bio program specific paths
