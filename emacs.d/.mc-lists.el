@@ -4,9 +4,11 @@
 (setq mc/cmds-to-run-for-all
       '(
 		keyboard-quit
+		noweb-indent-line
 		suspend-frame
 		))
 
 (setq mc/cmds-to-run-once
       '(
+		noweb-mouse-first-button
 		))
