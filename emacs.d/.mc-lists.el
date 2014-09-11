@@ -6,6 +6,7 @@
 		ess-smart-comma
 		keyboard-quit
 		mouse-set-region
+		noweb-indent-line
 		suspend-frame
 		))
 
