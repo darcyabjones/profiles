@@ -3,10 +3,13 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+		ess-smart-comma
 		keyboard-quit
+		mouse-set-region
 		suspend-frame
 		))
 
 (setq mc/cmds-to-run-once
       '(
+		noweb-mouse-first-button
 		))
