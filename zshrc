@@ -13,8 +13,14 @@ compinit
 # End of lines added by compinstall
 
 
-# Antigen Stuff
-source /home/darcy/.antigen/antigen.zsh
+### Paths etc
+source $HOME/.aliases
+source $HOME/.env
+source $HOME/.paths
+
+
+### Antigen Stuff ###
+source $HOME/.antigen/antigen.zsh
 
 #
 # Load the oh-my-zsh's library.
