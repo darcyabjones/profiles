@@ -11,3 +11,59 @@ zstyle :compinstall filename '/home/darcy/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+
+# Antigen Stuff
+source /home/darcy/.antigen/antigen.zsh
+
+#
+# Load the oh-my-zsh's library.
+#
+antigen use oh-my-zsh
+antigen bundle robbyrussell/oh-my-zsh lib/
+
+#
+# Antigen Theme
+#
+antigen theme robbyrussell
+
+#
+# Antigen Bundles
+#
+antigen bundle git
+antigen bundle git-extras
+
+antigen bundle tmuxinator
+antigen bundle tmux
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle rupa/z
+antigen bundle docker
+antigen bundle ssh-agent
+antigen bundle emacs
+
+# Python Plugins
+antigen bundle pip
+antigen bundle python
+antigen bundle virtualenv
+antigen bundle pep8
+
+# OS specific plugins
+if [[ $CURRENT_OS == 'OS X' ]]; then
+    antigen bundle brew
+    antigen bundle brew-cask
+    antigen bundle gem
+    antigen bundle osx
+elif [[ $CURRENT_OS == 'Linux' ]]; then
+    # None so far...
+
+    if [[ $DISTRO == 'CentOS' ]]; then
+        antigen bundle centos
+    fi
+    if [[ $DISTRO == 'Fedora' ]]; then
+        antigen bundle yum
+elif [[ $CURRENT_OS == 'Cygwin' ]]; then
+    antigen bundle cygwin
+fi
+
+# Tell antigen that you're done.
+antigen apply
