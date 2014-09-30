@@ -67,9 +67,12 @@ elif [[ $CURRENT_OS == 'Linux' ]]; then
     fi
     if [[ $DISTRO == 'Fedora' ]]; then
         antigen bundle yum
+    fi
 elif [[ $CURRENT_OS == 'Cygwin' ]]; then
     antigen bundle cygwin
 fi
 
 # Tell antigen that you're done.
 antigen apply
+
+echo "\t\n"
