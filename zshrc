@@ -39,8 +39,8 @@ antigen theme robbyrussell
 antigen bundle git
 antigen bundle git-extras
 
-antigen bundle tmuxinator
-antigen bundle tmux
+# antigen bundle tmuxinator
+# antigen bundle tmux
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle rupa/z
 antigen bundle docker
