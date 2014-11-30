@@ -28,7 +28,7 @@ mkdir $HOME/data
 #
 # Install the basic yum packages from the fedora repo
 #
-sudo yum update
+sudo yum -y update
 sudo yum install -y alien
 sudo yum install -y argtable argtable-devel
 sudo yum install -y autoconf
@@ -89,12 +89,62 @@ sudo yum install -y xclip
 sudo yum install -y zsh
 
 #
+# Add special repositories
+#
+sudo cp $PROFILES/repos/* /etc/yum.repos.d/
+sudo yum update
+
+#
+# Spotify
+#
+sudo yum-config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
+sudo yum -y install spotify-client
+#
+# Fedy
+#
+su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer && rm ./fedy-installer"
+sudo fedy --exex rpmfusion_repos
+sudo fedy --exec google_chrome
+sudo fedy --exec nautilus_dropbox
+sudo fedy --exec oracle_jdk
+sudo fedy --exec skype_linux
+sudo fedy --exec sublime_text3
+sudo fedy --exec adobe_flash
+sudo fedy --exec disk_io_scheduler
+sudo fedy --exec dvd_playback
+sudo fedy --exec media_codecs
+sudo fedy --exec oracle_jre
+
+#
+# chromium
+#
+sudo yum install -y chromium
+
+#
+# rpmfusion ones
+#
+sudo yum install -y rpmfusion-free-release rpmfusion-nonfree-release 
+sudo yum install -y akmod-wl
+sudo yum install -y akmods
+sudo yum install -y vlc vlc-core
+
+#
+# Check that broadcom drivers are running
+#
+# Make sure the module built for your kernel
+sudo akmods
+# See if the module is loaded (if no results, it's not)
+sudo lsmod | grep wl
+# Manually load the module
+sudo modprobe wl
+
+#
 # Generate an ssh key
 #
 ssh-keygen -t rsa -C "darcy.ab.jones@gmail.com" -N ""
 
 
-# Creates a new ssh key, using the provided email as a label
+# Creates a new ssh key, using the provided email as a label 
 # nb the spaces here are important because they use the default ssh location.
 # start the ssh-agent in the background
 eval "$(ssh-agent -s)"
@@ -132,59 +182,10 @@ git clone git@github.com:darcyabjones/markdown.git $HOME/Templates/markdown
 git clone git@github.com:darcyabjones/tex.git $HOME/Templates/tex
 
 #
-# Add special repositories
-#
-sudo cp ./repos/* /etc/yum.repos.d/
-sudo yum update
-
-#
-# Spotify
-#
-sudo yum-config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
-sudo yum -y install spotify-client
-#
-# Fedy
-#
-su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer"
-sudo fedy --exex rpmfusion_repos
-sudo fedy --exec google_chrome
-sudo fedy --exec nautilus_dropbox
-sudo fedy --exec oracle_jdk
-sudo fedy --exec skype_linux
-sudo fedy --exec adobe_flash
-sudo fedy --exec disk_io_scheduler
-sudo fedy --exec dvd_playback
-sudo fedy --exec media_codecs
-sudo fedy --exec oracle_jre
-
-#
-# chromium
-#
-sudo yum install -y chromium
-
-#
-# rpmfusion ones
-#
-sudo yum install -y rpmfusion-free-release rpmfusion-nonfree-release 
-sudo yum install -y akmod-wl
-sudo yum install -y akmods
-sudo yum install -y vlc vlc-core
-
-#
-# Check that broadcom drivers are running
-#
-# Make sure the module built for your kernel
-sudo akmods
-# See if the module is loaded (if no results, it's not)
-sudo lsmod | grep wl
-# Manually load the module
-sudo modprobe wl
-
-#
 # mendeley
 #
 wget -t 3 http://www.mendeley.com/client/get/100-2 -O $SOURCES/mendeleydesktop-x86_64.tar.bz2
-tar xjvf $SOURCES/mendeleydesktop-x86_64.tar.bz2
+tar -xjf $SOURCES/mendeleydesktop-x86_64.tar.bz2 -C $SOURCES
 sudo mv $SOURCES/mendeleydesktop-x86_64 /usr/local/mendeleydesktop
 sudo ln -s /usr/local/mendeleydesktop/bin/mendeleydesktop /usr/local/bin/mendeleydesktop
 
@@ -207,14 +208,13 @@ script/grunt install
 
 cd $HOME
 
-
 #
 # Install the python distributions
 #
 wget -t 3 https://bootstrap.pypa.io/ez_setup.py -O $SOURCES/ez_setup.py
 
 wget -t 3 https://www.python.org/ftp/python/3.4.2/Python-3.4.2.tgz -O $SOURCES/Python-3.4.2.tgz
-tar zxvf $SOURCES/Python-3.4.2.tgz
+tar -zxf $SOURCES/Python-3.4.2.tgz -C $SOURCES
 cd $SOURCES/Python-3.4.2
 ./configure
 make
@@ -225,7 +225,7 @@ sudo pip3.4 install virtualenv
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/3.3.6/Python-3.3.6.tgz -O $SOURCES/Python-3.3.6.tgz
-tar zxvf $SOURCES/Python-3.3.6.tgz
+tar -zxf $SOURCES/Python-3.3.6.tgz -C $SOURCES
 cd $SOURCES/Python-3.3.6
 ./configure
 make
@@ -236,7 +236,7 @@ sudo pip3.3 install virtualenv
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz -O $SOURCES/Python-3.2.6.tgz
-tar zxvf $SOURCES/Python-3.2.6.tgz
+tar -zxf $SOURCES/Python-3.2.6.tgz -C $SOURCES
 cd $SOURCES/Python-3.2.6
 ./configure
 make
@@ -247,7 +247,7 @@ sudo pip3.2 install virtualenv
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz -O $SOURCES/Python-3.1.5.tgz
-tar zxvf $SOURCES/Python-3.1.5.tgz
+tar -zxf $SOURCES/Python-3.1.5.tgz -C $SOURCES
 cd $SOURCES/Python-3.1.5
 ./configure
 make
@@ -258,7 +258,7 @@ sudo pip3.1 install virtualenv
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz -O $SOURCES/Python-2.7.8.tgz
-tar zxvf $SOURCES/Python-2.7.8.tgz
+tar -zxf $SOURCES/Python-2.7.8.tgz -C $SOURCES
 cd $SOURCES/Python-2.7.8
 ./configure
 make
@@ -269,7 +269,7 @@ sudo pip2.7 install virtualenv
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz -O $SOURCES/Python-2.6.9.tgz
-tar zxvf $SOURCES/Python-2.6.9.tgz
+tar -zxf $SOURCES/Python-2.6.9.tgz -C $SOURCES
 cd $SOURCES/Python-2.6.9
 ./configure
 make
@@ -283,7 +283,7 @@ cd $HOME
 # Install the R distributions
 #
 wget -t 3 http://cran.ms.unimelb.edu.au/src/base/R-3/R-3.1.2.tar.gz -O $SOURCES/R-3.1.2.tar.gz
-tar zxvf $SOURCES/R-3.1.2.tar.gz
+tar -zxf $SOURCES/R-3.1.2.tar.gz -C $SOURCES
 cd $SOURCES/R-3.1.2
 ./configure
 make && make check && sudo make install
@@ -341,7 +341,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/beast
 
 wget -t 3 http://tree.bio.ed.ac.uk/download.php?id=91&num=3 -O $SOURCES/BEAST-1.8.1.tgz
-tar zxvf $SOURCES/BEAST-1.8.1.tgz
+tar -zxf $SOURCES/BEAST-1.8.1.tgz -C $SOURCES
 
 cd $HOME
 
@@ -350,7 +350,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/blast
 
 wget -t 3 ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.30/ncbi-blast-2.2.30+-src.tar.gz -O $SOURCES/ncbi-blast-2.2.30+-src.tar.gz
-tar zxvf $SOURCES/ncbi-blast-2.2.30+-src.tar.gz
+tar -zxf $SOURCES/ncbi-blast-2.2.30+-src.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -359,7 +359,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/bwa
 
 wget -t 3 http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.10.tar.bz2/download -O bwa-0.7.10.tar.bz2
-tar zxvf $SOURCES/bwa-0.7.10.tar.bz2
+tar -xjf $SOURCES/bwa-0.7.10.tar.bz2 -C $SOURCES
 
 cd $HOME
 
@@ -368,7 +368,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/clustalo
 
 wget -t 3 http://www.clustal.org/omega/clustal-omega-1.2.1.tar.gz -O $SOURCES/clustal-omega-1.2.1.tar.gz
-tar zxvf $SOURCES/clustal-omega-1.2.1.tar.gz
+tar -zxf $SOURCES/clustal-omega-1.2.1.tar.gz -C $SOURCES
 cd $SOURCES/clustal-omega-1.2.1
 ./configure
 make && make check
@@ -382,7 +382,7 @@ cd $HOME
 cd $HOME/Downloads
 sudo mkdir /usr/local/clustalw
 wget -t 3 http://www.clustal.org/download/current/clustalw-2.1.tar.gz -O $SOURCES/clustalw-2.1.tar.gz
-tar zxvf $SOURCES/clustalw-2.1.tar.gz
+tar -zxf $SOURCES/clustalw-2.1.tar.gz -C $SOURCES
 cd $SOURCES/clustalw-2.1
 ./configure
 make && make check
@@ -397,7 +397,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/dialign
 
 wget -t 3 http://dialign.gobics.de/download/dialign_package.tgz -O $HOME/dialign_package.tgz
-tar zxvf $HOME/dialign_package.tgz
+tar -zxf $HOME/dialign_package.tgz -C $SOURCES
 
 cd $HOME
 
@@ -406,7 +406,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/dialign-tx
 
 wget -t 3 http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz -O $SOURCES/DIALIGN-TX_1.0.2.tar.gz
-tar zxvf $SOURCES/DIALIGN-TX_1.0.2.tar.gz
+tar -zxf $SOURCES/DIALIGN-TX_1.0.2.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -415,14 +415,14 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/diamond
 
 wget -t 3 http://www-ab.informatik.uni-tuebingen.de/data/software/diamond/download/public/diamond.tar.gz -O $SOURCES/diamond.tar.gz
-tar zxvf $SOURCES/diamond.tar.gz
+tar -zxf $SOURCES/diamond.tar.gz -C $SOURCES
 
 # Entrez Direct
 cd $HOME/Downloads
 sudo mkdir /usr/local/edirect
 
 wget -t 3 ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz -O $SOURCES/edirect.tar.gz
-tar zxvf $SOURCES/edirect.tar.gz
+tar -zxf $SOURCES/edirect.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -431,7 +431,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/figtree
 
 wget -t 3 http://tree.bio.ed.ac.uk/download.php?id=90&num=3 -O $SOURCES/FigTree_v1.4.2.tgz
-tar zxvf $SOURCES/FigTree_v1.4.2.tgz
+tar -zxf $SOURCES/FigTree_v1.4.2.tgz -C $SOURCES
 
 cd $HOME
 
@@ -440,7 +440,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/hmmer
 
 wget -t 3 ftp://selab.janelia.org/pub/software/hmmer3/3.1b1/hmmer-3.1b1.tar.gz -O $SOURCES/hmmer-3.1b1.tar.gz
-tar zxvf $SOURCES/hmmer-3.1b1.tar.gz
+tar -zxf $SOURCES/hmmer-3.1b1.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -449,7 +449,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/kalign
 
 wget -t 3 http://msa.sbc.su.se/bin/sources/kalign/current.tar.gz -O $SOURCES/kalign-2.tar.gz
-tar zxvf $SOURCES/kalign-2.tar.gz
+tar -zxf $SOURCES/kalign-2.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -458,7 +458,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/kalignvu
 
 wget -t 3 http://msa.sbc.su.se/bin/sources/kalignvu_2.1.tgz -O $SOURCES/kalignvu_2.1.tgz
-tar zxvf $SOURCES/kalignvu_2.1.tgz
+tar -zxf $SOURCES/kalignvu_2.1.tgz -C $SOURCES
 
 cd $HOME
 
@@ -467,7 +467,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/mafft
 
 wget -t 3 http://mafft.cbrc.jp/alignment/software/mafft-7.212-with-extensions-src.tgz -O $SOURCES/mafft-7.212.tgz
-tar zxvf $SOURCES/mafft-7.212.tgz
+tar -zxf $SOURCES/mafft-7.212.tgz -C $SOURCES
 
 cd $HOME
 
@@ -476,7 +476,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/msaprobs
 
 wget -t 3 wget http://sourceforge.net/projects/msaprobs/files/MSAProbs-0.9.7.tar.gz/download -O $SOURCES/MSAProbs-0.9.7.tar.gz
-tar zxvf $SOURCES/MSAProbs-0.9.7.tar.gz
+tar -zxf $SOURCES/MSAProbs-0.9.7.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -485,7 +485,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/mummer
 
 wget -t 3 http://sourceforge.net/projects/mummer/files/mummer/3.23/MUMmer3.23.tar.gz/download -O $SOURCES/MUMmer3.23.tar.gz
-tar zxvf $SOURCES/MUMmer3.23.tar.gz
+tar -zxf $SOURCES/MUMmer3.23.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -494,7 +494,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/mumsa
 
 wget -t 3 http://msa.sbc.su.se/bin/sources/mumsa-1.0.tgz -O $SOURCES/mumsa-1.0.tgz
-tar zxvf $SOURCES/mumsa-1.0.tgz
+tar -zxf $SOURCES/mumsa-1.0.tgz -C $SOURCES
 
 cd $HOME
 
@@ -503,7 +503,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/muscle
 
 wget -t 3 http://drive5.com/muscle/muscle3.8.425_src.tar.gz -O $SOURCES/muscle3.8.425_src.tar.gz
-tar zxvf $SOURCES/muscle3.8.425_src.tar.gz
+tar -zxf $SOURCES/muscle3.8.425_src.tar.gz -C $SOURCES
 
 # see also http://www.drive5.com/muscle/downloads3.8.31/muscle3.8.31_src.tar.gz
 
@@ -514,7 +514,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/ninja
 
 wget -t 3 http://nimbletwist.com/software/ninja/old_distros/ninja_1.2.2.tgz -O $SOURCES/ninja_1.2.2.tgz
-tar zxvf $SOURCES/ninja_1.2.2.tgz
+tar -zxf $SOURCES/ninja_1.2.2.tgz -C $SOURCES
 
 cd $HOME
 
@@ -523,7 +523,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/phylip
 
 wget -t 3 http://evolution.gs.washington.edu/phylip/download/phylip-3.696.tar.gz -O $SOURCES/phylip-3.696.tar.gz
-tar zxvf $SOURCES/phylip-3.696.tar.gz
+tar -zxf $SOURCES/phylip-3.696.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -532,7 +532,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/phyml
 
 wget -t 3 https://github.com/stephaneguindon/phyml-downloads/releases/download/stable/phyml-20120412.tar.gz -O $SOURCES/phyml-20120412.tar.gz
-tar zxvf $SOURCES/phyml-20120412.tar.gz
+tar -zxf $SOURCES/phyml-20120412.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -541,7 +541,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/quicktree
 
 wget -t 3 ftp://ftp.sanger.ac.uk/pub/resources/software/quicktree/quicktree.tar.gz -O $SOURCES/quicktree.tar.gz
-tar zxvf $SOURCES/quicktree.tar.gz
+tar -zxf $SOURCES/quicktree.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -566,7 +566,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/tcoffee
 
 wget -t 3 http://www.tcoffee.org/Packages/Stable/Latest/linux/T-COFFEE_installer_Version_11.00.8cbe486_linux_x64.tar.gz -O $SOURCES/T-COFFEE_installer_Version_11.00.8cbe486_linux_x64.tar.gz
-tar zxvf $SOURCES/T-COFFEE_installer_Version_11.00.8cbe486_linux_x64.tar.gz
+tar -zxf $SOURCES/T-COFFEE_installer_Version_11.00.8cbe486_linux_x64.tar.gz -C $SOURCES
 #Do something
 
 cd $HOME
@@ -576,7 +576,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/tracer
 
 wget -t 3 http://tree.bio.ed.ac.uk/download.php?id=88&num=3 -O $SOURCES/Tracer_v1.6.tgz
-tar zxvf $SOURCES/Tracer_v1.6.tgz
+tar -zxf $SOURCES/Tracer_v1.6.tgz -C $SOURCES
 
 cd $HOME
 
@@ -585,7 +585,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/trimal
 
 wget -t 3 http://trimal.cgenomics.org/_media/trimal.v1.2rev59.tar.gz -O $SOURCES/trimal.v1.2rev59.tar.gz
-tar zxvf $SOURCES/trimal.v1.2rev59.tar.gz
+tar -zxf $SOURCES/trimal.v1.2rev59.tar.gz -C $SOURCES
 
 cd $HOME
 
@@ -594,7 +594,7 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/velvet
 
 wget -t 3 https://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.10.tgz -O $SOURCES/velvet_1.2.10.tgz
-tar zxvf $SOURCES/velvet_1.2.10.tgz
+tar -zxf $SOURCES/velvet_1.2.10.tgz -C $SOURCES
 
 cd $HOME
 
@@ -603,6 +603,6 @@ cd $HOME/Downloads
 sudo mkdir /usr/local/oases
 
 wget -t 3 http://www.ebi.ac.uk/~zerbino/oases/oases_0.2.08.tgz -O $SOURCES/oases_0.2.08.tgz
-tar zxvf $SOURCES/oases_0.2.08.tgz
+tar -zxf $SOURCES/oases_0.2.08.tgz -C $SOURCES
 
 cd $HOME
