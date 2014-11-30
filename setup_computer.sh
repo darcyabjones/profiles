@@ -219,9 +219,9 @@ cd $SOURCES/Python-3.4.2
 ./configure
 make
 sudo make install
-sudo python3.4 $SOURCES/ez_setup.py
-sudo easy_install-3.4 pip 
-sudo pip3.4 install virtualenv
+su -c "python3.4 $SOURCES/ez_setup.py"
+su -c "easy_install-3.4 pip"
+su -c "pip3.4 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/3.3.6/Python-3.3.6.tgz -O $SOURCES/Python-3.3.6.tgz
@@ -230,9 +230,9 @@ cd $SOURCES/Python-3.3.6
 ./configure
 make
 sudo make altinstall
-sudo python3.3 $SOURCES/ez_setup.py
-sudo easy_install-3.3 pip 
-sudo pip3.3 install virtualenv
+su -c "python3.3 $SOURCES/ez_setup.py"
+su -c "easy_install-3.3 pip"
+su -c "pip3.3 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz -O $SOURCES/Python-3.2.6.tgz
@@ -241,9 +241,9 @@ cd $SOURCES/Python-3.2.6
 ./configure
 make
 sudo make altinstall
-sudo python3.2 $SOURCES/ez_setup.py
-sudo easy_install-3.2 pip 
-sudo pip3.2 install virtualenv
+su -c "python3.2 $SOURCES/ez_setup.py"
+su -c "easy_install-3.2 pip"
+su -c "pip3.2 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz -O $SOURCES/Python-3.1.5.tgz
@@ -252,9 +252,9 @@ cd $SOURCES/Python-3.1.5
 ./configure
 make
 sudo make altinstall
-sudo python3.1 $SOURCES/ez_setup.py
-sudo easy_install-3.1 pip 
-sudo pip3.1 install virtualenv
+su -c "python3.1 $SOURCES/ez_setup.py"
+su -c "easy_install-3.1 pip"
+su -c "pip3.1 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz -O $SOURCES/Python-2.7.8.tgz
@@ -263,9 +263,9 @@ cd $SOURCES/Python-2.7.8
 ./configure
 make
 sudo make altinstall
-sudo python2.7 $SOURCES/ez_setup.py
-sudo easy_install-2.7 pip 
-sudo pip2.7 install virtualenv
+su -c "python2.7 $SOURCES/ez_setup.py"
+su -c "easy_install-2.7 pip"
+su -c "pip2.7 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz -O $SOURCES/Python-2.6.9.tgz
@@ -274,9 +274,9 @@ cd $SOURCES/Python-2.6.9
 ./configure
 make
 sudo make altinstall
-sudo python2.6 $SOURCES/ez_setup.py
-sudo easy_install-2.6 pip 
-sudo pip2.6 install virtualenv
+su -c "python2.6 $SOURCES/ez_setup.py"
+su -c "easy_install-2.6 pip"
+su -c "pip2.6 install virtualenv"
 cd $HOME
 
 #
