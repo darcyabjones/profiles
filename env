@@ -1,6 +1,10 @@
 PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
+export DIALIGN2_DIR=/usr/local/dialign/2/dialign2_dir/
+export MAFFT_BINARIES=/usr/local/mafft/7.212/binaries
+
 export SHELL=/usr/bin/zsh
 
 stty -ixon
+
