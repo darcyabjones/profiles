@@ -26,145 +26,6 @@ mkdir $HOME/research
 mkdir $HOME/data
 
 #
-# Install the basic yum packages from the fedora repo
-#
-sudo yum -y update
-sudo yum install -y alien argtable argtable-devel autoconf \
-	automake bash bash-completion \
-	bibutils bibutils-devel bibutils-libs \
-	boost boost-devel \
-	cairo cairo-devel cairo-gobject cairo-gobject-devel \
-	cmake \
-	cpp \
-	cups cups-libs \
-	curl \
-	docker-io \
-	doxygen \
-	emacs emacs-common emacs-filesystem emacs-nox \
-	freeglut-devel \
-	gawk \
-	gcc gcc-c++ gcc-gfortran \
-	ghc-base ghc-base-devel \
-	ghc-pandoc ghc-pandoc-citeproc ghc-pandoc-devel ghc-pandoc-types ghc-pandoc-types-devel \
-	gimp gimp_libs \
-	git git-core git-extras \
-	git-annex git-annex-docs \
-	glibc-devel \
-	gmp gmp-devel gmp-static \
-	gmpc gmpc-devel\
-	graphviz graphviz-devel \
-	htop \
-	inkscape\
-	java \
-	kernel-devel \
-	latexmk \
-	levien-inconsolata-fonts \
-	libgcrypt libgcrypt-devel \
-	libgnome-keyring-devel \
-	libmpc libmpc-devel \
-	libtool libtool-sultdl-devel libtool-ltdl \
-	libpng libpng-devel \
-	libXi-devel libXmu-devel \
-	mesa-libGLU-devel \
-	mpc \
-	mpfr mpfr-devel \
-	nodejs \
-	npm \
-	opencl-filesystem opencl-headers \
-	opencl-utils opencl-utils-devel \
-	OpenTK \
-	openmpi openmpi-devel openmpi-java-devel \
-	openssh openssh-clients openssh-server \
-	openssl openssl-devel openssl-libs openssl-static \
-	openvpn \
-	pandoc pandoc-citeproc pandoc-pdf \
-	postgresql postgresql-contrib postgresql-libs postgresql-server \
-	qt qt-devel qt-x11 \
-	qtwebkit qtwebkit-devel \
-	readline readline-devel readline-static \
-	rpm rpm-build rpm-build-libs rpm-libs rpm-python \
-	rpmdevtools \
-	samba-client samba-common samba-libs \
-	sed \
-	sqlite sqlite-devel sqlite-doc sqlite-tcl \
-	tcsh \
-	texlive texlive-base \
-	thunderbird thunderbird-lightning thunderbird-enigmail thunderbird-lightning-gdata \
-	tk tk-devel \
-	tkinker \
-	tmux \
-	transmission-common transmission-gtk \
-	vim vim-common vim-enhanced vim-filesystem vim-minimal \
-	vpnc \
-	wget \
-	xclip \
-	zsh
-
-#
-# Add special repositories
-#
-sudo cp $PROFILES/repos/* /etc/yum.repos.d/
-sudo yum update
-
-#
-# Spotify
-#
-sudo yum-config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
-sudo yum -y install spotify-client
-
-#
-# Fedy
-#
-su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer && rm ./fedy-installer"
-sudo fedy --exex rpmfusion_repos
-sudo fedy --exec google_chrome
-sudo fedy --exec nautilus_dropbox
-sudo fedy --exec oracle_jdk
-sudo fedy --exec skype_linux
-sudo fedy --exec sublime_text3
-sudo fedy --exec adobe_flash
-sudo fedy --exec disk_io_scheduler
-sudo fedy --exec dvd_playback
-sudo fedy --exec media_codecs
-sudo fedy --exec oracle_jre
-
-#
-# chromium
-#
-sudo yum install -y chromium
-
-#
-# rpmfusion ones
-#
-sudo yum install -y rpmfusion-free-release rpmfusion-nonfree-release \
-	akmods akmod-wl \
-	vlc vlc-core \
-	xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-libs
-
-#
-# CUDA
-#
-
-# Get the latest from here: https://developer.nvidia.com/cuda-toolkit
-# See: http://www.r-tutor.com/gpu-computing/cuda-installation/cuda6.5-fc20
-# Make sure you change .paths on update
-
-sudo rpm -Uhv http://developer.download.nvidia.com/compute/cuda/repos/fedora20/x86_64/cuda-repo-fedora20-6.5-14.x86_64.rpm
-
-sudo yum -y install cuda
-
-
-#
-# Check that broadcom drivers are running
-#
-# Make sure the module built for your kernel
-sudo akmods
-# See if the module is loaded (if no results, it's not)
-sudo lsmod | grep wl
-# Manually load the module
-sudo modprobe wl
-
-#
 # Generate an ssh key
 #
 ssh-keygen -t rsa -C "darcy.ab.jones@gmail.com" -N ""
@@ -223,8 +84,8 @@ git clone https://github.com/zsh-users/antigen.git $HOME/.antigen
 #
 # Install atom
 #
-sudo rpm -Uhv https://atom.io/download/rpm
-sudo yum install atom
+# https://atom.io/download/deb
+#
 
 #
 # Install the python distributions
