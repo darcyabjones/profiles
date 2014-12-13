@@ -70,6 +70,7 @@ sudo yum install -y alien argtable argtable-devel autoconf \
 	docker-io \
 	doxygen \
 	emacs emacs-common emacs-filesystem emacs-nox \
+	filezilla \
 	freeglut-devel \
 	gawk \
 	gcc gcc-c++ gcc-gfortran \
