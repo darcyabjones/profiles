@@ -108,6 +108,7 @@ sudo yum install -y alien argtable argtable-devel autoconf \
 	openvpn \
 	pandoc pandoc-citeproc pandoc-pdf \
 	postgresql postgresql-contrib postgresql-libs postgresql-server \
+	python-devel python3-devel \
 	qt qt-devel qt-x11 \
 	qtwebkit qtwebkit-devel \
 	readline readline-devel readline-static \
