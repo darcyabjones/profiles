@@ -87,12 +87,13 @@ sudo yum install -y \
 	glibc-devel \
 	gmp gmp-devel gmp-static \
 	gmpc gmpc-devel \
+	gnome-tweak-tool \
 	gparted \
 	graphviz graphviz-devel \
 	htop \
 	inkscape \
 	java \
-	json-c-devel
+	json-c-devel \
 	kernel-devel \
 	latexmk \
 	levien-inconsolata-fonts \
@@ -155,7 +156,7 @@ sudo yum -y install spotify-client
 # Fedy
 #
 su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer && rm ./fedy-installer"
-sudo fedy --exex rpmfusion_repos
+sudo fedy --exec rpmfusion_repos
 sudo fedy --exec google_chrome
 sudo fedy --exec nautilus_dropbox
 sudo fedy --exec oracle_jdk
@@ -176,8 +177,8 @@ sudo yum install -y chromium
 # rpmfusion ones
 #
 sudo yum install -y rpmfusion-free-release rpmfusion-nonfree-release \
-	akmods akmod-wl \
 	vlc vlc-core \
+	akmods akmod-wl
 
 # xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-libs
 
@@ -268,67 +269,55 @@ wget -t 3 https://bootstrap.pypa.io/ez_setup.py -O $SOURCES/ez_setup.py
 wget -t 3 https://www.python.org/ftp/python/3.4.2/Python-3.4.2.tgz -O $SOURCES/Python-3.4.2.tgz
 tar -zxf $SOURCES/Python-3.4.2.tgz -C $SOURCES
 cd $SOURCES/Python-3.4.2
-./configure
-make
+$SOURCES/Python-3.4.2/configure && \
+make && \
 sudo make install
-su -c "python3.4 $SOURCES/ez_setup.py"
-su -c "easy_install-3.4 pip"
-su -c "pip3.4 install virtualenv"
+su -c "python3.4 $SOURCES/ez_setup.py && easy_install-3.4 pip && pip3.4 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/3.3.6/Python-3.3.6.tgz -O $SOURCES/Python-3.3.6.tgz
 tar -zxf $SOURCES/Python-3.3.6.tgz -C $SOURCES
 cd $SOURCES/Python-3.3.6
-./configure
-make
+$SOURCES/Python-3.3.6/configure && \
+make && \
 sudo make altinstall
-su -c "python3.3 $SOURCES/ez_setup.py"
-su -c "easy_install-3.3 pip"
-su -c "pip3.3 install virtualenv"
+su -c "python3.3 $SOURCES/ez_setup.py && easy_install-3.3 pip && pip3.3 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz -O $SOURCES/Python-3.2.6.tgz
 tar -zxf $SOURCES/Python-3.2.6.tgz -C $SOURCES
 cd $SOURCES/Python-3.2.6
-./configure
-make
-sudo make altinstall
-su -c "python3.2 $SOURCES/ez_setup.py"
-su -c "easy_install-3.2 pip"
-su -c "pip3.2 install virtualenv"
+$SOURCES/Python-3.2.6/configure && \
+make && \
+sudo make install
+su -c "python3.2 $SOURCES/ez_setup.py && easy_install-3.2 pip && pip3.2 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz -O $SOURCES/Python-3.1.5.tgz
 tar -zxf $SOURCES/Python-3.1.5.tgz -C $SOURCES
 cd $SOURCES/Python-3.1.5
-./configure
-make
+$SOURCES/Python-3.1.5/configure && \
+make && \
 sudo make altinstall
-su -c "python3.1 $SOURCES/ez_setup.py"
-su -c "easy_install-3.1 pip"
-su -c "pip3.1 install virtualenv"
+su -c "python3.1 $SOURCES/ez_setup.py && easy_install-3.1 pip && pip3.1 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz -O $SOURCES/Python-2.7.8.tgz
 tar -zxf $SOURCES/Python-2.7.8.tgz -C $SOURCES
 cd $SOURCES/Python-2.7.8
-./configure
-make
+$SOURCES/Python-2.7.8/configure && \
+make && \
 sudo make altinstall
-su -c "python2.7 $SOURCES/ez_setup.py"
-su -c "easy_install-2.7 pip"
-su -c "pip2.7 install virtualenv"
+su -c "python2.7 $SOURCES/ez_setup.py && easy_install-2.7 pip && pip2.7 install virtualenv"
 cd $HOME
 
 wget -t 3 https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz -O $SOURCES/Python-2.6.9.tgz
 tar -zxf $SOURCES/Python-2.6.9.tgz -C $SOURCES
 cd $SOURCES/Python-2.6.9
-./configure
-make
+$SOURCES/Python-2.6.9/configure && \
+make && \
 sudo make altinstall
-su -c "python2.6 $SOURCES/ez_setup.py"
-su -c "easy_install-2.6 pip"
-su -c "pip2.6 install virtualenv"
+su -c "python2.6 $SOURCES/ez_setup.py && easy_install-2.6 pip && pip2.6 install virtualenv"
 cd $HOME
 
 #
@@ -337,19 +326,18 @@ cd $HOME
 wget -t 3 http://cran.ms.unimelb.edu.au/src/base/R-3/R-3.1.2.tar.gz -O $SOURCES/R-3.1.2.tar.gz
 tar -zxf $SOURCES/R-3.1.2.tar.gz -C $SOURCES
 cd $SOURCES/R-3.1.2
-./configure
+$SOURCES/R-3.1.2/configure --enable-R-shlib && \
 make && make check && sudo make install
 
-sudo chmod o+w -R /usr/local/lib64/R/
+sudo chmod o+w -R /usr/local/lib64/R
 
 cd $HOME
 
 #
 # RStudio
 #
-cd $HOME/Downloads
 wget -t 3 http://download1.rstudio.org/rstudio-0.98.1091-x86_64.rpm -O $SOURCES/rstudio-0.98.1091-x86_64.rpm
-sudo yum --nogpgcheck localinstall $SOURCES/rstudio-0.98.1091-x86_64.rpm
+sudo yum --nogpgcheck -y localinstall $SOURCES/rstudio-0.98.1091-x86_64.rpm
 
 #
 # Julia
@@ -411,8 +399,6 @@ sudo chsh -s /usr/bin/zsh $USER
 #sudo make install
 ## export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
 
-#cd $HOME
-
 # BEAST
 sudo mkdir /usr/local/beast
 
@@ -426,14 +412,13 @@ sudo ln -sf /usr/local/beast/1.8.1/bin/loganalyser /usr/local/bin/loganalyser-1.
 sudo ln -sf /usr/local/beast/1.8.1/bin/logcombiner /usr/local/bin/logcombiner-1.8.1
 sudo ln -sf /usr/local/beast/1.8.1/bin/treeannotator /usr/local/bin/treeannotator-1.8.1
 sudo ln -sf /usr/local/beast/1.8.1/bin/treestat /usr/local/bin/treestat-1.8.1
-cd $HOME
 
 # Bedtools
 sudo mkdir /usr/local/bedtools
 
 wget -t 3 -O $SOURCES/Bedtools2-2.22.0.tar.gz https://github.com/arq5x/bedtools2/archive/v2.22.0.tar.gz
 tar -zxf $SOURCES/Bedtools2-2.22.0.tar.gz -C $SOURCES
-cd $SOURCES/Bedtools2-2.22.0
+cd $SOURCES/bedtools2-2.22.0
 make && \
 sudo mv $SOURCES/bedtools2-2.22.0 /usr/local/bedtools/2.22.0 && \
 sudo ln -sf /usr/local/bedtools/2.22.0/bin/* /usr/local/bin && \
@@ -481,44 +466,41 @@ sudo mkdir /usr/local/blast
 wget -t 3 -O $SOURCES/ncbi-blast-2.2.30+-src.tar.gz ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.30/ncbi-blast-2.2.30+-src.tar.gz
 tar -zxf $SOURCES/ncbi-blast-2.2.30+-src.tar.gz -C $SOURCES
 cd $SOURCES/ncbi-blast-2.2.30+-src/c++
-$SOURCES/ncbi-blast-2.2.30+-src/c++/configure
-make
-
-sudo mv $SOURCES/ncbi-blast-2.2.30+-src/c++ /usr/local/blast/2.2.30+
-rmdir $SOURCES/ncbi-blast-2.2.30+-src
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/* /usr/local/bin
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastdb_aliastool /usr/local/bin/blastdb_aliastool-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastn /usr/local/bin/blastn-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/deltablast /usr/local/bin/deltablast-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/makembindex /usr/local/bin/makembindex-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/rpstblastn /usr/local/bin/rpstblastn-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/tblastn /usr/local/bin/tblastn-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastdbcheck /usr/local/bin/blastdbcheck-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastp /usr/local/bin/blastp-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/dustmasker /usr/local/bin/dustmasker-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/makeprofiledb /usr/local/bin/makeprofiledb-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/seedtop /usr/local/bin/seedtop-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/tblastx /usr/local/bin/tblastx-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastdbcmd /usr/local/bin/blastdbcmd-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastx /usr/local/bin/blastx-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/gene_info_reader /usr/local/bin/gene_info_reader-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/project_tree_builder /usr/local/bin/project_tree_builder-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/segmasker /usr/local/bin/segmasker-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/update_blastdb.pl /usr/local/bin/update_blastdb.pl-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastdbcp /usr/local/bin/blastdbcp-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/convert2blastmask /usr/local/bin/convert2blastmask-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/legacy_blast.pl /usr/local/bin/legacy_blast-2.2.30+.pl
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/psiblast /usr/local/bin/psiblast-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/seqdb_demo /usr/local/bin/seqdb_demo-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/windowmasker /usr/local/bin/windowmasker-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blast_formatter /usr/local/bin/blast_formatter-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/datatool /usr/local/bin/datatool-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/makeblastdb /usr/local/bin/makeblastdb-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/rpsblast /usr/local/bin/rpsblast-2.2.30+
-sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/seqdb_perf /usr/local/bin/seqdb_perf-2.2.30+
+$SOURCES/ncbi-blast-2.2.30+-src/c++/configure && \
+make && \
+sudo mv $SOURCES/ncbi-blast-2.2.30+-src/c++ /usr/local/blast/2.2.30+ && \
+rmdir $SOURCES/ncbi-blast-2.2.30+-src && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/* /usr/local/bin && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastdb_aliastool /usr/local/bin/blastdb_aliastool-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastn /usr/local/bin/blastn-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/deltablast /usr/local/bin/deltablast-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/makembindex /usr/local/bin/makembindex-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/rpstblastn /usr/local/bin/rpstblastn-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/tblastn /usr/local/bin/tblastn-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastdbcheck /usr/local/bin/blastdbcheck-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastp /usr/local/bin/blastp-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/dustmasker /usr/local/bin/dustmasker-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/makeprofiledb /usr/local/bin/makeprofiledb-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/seedtop /usr/local/bin/seedtop-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/tblastx /usr/local/bin/tblastx-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastdbcmd /usr/local/bin/blastdbcmd-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastx /usr/local/bin/blastx-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/gene_info_reader /usr/local/bin/gene_info_reader-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/project_tree_builder /usr/local/bin/project_tree_builder-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/segmasker /usr/local/bin/segmasker-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/update_blastdb.pl /usr/local/bin/update_blastdb.pl-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blastdbcp /usr/local/bin/blastdbcp-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/convert2blastmask /usr/local/bin/convert2blastmask-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/legacy_blast.pl /usr/local/bin/legacy_blast-2.2.30+.pl && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/psiblast /usr/local/bin/psiblast-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/seqdb_demo /usr/local/bin/seqdb_demo-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/windowmasker /usr/local/bin/windowmasker-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/blast_formatter /usr/local/bin/blast_formatter-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/datatool /usr/local/bin/datatool-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/makeblastdb /usr/local/bin/makeblastdb-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/rpsblast /usr/local/bin/rpsblast-2.2.30+ && \
+sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/seqdb_perf /usr/local/bin/seqdb_perf-2.2.30+ && \
 sudo ln -sf /usr/local/blast/2.2.30+/ReleaseMT/bin/windowmasker_2.2.22_adapter.py /usr/local/bin/windowmasker_2.2.22_adapter-2.2.30+.py
-
-cd $HOME
 
 # BWA
 sudo mkdir /usr/local/bwa
@@ -535,8 +517,6 @@ sudo ln -sf /usr/local/bwa/0.7.10/qualfa2fq.pl /usr/local/bin/qualfa2fq-0.7.10.p
 sudo ln -sf /usr/local/bwa/0.7.10/xa2multi.pl /usr/local/bin/xa2multi.pl && \
 sudo ln -sf /usr/local/bwa/0.7.10/xa2multi.pl /usr/local/bin/xa2multi-0.7.10.pl
 
-cd $HOME
-
 # Clustal-O
 sudo mkdir /usr/local/clustalo
 
@@ -550,8 +530,6 @@ sudo mv $SOURCES/clustal-omega-1.2.1 /usr/local/clustalo/1.2.1 && \
 sudo ln -sf /usr/local/clustalo/1.2.1/src/clustalo /usr/local/bin/clustalo && \
 sudo ln -sf /usr/local/clustalo/1.2.1/src/clustalo /usr/local/bin/clustalo-1.2.1
 
-cd $HOME
-
 # Clustalw2
 sudo mkdir /usr/local/clustalw
 wget -t 3 -O $SOURCES/clustalw-2.1.tar.gz http://www.clustal.org/download/current/clustalw-2.1.tar.gz
@@ -564,7 +542,6 @@ sudo mv $SOURCES/clustalw-2.1 /usr/local/clustalw/2.1 && \
 sudo ln -sf /usr/local/clustalw/2.1/src/clustalw2 /usr/local/bin/clustalw && \
 sudo ln -sf /usr/local/clustalw/2.1/src/clustalw2 /usr/local/bin/clustalw2 && \
 sudo ln -sf /usr/local/clustalw/2.1/src/clustalw2 /usr/local/bin/clustalw-2.1
-cd $HOME
 
 # Dialign
 sudo mkdir /usr/local/dialign
@@ -581,7 +558,6 @@ sudo ln -sf /usr/local/dialign/2/src/dialign2-2 /usr/local/bin/dialign2 && \
 sudo ln -sf /usr/local/dialign/2/src/dialign2-2 /usr/local/bin/dialign-2
 
 # Note that setenv DIALIGN2_DIR /your_path/dialign2_dir/ is already in the .envs file
-cd $HOME
 
 # Dialign-TX
 sudo mkdir /usr/local/dialign-tx
@@ -597,9 +573,6 @@ sudo mv $SOURCES/DIALIGN-TX_1.0.2 /usr/local/dialign-tx/1.0.2 && \
 sudo ln -sf /usr/local/dialign-tx/1.0.2/bin/dialign-tx /usr/local/bin/dialign-tx && \
 sudo ln -sf /usr/local/dialign-tx/1.0.2/bin/dialign-tx /usr/local/bin/dialign-tx-1.0.2
 
-cd $HOME
-
-
 # Diamond
 sudo mkdir /usr/local/diamond
 
@@ -613,14 +586,11 @@ sudo mv $SOURCES/diamond /usr/local/diamond/0.6.3 && \
 sudo ln -sf /usr/local/diamond/0.6.3/diamond /usr/local/bin/diamond && \
 sudo ln -sf /usr/local/diamond/0.6.3/diamond /usr/local/bin/diamond-0.6.3
 
-cd $HOME
-
 # Entrez Direct
 wget -t 3 -O $SOURCES/edirect.tar.gz ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz
 tar -zxf $SOURCES/edirect.tar.gz -C $SOURCES
 sudo mv $SOURCES/edirect /usr/local/edirect && \
 sudo ln -sf /usr/local/edirect/!(README) /usr/local/bin/
-cd $HOME
 
 # Figtree
 sudo mkdir /usr/local/figtree
@@ -631,8 +601,6 @@ chmod a+x $SOURCES/FigTree_v1.4.2/bin/figtree
 sudo mv $SOURCES/FigTree_v1.4.2 /usr/local/figtree/1.4.2 && \
 sudo ln -sf /usr/local/figtree/1.4.2/bin/figtree /usr/local/bin/figtree && \
 sudo ln -sf /usr/local/figtree/1.4.2/bin/figtree /usr/local/bin/figtree-1.4.2
-
-cd $HOME
 
 # FSA
 sudo mkdir /usr/local/fsa
@@ -709,9 +677,6 @@ sudo ln -sf /usr/local/hmmer/3.1b1/src/nhmmer /usr/local/bin/nhmmer-3.1b1 && \
 sudo ln -sf /usr/local/hmmer/3.1b1/src/nhmmscan /usr/local/bin/nhmmscan-3.1b1 && \
 sudo ln -sf /usr/local/hmmer/3.1b1/src/alimask /usr/local/bin/alimask-3.1b1
 
-
-cd $HOME
-
 # Kalign
 sudo mkdir /usr/local/kalign
 
@@ -726,7 +691,6 @@ sudo mv $SOURCES/kalign-2 /usr/local/kalign/2 && \
 sudo ln -sf /usr/local/kalign/2/kalign /usr/local/bin/kalign && \
 sudo ln -sf /usr/local/kalign/2/kalign /usr/local/bin/kalign2 && \
 sudo ln -sf /usr/local/kalign/2/kalign /usr/local/bin/kalign-2
-cd $HOME
 
 # Kalignvu
 sudo mkdir /usr/local/kalignvu
@@ -738,8 +702,6 @@ make && \
 sudo mv $SOURCES/kalignvu_2.1 /usr/local/kalignvu/2.1 && \
 sudo ln -sf /usr/local/kalignvu/2.1/kalignvu /usr/local/bin/kalignvu && \
 sudo ln -sf /usr/local/kalignvu/2.1/kalignvu /usr/local/bin/kalignvu-2.1
-
-cd $HOME
 
 # Mafft
 sudo mkdir /usr/local/mafft
@@ -760,8 +722,6 @@ sudo ln -sf /usr/local/mafft/7.212/scripts/mafft-sparsecore.rb /usr/local/bin/ma
 
 # Mafft binaries variable is set in .env
 
-cd $HOME
-
 # msaprobs
 sudo mkdir /usr/local/msaprobs
 
@@ -772,8 +732,6 @@ make && \
 sudo mv $SOURCES/MSAProbs-0.9.7 /usr/local/msaprobs/0.9.7 && \
 sudo ln -sf /usr/local/msaprobs/0.9.7/MSAProbs/msaprobs /usr/local/bin/MSAProbs && \
 sudo ln -sf /usr/local/msaprobs/0.9.7/MSAProbs/msaprobs /usr/local/bin/MSAProbs-0.9.7
-
-cd $HOME
 
 # mummer
 sudo mkdir /usr/local/mummer
@@ -827,8 +785,6 @@ sudo ln -sf /usr/local/mummer/3.23/show-diff /usr/local/bin/show-diff-3.23 && \
 sudo ln -sf /usr/local/mummer/3.23/show-snps /usr/local/bin/show-snps-3.23 && \
 sudo ln -sf /usr/local/mummer/3.23/show-tiling /usr/local/bin/show-tiling-3.23
 
-cd $HOME
-
 # Mumsa
 sudo mkdir /usr/local/mumsa
 
@@ -840,8 +796,6 @@ sudo mv $SOURCES/mumsa-1.0 /usr/local/mumsa/1.0 && \
 sudo ln -sf /usr/local/mumsa/1.0/mumsa /usr/local/bin/mumsa && \
 sudo ln -sf /usr/local/mumsa/1.0/mumsa /usr/local/bin/mumsa-1.0
 
-cd $HOME
-
 # muscle
 sudo mkdir /usr/local/muscle
 
@@ -852,8 +806,6 @@ sudo mv $SOURCES/muscle /usr/local/muscle/3.8.31 && \
 sudo ln -sf /usr/local/muscle/3.8.31/muscle3.8.31_i86linux64 /usr/local/bin/muscle && \
 sudo ln -sf /usr/local/muscle/3.8.31/muscle3.8.31_i86linux64 /usr/local/bin/muscle-3.8.31
 
-cd $HOME
-
 # ninja
 sudo mkdir /usr/local/ninja
 
@@ -862,8 +814,6 @@ tar -zxf $SOURCES/ninja_1.2.2.tgz -C $SOURCES
 sudo mv $SOURCES/ninja_1.2.2 /usr/local/ninja/1.2.2 && \
 sudo ln -s /usr/local/ninja/1.2.2/ninja /usr/local/bin/ninja && \
 sudo ln -s /usr/local/ninja/1.2.2/ninja /usr/local/bin/ninja-1.2.2
-
-cd $HOME
 
 # Phylip
 sudo mkdir /usr/local/phylip
@@ -916,8 +866,6 @@ sudo ln -sf /usr/local/phylip/3.696/exe/retree /usr/local/bin/retree-3.696 && \
 sudo ln -sf /usr/local/phylip/3.696/exe/seqboot /usr/local/bin/seqboot-3.696 && \
 sudo ln -sf /usr/local/phylip/3.696/exe/treedist /usr/local/bin/treedist-3.696
 
-cd $HOME
-
 # PhyML
 sudo mkdir /usr/local/phyml
 
@@ -930,8 +878,6 @@ sudo mv $SOURCES/phyml-20120412 /usr/local/phyml/20120412 && \
 sudo ln -sf /usr/local/phyml/20120412/src/phyml /usr/local/bin/phyml && \
 sudo ln -sf /usr/local/phyml/20120412/src/phyml /usr/local/bin/phyml-20120412
 
-cd $HOME
-
 # Quicktree
 sudo mkdir /usr/local/quicktree
 
@@ -943,11 +889,10 @@ sudo mv $SOURCES/quicktree_1.1 /usr/local/quicktree/1.1 && \
 sudo ln -sf /usr/local/quicktree/1.1/bin/quicktree /usr/local/bin/quicktree && \
 sudo ln -sf /usr/local/quicktree/1.1/bin/quicktree /usr/local/bin/quicktree-1.1
 
-cd $HOME
-
 # RAxML
 sudo mkdir /usr/local/raxml
 
+cd $HOME
 git clone git@github.com:stamatak/standard-RAxML.git $SOURCES/RAxML
 cd $SOURCES/RAxML
 git checkout v8.1.7
@@ -955,19 +900,26 @@ make -f Makefile.SSE3.PTHREADS.gcc && \
 rm *.o && \
 make -f Makefile.SSE3.MPI.gcc  && \
 rm *.o && \
+make -f Makefile.AVX.PTHREADS.gcc && \
+rm *.o && \
+make -f Makefile.AVX.MPI.gcc && \
+rm *.o && \
 sudo mv $SOURCES/RAxML /usr/local/raxml/8.1.7 && \
-sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-SSE3 /usr/local/bin/raxml-mpi && \
-sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-SSE3 /usr/local/bin/raxml-mpi-8.1.7 && \
-sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-pthreads && \
-sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-pthreads-8.1.7 && \
-sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml && \
-sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-8.1.7
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-SSE3 /usr/local/bin/raxml-mpi-SSE3 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-SSE3 /usr/local/bin/raxml-mpi-SSE3-8.1.7 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-pthreads-SSE3 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-pthreads-SSE3-8.1.7 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-SSE3 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-SSE3-8.1.7 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-AVX /usr/local/bin/raxml-mpi-AVX && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-AVX /usr/local/bin/raxml-mpi-AVX-8.1.7 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-AVX /usr/local/bin/raxml-pthreads-AVX && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-AVX /usr/local/bin/raxml-pthreads-AVX-8.1.7 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-AVX /usr/local/bin/raxml-AVX && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-AVX /usr/local/bin/raxml && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-AVX /usr/local/bin/raxml-8.1.7
 
-# make -f Makefile.AVX.PTHREADS.gcc
-# make -f Makefile.AVX.MPI.gcc
 # Requires mpicc in path
-cd $HOME
-
 
 # T-Coffee
 sudo mkdir /usr/local/tcoffee
@@ -990,8 +942,6 @@ sudo mv $SOURCES/T-COFFEE_installer_Version_11.00.8cbe486_linux_x64 /usr/local/t
 sudo ln -sf /usr/local/tcoffee/11.00.8cbe486/bin/t_coffee /usr/local/bin/t_coffee && \
 sudo ln -sf /usr/local/tcoffee/11.00.8cbe486/bin/t_coffee /usr/local/bin/t_coffee-11.00.8cbe486
 
-cd $HOME
-
 # Tracer
 sudo mkdir /usr/local/tracer
 
@@ -1001,8 +951,6 @@ chmod a+x $SOURCES/Tracer_v1.6/bin/tracer
 sudo mv $SOURCES/Tracer_v1.6 /usr/local/tracer/1.6 && \
 sudo ln -sf /usr/local/tracer/1.6/bin/tracer /usr/local/bin/tracer && \
 sudo ln -sf /usr/local/tracer/1.6/bin/tracer /usr/local/bin/tracer-1.6
-
-cd $HOME
 
 # TrimAL
 sudo mkdir /usr/local/trimal
@@ -1017,8 +965,6 @@ sudo ln -sf /usr/local/trimal/1.2rev59/source/readal /usr/local/bin/readal && \
 sudo ln -sf /usr/local/trimal/1.2rev59/source/trimal /usr/local/bin/trimal-1.2rev59 && \
 sudo ln -sf /usr/local/trimal/1.2rev59/source/readal /usr/local/bin/readal-1.2rev59
 
-cd $HOME
-
 # Velvet
 sudo mkdir /usr/local/velvet
 
@@ -1031,8 +977,6 @@ sudo ln -sf /usr/local/velvet/1.2.10/velveth /usr/local/bin/velveth && \
 sudo ln -sf /usr/local/velvet/1.2.10/velvetg /usr/local/bin/velvetg && \
 sudo ln -sf /usr/local/velvet/1.2.10/velveth /usr/local/bin/velveth-1.2.10 && \
 sudo ln -sf /usr/local/velvet/1.2.10/velvetg /usr/local/bin/velvetg-1.2.10
-
-cd $HOME
 
 ## Oases
 #sudo mkdir /usr/local/oases
