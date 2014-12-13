@@ -31,7 +31,7 @@ antigen bundle robbyrussell/oh-my-zsh lib/
 #
 # Antigen Theme
 #
-antigen theme robbyrussell
+antigen theme darcy 
 
 #
 # Antigen Bundles
@@ -46,6 +46,9 @@ antigen bundle rupa/z
 antigen bundle docker
 antigen bundle ssh-agent
 antigen bundle emacs
+antigen bundle postgres
+antigen bundle atom
+
 
 # Python Plugins
 antigen bundle pip
