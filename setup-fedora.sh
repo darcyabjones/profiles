@@ -58,8 +58,13 @@ mkdir $HOME/data
 # Install the basic yum packages from the fedora repo
 #
 sudo yum -y update
-sudo yum install -y alien argtable argtable-devel autoconf \
-	automake bash bash-completion \
+sudo yum install -y \
+	alien \
+	argtable argtable-devel \
+	autoconf \
+	automake \
+	bash \
+	bash-completion \
 	bibutils bibutils-devel bibutils-libs \
 	boost boost-devel \
 	cairo cairo-devel cairo-gobject cairo-gobject-devel \
@@ -81,10 +86,11 @@ sudo yum install -y alien argtable argtable-devel autoconf \
 	git-annex git-annex-docs \
 	glibc-devel \
 	gmp gmp-devel gmp-static \
-	gmpc gmpc-devel\
+	gmpc gmpc-devel \
+	gparted \
 	graphviz graphviz-devel \
 	htop \
-	inkscape\
+	inkscape \
 	java \
 	kernel-devel \
 	latexmk \
@@ -92,7 +98,7 @@ sudo yum install -y alien argtable argtable-devel autoconf \
 	libgcrypt libgcrypt-devel \
 	libgnome-keyring-devel \
 	libmpc libmpc-devel \
-	libtool libtool-sultdl-devel libtool-ltdl \
+	libtool libtool-ltdl-devel libtool-ltdl \
 	libpng libpng-devel \
 	libXi-devel libXmu-devel \
 	mesa-libGLU-devel \
