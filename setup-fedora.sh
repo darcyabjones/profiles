@@ -6,7 +6,7 @@
 ssh-keygen -t rsa -C "darcy.ab.jones@gmail.com" -N ""
 
 
-# Creates a new ssh key, using the provided email as a label 
+# Creates a new ssh key, using the provided email as a label
 # nb the spaces here are important because they use the default ssh location.
 # start the ssh-agent in the background
 eval "$(ssh-agent -s)"
@@ -61,7 +61,7 @@ sudo yum -y update
 sudo yum install -y alien argtable argtable-devel autoconf \
 	automake bash bash-completion \
 	bibutils bibutils-devel bibutils-libs \
-	boost boost-devel \
+	boost boost-devel boost-filesystem boost-build \
 	cairo cairo-devel cairo-gobject cairo-gobject-devel \
 	cmake \
 	cpp \
@@ -75,19 +75,21 @@ sudo yum install -y alien argtable argtable-devel autoconf \
 	gcc gcc-c++ gcc-gfortran \
 	ghc-base ghc-base-devel \
 	ghc-pandoc ghc-pandoc-citeproc ghc-pandoc-devel ghc-pandoc-types ghc-pandoc-types-devel \
-	gimp gimp_libs \
+	gimp gimp-libs \
 	git-core git-extras \
 	git-annex git-annex-docs \
 	glibc-devel \
 	gmp gmp-devel gmp-static \
-	gmpc gmpc-devel\
+	gmpc gmpc-devel \
 	graphviz graphviz-devel \
 	htop \
-	inkscape\
+	inkscape \
 	java \
+	json-c-devel
 	kernel-devel \
 	latexmk \
 	levien-inconsolata-fonts \
+	libcurl-devel \
 	libgcrypt libgcrypt-devel \
 	libgnome-keyring-devel \
 	libmpc libmpc-devel \
@@ -168,7 +170,8 @@ sudo yum install -y chromium
 sudo yum install -y rpmfusion-free-release rpmfusion-nonfree-release \
 	akmods akmod-wl \
 	vlc vlc-core \
-	xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-libs
+
+# xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-libs
 
 #
 # Check that broadcom drivers are running
@@ -231,6 +234,23 @@ git clone https://github.com/zsh-users/antigen.git $HOME/.antigen
 #
 sudo rpm -Uhv https://atom.io/download/rpm
 sudo yum install atom
+
+#
+# Configure thunderbird
+#
+gsettings set org.gnome.desktop.default-applications.office.calendar exec thunderbird
+sudo vim /usr/share/applications/mozilla-thunderbird.desktop
+
+# Edit the line
+# MimeType=message/rfc822;x-scheme-handler/mailto;text/calendar;text/x-vcard;:
+
+#Now, close text editor and update database file:
+# update-desktop-database -q
+
+#
+# Grive
+#
+# Yet to come
 
 #
 # Install the python distributions
@@ -338,6 +358,13 @@ sudo ln -sf /usr/local/julia/0.3/julia /usr/local/bin/julia
 sudo ln -sf /usr/local/julia/0.3/julia /usr/local/bin/julia-0.3
 
 #
+# perl stuff
+#
+sudo perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 1); $c->edit(prerequisites_policy => "follow"); $c->edit(build_requires_install_policy => "yes"); $c->commit'
+sudo cpan -u
+sudo cpan -i SOAP::Lite
+
+#
 # Heroku
 #
 wget -qO- https://toolbelt.heroku.com/install.sh | sudo sh
@@ -392,6 +419,53 @@ sudo ln -sf /usr/local/beast/1.8.1/bin/logcombiner /usr/local/bin/logcombiner-1.
 sudo ln -sf /usr/local/beast/1.8.1/bin/treeannotator /usr/local/bin/treeannotator-1.8.1
 sudo ln -sf /usr/local/beast/1.8.1/bin/treestat /usr/local/bin/treestat-1.8.1
 cd $HOME
+
+# Bedtools
+sudo mkdir /usr/local/bedtools
+
+wget -t 3 -O $SOURCES/Bedtools2-2.22.0.tar.gz https://github.com/arq5x/bedtools2/archive/v2.22.0.tar.gz
+tar -zxf $SOURCES/Bedtools2-2.22.0.tar.gz -C $SOURCES
+cd $SOURCES/Bedtools2-2.22.0
+make && \
+sudo mv $SOURCES/bedtools2-2.22.0 /usr/local/bedtools/2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/* /usr/local/bin && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/annotateBed /usr/local/bin/annotateBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/bamToBed /usr/local/bin/bamToBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/bamToFastq /usr/local/bin/bamToFastq-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/bed12ToBed6 /usr/local/bin/bed12ToBed6-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/bedpeToBam /usr/local/bin/bedpeToBam-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/bedToBam /usr/local/bin/bedToBam-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/bedToIgv /usr/local/bin/bedToIgv-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/bedtools /usr/local/bin/bedtools-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/closestBed /usr/local/bin/closestBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/clusterBed /usr/local/bin/clusterBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/complementBed /usr/local/bin/complementBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/coverageBed /usr/local/bin/coverageBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/expandCols /usr/local/bin/expandCols-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/fastaFromBed /usr/local/bin/fastaFromBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/flankBed /usr/local/bin/flankBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/genomeCoverageBed /usr/local/bin/genomeCoverageBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/getOverlap /usr/local/bin/getOverlap-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/groupBy /usr/local/bin/groupBy-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/intersectBed /usr/local/bin/intersectBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/linksBed /usr/local/bin/linksBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/mapBed /usr/local/bin/mapBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/maskFastaFromBed /usr/local/bin/maskFastaFromBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/mergeBed /usr/local/bin/mergeBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/multiBamCov /usr/local/bin/multiBamCov-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/multiIntersectBed /usr/local/bin/multiIntersectBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/nucBed /usr/local/bin/nucBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/pairToBed /usr/local/bin/pairToBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/pairToPair /usr/local/bin/pairToPair-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/randomBed /usr/local/bin/randomBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/shuffleBed /usr/local/bin/shuffleBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/slopBed /usr/local/bin/slopBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/sortBed /usr/local/bin/sortBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/subtractBed /usr/local/bin/subtractBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/tagBam /usr/local/bin/tagBam-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/unionBedGraphs /usr/local/bin/unionBedGraphs-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/windowBed /usr/local/bin/windowBed-2.22.0 && \
+sudo ln -sf /usr/local/bedtools/2.22.0/bin/windowMaker /usr/local/bin/windowMaker-2.22.0
 
 # BLAST+
 sudo mkdir /usr/local/blast
@@ -874,21 +948,20 @@ rm *.o && \
 make -f Makefile.SSE3.MPI.gcc  && \
 rm *.o && \
 sudo mv $SOURCES/RAxML /usr/local/raxml/8.1.7 && \
-ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-SSE3 /usr/local/bin/raxml-mpi && \
-ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-SSE3 /usr/local/bin/raxml-mpi-8.1.7 && \
-ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-pthreads && \
-ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-pthreads-8.1.7 && \
-ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml && \
-ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-8.1.7
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-SSE3 /usr/local/bin/raxml-mpi && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-MPI-SSE3 /usr/local/bin/raxml-mpi-8.1.7 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-pthreads && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-pthreads-8.1.7 && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml && \
+sudo ln -sf /usr/local/raxml/8.1.7/raxmlHPC-PTHREADS-SSE3 /usr/local/bin/raxml-8.1.7
 
 # make -f Makefile.AVX.PTHREADS.gcc
 # make -f Makefile.AVX.MPI.gcc
 # Requires mpicc in path
 cd $HOME
 
-# T-Coffee
-cpan -i ExtUtils::CBuilder Path::Class Crypt::SSLeay SOAP::Lite
 
+# T-Coffee
 sudo mkdir /usr/local/tcoffee
 
 #wget -t 3 -O $SOURCES/T-COFFEE_distribution_Version_11.00.8cbe486.tar.gz http://www.tcoffee.org/Packages/Stable/Version_11.00.8cbe486/T-COFFEE_distribution_Version_11.00.8cbe486.tar.gz
@@ -953,13 +1026,13 @@ sudo ln -sf /usr/local/velvet/1.2.10/velvetg /usr/local/bin/velvetg-1.2.10
 
 cd $HOME
 
-## Oases 
+## Oases
 #sudo mkdir /usr/local/oases
 
 #wget -t 3 -O $SOURCES/oases_0.2.08.tgz http://www.ebi.ac.uk/~zerbino/oases/oases_0.2.08.tgz
 #tar -zxf $SOURCES/oases_0.2.08.tgz -C $SOURCES
 #cd $SOURCES/oases_0.2.8
-#make 
+#make
 #sudo mv $SOURCES/oases_0.2.8 /usr/local/oases/0.2.8
 ## link executables
 
