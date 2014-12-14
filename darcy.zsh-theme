@@ -37,7 +37,7 @@ function _pyenv_prompt_info {
   echo "${ZSH_THEME_PYENV_PROMPT_PREFIX}$(pyenv_prompt_info)${ZSH_THEME_PYENV_PROMPT_SUFFIX}"
 }
 
-ret_status="%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%}%s)" #➜
+ret_status="%(?:%{$fg_bold[cyan]%}:%{$fg_bold[red]%}%s)" #➜
 
 # Combine it all into a final right-side prompt
 RPS1='$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info)$(_virtualenv_prompt_info) $EPS1'
