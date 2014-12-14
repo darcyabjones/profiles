@@ -52,7 +52,8 @@ antigen bundle atom
 
 # Python Plugins
 antigen bundle pip
-antigen bundle python
+antigen bundle pyenv
+# antigen bundle python
 antigen bundle virtualenv
 antigen bundle pep8
 
