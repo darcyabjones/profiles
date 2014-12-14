@@ -31,7 +31,7 @@ antigen bundle robbyrussell/oh-my-zsh lib/
 #
 # Antigen Theme
 #
-antigen theme darcy 
+antigen theme darcyabjones/profiles darcy 
 
 #
 # Antigen Bundles
