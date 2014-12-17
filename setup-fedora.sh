@@ -131,7 +131,7 @@ sudo yum install -y \
 	texlive texlive-base \
 	thunderbird thunderbird-lightning thunderbird-enigmail thunderbird-lightning-gdata \
 	tk tk-devel \
-	tkinker \
+	tkinter \
 	tmux \
 	transmission-common transmission-gtk \
 	vim vim-common vim-enhanced vim-filesystem vim-minimal \
@@ -156,17 +156,18 @@ sudo yum -y install spotify-client
 # Fedy
 #
 su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer && rm ./fedy-installer"
-sudo fedy --exec rpmfusion_repos
-sudo fedy --exec google_chrome
-sudo fedy --exec nautilus_dropbox
-sudo fedy --exec oracle_jdk
-sudo fedy --exec skype_linux
-sudo fedy --exec sublime_text3
-sudo fedy --exec adobe_flash
-sudo fedy --exec disk_io_scheduler
-sudo fedy --exec dvd_playback
-sudo fedy --exec media_codecs
-sudo fedy --exec oracle_jre
+sudo fedy --exec \
+	rpmfusion_repos \
+	google_chrome \
+	nautilus_dropbox \
+	oracle_jdk \
+	skype_linux \
+	sublime_text3 \
+	adobe_flash \
+	disk_io_scheduler \
+	dvd_playback \
+	media_codecs \
+	oracle_jre
 
 #
 # chromium
@@ -176,9 +177,11 @@ sudo yum install -y chromium
 #
 # rpmfusion ones
 #
-sudo yum install -y rpmfusion-free-release rpmfusion-nonfree-release \
+sudo yum install -y \
+	rpmfusion-free-release rpmfusion-nonfree-release \
 	vlc vlc-core \
-	akmods akmod-wl
+	akmod-wl \
+	akmods
 
 # xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-libs
 
@@ -229,8 +232,8 @@ git clone git@github.com:darcyabjones/tex.git $HOME/Templates/tex
 # mendeley
 #
 wget -t 3 http://www.mendeley.com/client/get/100-2 -O $SOURCES/mendeleydesktop-x86_64.tar.bz2
-tar -xjf $SOURCES/mendeleydesktop-x86_64.tar.bz2 -C $SOURCES
-sudo mv $SOURCES/mendeleydesktop* /usr/local/mendeleydesktop
+tar -xjf $SOURCES/mendeleydesktop-x86_64.tar.bz2 -C $SOURCES && \
+sudo mv $SOURCES/mendeleydesktop* /usr/local/mendeleydesktop && \
 sudo ln -s /usr/local/mendeleydesktop/bin/mendeleydesktop /usr/local/bin/mendeleydesktop
 
 #
@@ -266,59 +269,53 @@ sudo vim /usr/share/applications/mozilla-thunderbird.desktop
 #
 wget -t 3 https://bootstrap.pypa.io/ez_setup.py -O $SOURCES/ez_setup.py
 
-wget -t 3 https://www.python.org/ftp/python/3.4.2/Python-3.4.2.tgz -O $SOURCES/Python-3.4.2.tgz
-tar -zxf $SOURCES/Python-3.4.2.tgz -C $SOURCES
-cd $SOURCES/Python-3.4.2
-$SOURCES/Python-3.4.2/configure && \
-make && \
-sudo make install
-su -c "python3.4 $SOURCES/ez_setup.py && easy_install-3.4 pip && pip3.4 install virtualenv"
-cd $HOME
-
-wget -t 3 https://www.python.org/ftp/python/3.3.6/Python-3.3.6.tgz -O $SOURCES/Python-3.3.6.tgz
-tar -zxf $SOURCES/Python-3.3.6.tgz -C $SOURCES
-cd $SOURCES/Python-3.3.6
-$SOURCES/Python-3.3.6/configure && \
+wget -t 3 https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz -O $SOURCES/Python-2.6.9.tgz
+tar -zxf $SOURCES/Python-2.6.9.tgz -C $SOURCES
+cd $SOURCES/Python-2.6.9
+$SOURCES/Python-2.6.9/configure --enable-shlib --enable-profiling --enable-ipv6 && \
 make && \
 sudo make altinstall
-su -c "python3.3 $SOURCES/ez_setup.py && easy_install-3.3 pip && pip3.3 install virtualenv"
-cd $HOME
-
-wget -t 3 https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz -O $SOURCES/Python-3.2.6.tgz
-tar -zxf $SOURCES/Python-3.2.6.tgz -C $SOURCES
-cd $SOURCES/Python-3.2.6
-$SOURCES/Python-3.2.6/configure && \
-make && \
-sudo make install
-su -c "python3.2 $SOURCES/ez_setup.py && easy_install-3.2 pip && pip3.2 install virtualenv"
-cd $HOME
-
-wget -t 3 https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz -O $SOURCES/Python-3.1.5.tgz
-tar -zxf $SOURCES/Python-3.1.5.tgz -C $SOURCES
-cd $SOURCES/Python-3.1.5
-$SOURCES/Python-3.1.5/configure && \
-make && \
-sudo make altinstall
-su -c "python3.1 $SOURCES/ez_setup.py && easy_install-3.1 pip && pip3.1 install virtualenv"
-cd $HOME
+# su -c "python2.6 $SOURCES/ez_setup.py && easy_install-2.6 pip && pip2.6 install virtualenv"
 
 wget -t 3 https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz -O $SOURCES/Python-2.7.8.tgz
 tar -zxf $SOURCES/Python-2.7.8.tgz -C $SOURCES
 cd $SOURCES/Python-2.7.8
-$SOURCES/Python-2.7.8/configure && \
+$SOURCES/Python-2.7.8/configure --enable-shlib --enable-profiling --enable-ipv6 && \
 make && \
-sudo make altinstall
-su -c "python2.7 $SOURCES/ez_setup.py && easy_install-2.7 pip && pip2.7 install virtualenv"
-cd $HOME
+sudo make install
+# su -c "python2.7 $SOURCES/ez_setup.py && easy_install-2.7 pip && pip2.7 install virtualenv"
 
-wget -t 3 https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz -O $SOURCES/Python-2.6.9.tgz
-tar -zxf $SOURCES/Python-2.6.9.tgz -C $SOURCES
-cd $SOURCES/Python-2.6.9
-$SOURCES/Python-2.6.9/configure && \
+wget -t 3 https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz -O $SOURCES/Python-3.1.5.tgz
+tar -zxf $SOURCES/Python-3.1.5.tgz -C $SOURCES
+cd $SOURCES/Python-3.1.5
+$SOURCES/Python-3.1.5/configure --enable-shlib --enable-profiling --enable-ipv6 && \
 make && \
 sudo make altinstall
-su -c "python2.6 $SOURCES/ez_setup.py && easy_install-2.6 pip && pip2.6 install virtualenv"
-cd $HOME
+# su -c "python3.1 $SOURCES/ez_setup.py && easy_install-3.1 pip && pip3.1 install virtualenv"
+
+wget -t 3 https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz -O $SOURCES/Python-3.2.6.tgz
+tar -zxf $SOURCES/Python-3.2.6.tgz -C $SOURCES
+cd $SOURCES/Python-3.2.6
+$SOURCES/Python-3.2.6/configure --enable-shlib --enable-profiling --enable-ipv6 && \
+make && \
+sudo make altinstall
+# su -c "python3.2 $SOURCES/ez_setup.py && easy_install-3.2 pip && pip3.2 install virtualenv"
+
+wget -t 3 https://www.python.org/ftp/python/3.3.6/Python-3.3.6.tgz -O $SOURCES/Python-3.3.6.tgz
+tar -zxf $SOURCES/Python-3.3.6.tgz -C $SOURCES
+cd $SOURCES/Python-3.3.6
+$SOURCES/Python-3.3.6/configure --enable-shlib --enable-profiling --enable-ipv6 && \
+make && \
+sudo make altinstall
+# su -c "python3.3 $SOURCES/ez_setup.py && easy_install-3.3 pip && pip3.3 install virtualenv"
+
+wget -t 3 https://www.python.org/ftp/python/3.4.2/Python-3.4.2.tgz -O $SOURCES/Python-3.4.2.tgz
+tar -zxf $SOURCES/Python-3.4.2.tgz -C $SOURCES
+cd $SOURCES/Python-3.4.2
+$SOURCES/Python-3.4.2/configure --enable-shlib --enable-profiling --enable-ipv6 && \
+make && \
+sudo make install
+# su -c "python3.4 $SOURCES/ez_setup.py && easy_install-3.4 pip && pip3.4 install virtualenv"
 
 #
 # Install the R distributions
@@ -330,8 +327,6 @@ $SOURCES/R-3.1.2/configure --enable-R-shlib && \
 make && make check && sudo make install
 
 sudo chmod o+w -R /usr/local/lib64/R
-
-cd $HOME
 
 #
 # RStudio
