@@ -1,6 +1,6 @@
 alias la='ls -la'
 alias ll='ls -l'
 alias mendeley='mendeleydesktop&'
-alias laptop-ssh='ssh darcy@linux-2.local'
-alias desktop-ssh='ssh darcy@darcy-desktop.local'
+alias laptop-ssh='ssh darcy@darcy-macbook-fedora.local'
+alias desktop-ssh='ssh darcy@darcy-desktop-fedora.local'
 
