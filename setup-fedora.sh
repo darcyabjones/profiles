@@ -121,6 +121,7 @@ sudo yum install -y \
 	python-devel python3-devel \
 	qt qt-devel qt-x11 \
 	qtwebkit qtwebkit-devel \
+	R-core R-core-devel \
 	readline readline-devel readline-static \
 	rpm rpm-build rpm-build-libs rpm-libs rpm-python \
 	rpmdevtools \
