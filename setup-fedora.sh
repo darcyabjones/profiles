@@ -818,7 +818,8 @@ tar -zxf $SOURCES/phylip-3.696.tar.gz -C $SOURCES
 cd $SOURCES/phylip-3.696/src
 make -f $SOURCES/phylip-3.696/src/Makefile.unx install && \
 sudo mv $SOURCES/phylip-3.696 /usr/local/phylip/3.696 && \
-sudo ln -sf /usr/local/phylip/3.696/exe/!(font*) /usr/local/bin && \
+sudo ln -sf /usr/local/phylip/3.696/exe/* /usr/local/bin && \
+sudo rm /usr/local/bin/font* && \
 sudo ln -sf /usr/local/phylip/3.696/exe/clique /usr/local/bin/clique-3.696 && \
 sudo ln -sf /usr/local/phylip/3.696/exe/consense /usr/local/bin/consense-3.696 && \
 sudo ln -sf /usr/local/phylip/3.696/exe/contml /usr/local/bin/contml-3.696 && \
