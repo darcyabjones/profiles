@@ -13,13 +13,13 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
 echo "Add your SSH key to your account"
+sudo yum install -y xclip
 xclip -sel clip < ~/.ssh/id_rsa.pub
 # Copies the contents of the id_rsa.pub file to your clipboard
 
 #
 # Setup git
 #
-sudo yum install -y git
 
 git config --global user.name "Darcy Jones"
 git config --global user.email darcy.ab.jones@gmail.com
@@ -82,7 +82,7 @@ sudo yum install -y \
 	ghc-base ghc-base-devel \
 	ghc-pandoc ghc-pandoc-citeproc ghc-pandoc-devel ghc-pandoc-types ghc-pandoc-types-devel \
 	gimp gimp-libs \
-	git-core git-extras \
+	git git-core git-extras \
 	git-annex git-annex-docs \
 	glibc-devel \
 	gmp gmp-devel gmp-static \
@@ -121,6 +121,7 @@ sudo yum install -y \
 	python-devel python3-devel \
 	qt qt-devel qt-x11 \
 	qtwebkit qtwebkit-devel \
+	R-core R-core-devel \
 	readline readline-devel readline-static \
 	rpm rpm-build rpm-build-libs rpm-libs rpm-python \
 	rpmdevtools \
@@ -147,12 +148,6 @@ sudo cp $PROFILES/repos/* /etc/yum.repos.d/
 sudo yum update
 
 #
-# Spotify
-#
-sudo yum-config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
-sudo yum -y install spotify-client
-
-#
 # Fedy
 #
 su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer && rm ./fedy-installer"
@@ -168,6 +163,14 @@ sudo fedy --exec \
 	dvd_playback \
 	media_codecs \
 	oracle_jre
+
+
+#
+# Spotify
+#
+sudo yum-config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
+sudo yum -y install spotify-client
+
 
 #
 # chromium
@@ -233,7 +236,7 @@ git clone git@github.com:darcyabjones/tex.git $HOME/Templates/tex
 #
 wget -t 3 http://www.mendeley.com/client/get/100-2 -O $SOURCES/mendeleydesktop-x86_64.tar.bz2
 tar -xjf $SOURCES/mendeleydesktop-x86_64.tar.bz2 -C $SOURCES && \
-sudo mv $SOURCES/mendeleydesktop* /usr/local/mendeleydesktop && \
+sudo mv $SOURCES/mendeleydesktop-1.13.1-linux-x86_64 /usr/local/mendeleydesktop && \
 sudo ln -s /usr/local/mendeleydesktop/bin/mendeleydesktop /usr/local/bin/mendeleydesktop
 
 #
