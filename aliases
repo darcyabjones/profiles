@@ -4,3 +4,5 @@ alias mendeley='mendeleydesktop&'
 alias laptop-ssh='ssh darcy@darcy-macbook-fedora.local'
 alias desktop-ssh='ssh darcy@darcy-desktop-fedora.local'
 
+# Mounting a samba server to a local address
+# mount -t cifs <address> <local_mountpoint> -o user=<user_name>,password=<pwd>
