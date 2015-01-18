@@ -357,6 +357,8 @@ sudo ln -sf /usr/local/julia/0.3/julia /usr/local/bin/julia-0.3
 sudo perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 1); $c->edit(prerequisites_policy => "follow"); $c->edit(build_requires_install_policy => "yes"); $c->commit'
 sudo cpan -u
 sudo cpan -i SOAP::Lite
+sudo cpan -i Archive::Tar
+sudo cpan -i List::MoreUtils
 
 #
 # Heroku
