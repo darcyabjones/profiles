@@ -59,6 +59,7 @@ mkdir $HOME/data
 #
 sudo yum -y update
 sudo yum install -y \
+	atlas atlas-devel atlas-static atlas-sse3 atlas-sse3-devel atlas-sse3-static \
 	alien \
 	argtable argtable-devel \
 	autoconf \
