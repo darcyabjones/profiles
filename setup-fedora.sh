@@ -59,6 +59,7 @@ mkdir $HOME/data
 #
 sudo yum -y update
 sudo yum install -y \
+	atlas atlas-devel atlas-static atlas-sse3 atlas-sse3-devel atlas-sse3-static \
 	alien \
 	argtable argtable-devel \
 	autoconf \
@@ -357,6 +358,8 @@ sudo ln -sf /usr/local/julia/0.3/julia /usr/local/bin/julia-0.3
 sudo perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 1); $c->edit(prerequisites_policy => "follow"); $c->edit(build_requires_install_policy => "yes"); $c->commit'
 sudo cpan -u
 sudo cpan -i SOAP::Lite
+sudo cpan -i Archive::Tar
+sudo cpan -i List::MoreUtils
 
 #
 # Heroku

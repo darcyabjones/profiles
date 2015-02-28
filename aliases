@@ -4,3 +4,5 @@ alias mendeley='mendeleydesktop&'
 alias laptop-ssh='ssh darcy@darcy-macbook-fedora.local'
 alias desktop-ssh='ssh darcy@darcy-desktop-fedora.local'
 
+# Mounting a samba server to a local address
+# mount -t cifs //rdfs.ltu.edu.au/labs/Botany/Kim_Plummer /home/plummer_drive/ -o user=<user_name>,password=<pwd>,domain=<domian|workgroup>
