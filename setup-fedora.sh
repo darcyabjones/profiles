@@ -66,6 +66,8 @@ sudo yum install -y \
 	bash \
 	bash-completion \
 	bibutils bibutils-devel bibutils-libs \
+	blas blas-devel \
+	blas64 blas64-devel \
 	boost boost-devel boost-filesystem boost-build \
 	cairo cairo-devel cairo-gobject cairo-gobject-devel \
 	cmake \
@@ -95,6 +97,8 @@ sudo yum install -y \
 	java \
 	json-c-devel \
 	kernel-devel \
+	lapack lapack-devel lapack-static \
+	lapack64 lapack64-devel lapack64-static \
 	latexmk \
 	levien-inconsolata-fonts \
 	libcurl-devel \
