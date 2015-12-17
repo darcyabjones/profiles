@@ -1,0 +1,47 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+##
+## Freesurfer normally requires the user to source a shell script called
+## $FREESURFER_HOME/SetUpFreeSurfer.sh. However this does not play well with
+## modules (because modifications made by the script to the local env) would
+## not be cleaned up when the module is unloaded. So we avoid the use of
+## the setup script, and make this module file do all the necessary changes
+## to the user environment itself.
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set home /usr/local/$name/$ver/freesurfer
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+prepend-path LD_LIBRARY_PATH /usr/local/$name/$ver/freesurfer/lib/vtk/lib/vtk-5.6
+#prepend-path MANPATH /usr/local/$name/$ver/share/man
+#prepend-path PATH /usr/local/$name/$ver/bin
+
+prepend-path PATH $home/bin:$home/fsfast/bin:$home/mni/bin:$home/tktools
+
+setenv FREESURFER_HOME $home
+setenv FS_OVERRIDE 0
+setenv PERL5LIB $home/mni/lib/perl5/5.8.5
+setenv OS Linux
+setenv LOCAL_DIR $home/local
+setenv FSFAST_HOME $home/fsfast
+setenv MNI_PERL5LIB $home/mni/lib/perl5/5.8.5
+setenv FMRI_ANALYSIS_DIR $home/fsfast
+setenv FSF_OUTPUT_FORMAT nii.gz
+setenv MINC_BIN_DIR $home/mni/bin
+setenv SUBJECTS_DIR $home/subjects
+setenv FUNCTIONALS_DIR $home/sessions
+setenv MINC_LIB_DIR $home/mni/lib
+setenv MNI_DIR $home/mni
+setenv FIX_VERTEX_AREA ""
+setenv MNI_DATAPATH $home/mni/data
+
+system /usr/local/vlsci/sbin/test_group_member freesurfer
+

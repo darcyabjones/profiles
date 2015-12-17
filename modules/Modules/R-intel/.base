@@ -1,0 +1,51 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+
+if { ![ is-loaded $compiler ] } {
+  module load $compiler
+}
+
+if { ![ is-loaded netcdf-$compiler ] } {
+module load netcdf-$compiler
+}
+
+if { ![ is-loaded hdf5-$compiler ] } {
+module load hdf5-$compiler
+}
+
+if { ![ is-loaded gdal-$compiler ] } {
+module load gdal-$compiler
+}
+
+if { ![ is-loaded proj-$compiler ] } {
+module load proj-$compiler
+}
+
+if { ![ is-loaded postgresql-$compiler ] } {
+module load postgresql-$compiler
+}
+
+prepend-path --delim " " CPPFLAGS -I/usr/local/$subname/$ver-$compiler/lib64/$subname/include
+prepend-path --delim " " LDFLAGS -L/usr/local/$subname/$ver-$compiler/lib64/$subname/lib
+
+prepend-path LD_LIBRARY_PATH /usr/local/$subname/$ver-$compiler/lib64/$subname/lib
+prepend-path MANPATH /usr/local/$subname/$ver-$compiler/share/man
+prepend-path INFOPATH /usr/local/$subname/$ver-$compiler/share/info
+prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
+
+setenv  R_DIR		/usr/local/$subname/$ver-$compiler/
+setenv  R_HOME        /usr/local/$subname/$ver-$compiler/lib64/R

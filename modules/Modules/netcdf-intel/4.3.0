@@ -1,0 +1,38 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+## needs HDF5 shared libraries
+if { ![ is-loaded hdf5-$compiler ] } {
+  module load hdf5-$compiler
+}
+
+#if { ![ is-loaded $compiler ] } {
+#  module load $compiler
+#}
+
+prepend-path --delim " " CPPFLAGS -I/usr/local/$subname/$ver-$compiler/include
+prepend-path --delim " " LDFLAGS -L/usr/local/$subname/$ver-$compiler/lib
+
+prepend-path LD_LIBRARY_PATH /usr/local/$subname/$ver-$compiler/lib
+prepend-path MANPATH /usr/local/$subname/$ver-$compiler/share/man
+prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
+
+setenv  NETCDF_DIR              /usr/local/$subname/$ver-$compiler/
+setenv  NETCDF_HOME        /usr/local/$subname/$ver-$compiler/
+
+setenv  NETCDFLIB        /usr/local/$subname/$ver-$compiler/lib
+setenv  NETCDFINC        /usr/local/$subname/$ver-$compiler/include
+

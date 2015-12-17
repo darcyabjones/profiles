@@ -16,7 +16,6 @@ compinit
 ### Paths etc
 source $HOME/.aliases
 source $HOME/.env
-source $HOME/.paths
 
 
 ### Antigen Stuff ###
@@ -31,7 +30,7 @@ antigen bundle robbyrussell/oh-my-zsh lib/
 #
 # Antigen Theme
 #
-antigen theme darcyabjones/profiles darcy 
+antigen theme darcyabjones/profiles darcy
 
 #
 # Antigen Bundles
@@ -45,8 +44,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle rupa/z
 antigen bundle docker
 antigen bundle ssh-agent
-antigen bundle emacs
-antigen bundle postgres
 antigen bundle atom
 
 
@@ -70,7 +67,7 @@ elif [[ $CURRENT_OS == 'Linux' ]]; then
         antigen bundle centos
     fi
     if [[ $DISTRO == 'Fedora' ]]; then
-        antigen bundle yum
+        antigen bundle dnf
     fi
 elif [[ $CURRENT_OS == 'Cygwin' ]]; then
     antigen bundle cygwin
@@ -78,5 +75,3 @@ fi
 
 # Tell antigen that you're done.
 antigen apply
-
-

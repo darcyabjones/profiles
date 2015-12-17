@@ -1,0 +1,5 @@
+#%licence: LGPLv3
+#%cite: Daniel L. Ayres, Aaron Darling, Derrick J. Zwickl, Peter Beerli, Mark T. Holder, Paul O. Lewis, John P. Huelsenbeck, Fredrik Ronquist, David L. Swofford, Michael P. Cummings, Andrew Rambaut, and Marc A. Suchard, BEAGLE: An Application Programming Interface and High-Performance Computing Library for Statistical Phylogenetics Syst Biol (2012) 61 (1): 170-173
+#%url: https://code.google.com/p/beagle-lib/
+#%docs: http://beagle-lib.googlecode.com/svn/doc/html/beagle_8h.html
+#%desc: BEAGLE is a high-performance library that can perform the core calculations at the heart of most Bayesian and Maximum Likelihood phylogenetics packages.

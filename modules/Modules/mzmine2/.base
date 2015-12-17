@@ -1,0 +1,33 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+# installed using java/1.7.0_25 R-gcc/3.1.0
+if { ![ is-loaded java/1.7.0_25 ] } {
+  module load java/1.7.0_25
+}
+
+if { ![ is-loaded R-gcc/3.1.0 ] } {
+  module load R-gcc/3.1.0
+}
+
+if { ![ is-loaded netcdf-intel/4.3.0 ] } {
+  module load netcdf-intel/4.3.0
+}
+
+prepend-path LD_LIBRARY_PATH /usr/local/$subname/$ver/lib
+prepend-path PATH /usr/local/$subname/$ver
+
+setenv  MZMINE_DIR         /usr/local/$subname/$ver/
+setenv  MZMINE_HOME        /usr/local/$subname/$ver/

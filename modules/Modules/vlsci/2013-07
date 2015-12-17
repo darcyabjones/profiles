@@ -1,0 +1,27 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded slurm ] } {
+        module load slurm
+}
+
+if { ![ is-loaded openmpi/1.6.5 ] } {
+        module load openmpi/1.6.5
+}
+
+if { ![ is-loaded intel/13.1.2 ] } {
+        module load intel/13.1.2
+}
+
+if { ![ is-loaded modules ] } {
+        module load modules
+}
+
+prepend-path MODULEPATH ~/.modules

@@ -1,0 +1,5 @@
+#%licence: Artistic License (@see $MUMMER_DIR/LICENSE)
+#%cite: "Versatile and open software for comparing large genomes." S. Kurtz, A. Phillippy, A.L. Delcher, M. Smoot, M. Shumway, C. Antonescu, and S.L. Salzberg, Genome Biology (2004), 5:R12
+#%url: http://mummer.sourceforge.net/
+#%docs: http://mummer.sourceforge.net/manual/
+#%desc: MUMmer is a system for rapidly aligning entire genomes, whether in complete or draft form

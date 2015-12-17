@@ -1,0 +1,27 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set langname [lrange [split $name - ] 1 1 ]
+set compiler [lrange [split $name - ] 2 2 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+prepend-path --delim " " CPPFLAGS -I/usr/local/$subname-$langname/$ver-$compiler/include
+prepend-path --delim " " LDFLAGS -L/usr/local/$subname-$langname/$ver-$compiler/lib
+
+prepend-path LD_LIBRARY_PATH /usr/local/$subname-$langname/$ver-$compiler/lib
+prepend-path PATH /usr/local/$subname-$langname/$ver-$compiler/bin
+
+setenv  CAPNPROTOCXX_DIR    /usr/local/$subname-$langname/$ver-$compiler/
+setenv  CAPNPROTOCXX_ROOT   /usr/local/$subname-$langname/$ver-$compiler/
+setenv  CAPNPROTOCXX_HOME    /usr/local/$subname-$langname/$ver-$compiler/
+

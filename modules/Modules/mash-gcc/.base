@@ -1,0 +1,30 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis {Set environment variables to use $name version $ver.
+
+Mash is a fast sequence distance estimator that uses the MinHash algorithm and is designed to work with genomes and metagenomes in the form of assemblies or reads. It is implemented in C++ and is distributed with KSeq (lh3lh3.users.sourceforge.net/kseq.shtml) and MurmurHash3 (code.google.com/p/smhasher/wiki/MurmurHash3). - Homepage: https://github.com/marbl/Mash
+}
+
+module load $compiler
+
+prepend-path --delim " " CPPFLAGS -I/usr/local/$subname/$ver-$compiler/include
+prepend-path --delim " " LDFLAGS -L/usr/local/$subname/$ver-$compiler/lib
+
+prepend-path LD_LIBRARY_PATH /usr/local/$subname/$ver-$compiler/lib
+prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
+
+setenv  MASH_DIR    /usr/local/$subname/$ver-$compiler
+setenv  MASH_ROOT   /usr/local/$subname/$ver-$compiler
+setenv  MASH_HOME   /usr/local/$subname/$ver-$compiler

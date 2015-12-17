@@ -1,0 +1,25 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tSchrodinger is no longer available at VLSCI"
+}
+
+module-whatis   "\tSchrodinger is no longer available at VLSCI"
+
+#setenv SCHRODINGER /usr/local/$name/$ver
+#setenv LM_LICENSE_FILE 27005@silver.pcf.vlsci.unimelb.edu.au
+#setenv SCHRODINGER_PDF_VIEWER evince
+
+#prepend-path PATH /usr/local/$name/$ver
+
+#system /usr/local/vlsci/sbin/test_group_member schrodinger
+
+puts stderr "\tSchrodinger is no longer available at VLSCI"
+
+break

@@ -1,0 +1,55 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+# set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+# if { ![ is-loaded $compiler ] } {
+#   module load $compiler
+# }
+
+if { ![ is-loaded perl ] } {
+  module load perl
+}
+
+if { ![ is-loaded geneid-intel ] } {
+  module load geneid-intel
+}
+
+if { ![ is-loaded genewise2-intel ] } {
+  module load genewise2-intel
+}
+
+if { ![ is-loaded hmmer-intel ] } {
+  module load hmmer-intel
+}
+
+if { ![ is-loaded blast+-intel/2.2.29 ] } {
+  module load blast+-intel/2.2.29
+}
+
+
+
+# prepend-path --delim " " CPPFLAGS -I/usr/local/$subname/$ver-$compiler/include
+# prepend-path --delim " " LDFLAGS -L/usr/local/$subname/$ver-$compiler/lib
+
+prepend-path PATH /usr/local/$subname/$ver/bin
+
+prepend-path PERL5LIB /usr/local/$subname/$ver/lib
+
+if { [info exists ::env(TMPDIR) ] } {
+ setenv CEGMATMP $::env(TMPDIR)
+}
+
+setenv CEGMA /usr/local/$subname/$ver
+

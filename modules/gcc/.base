@@ -1,0 +1,26 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded mpc ] } {
+        module load mpc
+}
+
+prepend-path --delim " " CPPFLAGS -I/usr/local/$name/$ver/include
+prepend-path --delim " " LDFLAGS -L/usr/local/$name/$ver/lib
+prepend-path --delim " " LDFLAGS -L/usr/local/$name/$ver/lib64
+
+prepend-path --delim ";" CMAKE_FIND_ROOT_PATH /usr/local/$name/$ver/
+
+prepend-path LD_LIBRARY_PATH /usr/local/$name/$ver/lib
+prepend-path LD_LIBRARY_PATH /usr/local/$name/$ver/lib64
+prepend-path MANPATH /usr/local/$name/$ver/share/man
+prepend-path PATH /usr/local/$name/$ver/bin
+

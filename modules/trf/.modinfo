@@ -1,0 +1,5 @@
+#%licence: CUSTOM (@see http://tandem.bu.edu/trf/trf.license.html)
+#%cite: G. Benson, "Tandem repeats finder: a program to analyze DNA sequences" Nucleic Acids Research (1999) Vol. 27, No. 2, pp. 573-580.
+#%url: http://tandem.bu.edu/trf/trf.html
+#%docs: http://tandem.bu.edu/trf/trf.unix.help.html
+#%desc: Tandem Repeats Finder is a program to locate and display tandem repeats in DNA sequences.

@@ -1,0 +1,22 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded perl ] } {
+  module load perl
+}
+
+prepend-path PATH /usr/local/$name/$ver/bin
+
+setenv  CIRCOS_DIR        /usr/local/$name/$ver/
+setenv  CIRCOS_HOME       /usr/local/$name/$ver/

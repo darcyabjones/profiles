@@ -1,0 +1,39 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded $compiler ] } {
+  module load $compiler
+}
+
+if { ![ is-loaded libpng-gcc/1.6.10] } {
+  module load libpng-gcc/1.6.10
+}
+
+if { ![ is-loaded zlib-gcc/1.2.8 ] } {
+  module load zlib-gcc/1.2.8
+}
+
+if { ![ is-loaded openmpi-gcc/1.6.5 ] } {
+  module load openmpi-gcc/1.6.5
+}
+
+prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
+
+setenv  IADHORE_HOME        /usr/local/$subname/$ver-$compiler
+
+puts stderr "i-adhore is non-exclusive, non-transferable, academic-only software.  By using it you agree to the i-adhore software license agreement available at /usr/local/iadhore/$ver-gcc/LICENSE.txt"
+
+

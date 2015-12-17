@@ -1,0 +1,5 @@
+#%licence: http://www.gnu.org/software/parallel/
+#%cite: O. Tange (2011): GNU Parallel - The Command-Line Power Tool, ;login: The USENIX Magazine, February 2011:42-47
+#%url: http://www.gnu.org/software/parallel/
+#%docs: http://www.gnu.org/software/parallel/parallel_tutorial.html
+#%desc: GNU parallel is a shell tool for executing jobs in parallel using one or more computers.

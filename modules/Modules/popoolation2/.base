@@ -1,0 +1,28 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded perl ] } {
+        module load perl
+}
+
+if { ![ is-loaded java ] } {
+        module load java
+}
+
+if { ![ is-loaded R-gcc ] } {
+        module load R-gcc/3.2.0
+}
+
+#prepend-path --delim " " CPPFLAGS -I/usr/local/$name/$ver/include
+#prepend-path --delim " " LDFLAGS -L/usr/local/$name/$ver/lib
+
+prepend-path PATH /usr/local/$name/$ver
+prepend-path PATH /usr/local/$name/$ver/export

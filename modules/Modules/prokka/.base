@@ -1,0 +1,55 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded blast+-intel/2.2.28] } {
+        module load blast+-intel/2.2.28
+}
+
+if { ![ is-loaded perl ] } {
+        module load perl
+}
+
+if { ![ is-loaded hmmer-intel/3.1b1 ] } {
+        module load hmmer-intel/3.1b1
+}
+
+if { ![ is-loaded prodigal-intel/2.60 ] } {
+        module load prodigal-intel/2.60
+}
+
+if { ![ is-loaded tbl2asn/23.0 ] } {
+        module load tbl2asn/23.0
+}
+
+if { ![ is-loaded parallel/20140122 ] } {
+        module load parallel/20140122
+}
+
+if { ![ is-loaded infernal-intel/1.1 ] } {
+        module load infernal-intel/1.1
+}
+
+if { ![ is-loaded barrnap/0.3 ] } {
+        module load barrnap/0.3
+}
+
+if { ![ is-loaded aragorn-gcc/1.2.36 ] } {
+        module load aragorn-gcc/1.2.36
+}
+
+
+if { ![ is-loaded java ] } {
+        module load java
+}
+
+prepend-path PATH /usr/local/$name/$ver/bin
+prepend-path PATH /usr/local/$name/$ver/binaries/common
+prepend-path PATH /usr/local/$name/$ver/binaries
+prepend-path PATH /usr/local/$name/$ver/binaries/linux

@@ -1,0 +1,13 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+prepend-path PATH /usr/local/$name/$ver
+
+setenv BAYESTRAITS_HOME /usr/local/$name/$ver

@@ -1,0 +1,25 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+setenv LIBXML2_HOME /usr/local/$subname/$ver-$compiler
+setenv LIBXML2_LIBDIR /usr/local/$subname/$ver-$compiler/lib
+
+prepend-path --delim " " CPPFLAGS -I$env(LIBXML2_HOME)/include
+prepend-path --delim " " LDFLAGS -L$env(LIBXML2_LIBDIR)
+
+prepend-path LD_LIBRARY_PATH $env(LIBXML2_LIBDIR)
+prepend-path MAN $env(LIBXML2_LIBDIR)/share/man
+prepend-path PATH $env(LIBXML2_LIBDIR)/bin

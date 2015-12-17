@@ -1,0 +1,5 @@
+#%licence: GPLv2
+#%cite: Darling ACE, Mau B, Blattner FR, Perna NT. Mauve: Multiple Alignment of Conserved Genomic Sequence With Rearrangements. Genome Research. 2004;14(7):1394-1403. doi:10.1101/gr.2289704.
+#%url: http://darlinglab.org/mauve/
+#%docs: http://darlinglab.org/mauve/user-guide/introduction.html
+#%desc: Mauve is a system for constructing multiple genome alignments in the presence of large-scale evolutionary events such as rearrangement and inversion.

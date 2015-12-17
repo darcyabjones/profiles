@@ -1,0 +1,119 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded gcc/4.8.1 ] } {
+  module load gcc/4.8.1
+}
+
+setenv  OPENCMISS_ROOT        /usr/local/$subname/0.3-$compiler/OpenCMISS
+setenv  OPENCMISSEXTRAS_ROOT       /usr/local/$subname/0.3-$compiler/OpenCMISSExtras
+
+prepend-path PATH /usr/local/$subname/0.3-$compiler/OpenCMISSExtras/cm/external/x86_64-linux/openmpi/gnu_4.8/bin
+prepend-path PATH /usr/local/$subname/0.3-$compiler/OpenCMISSExtras/mpi/x86_64-linux/openmpi/gnu_4.8/bin
+prepend-path PATH /usr/local/$subname/0.3-$compiler/OpenCMISSExtras/cellml/x86_64-linux/openmpi/gnu_4.8/bin
+prepend-path MANPATH /usr/local/$subname/0.3-$compiler/OpenCMISSExtras/mpi/x86_64-linux/openmpi/gnu_4.8/share/man
+
+setenv 	PYTHONPATH /usr/local/$subname/0.3-$compiler/OpenCMISS/cm/bindings/python
+setenv	PETSC_DIR /usr/local/$subname/0.3-$compiler/OpenCMISSExtras/cm/external/x86_64-linux/openmpi/gnu_4.8
+
+#setenv	OPENCMISSEXAMPLES_ROOT /usr/local/$subname/$ver-$compiler/OpenCMISS/examples
+setenv	INTELAPI intel64
+setenv 	SYSLIBAPI lib64
+setenv	TOTALVIEW_VERSION 8.9.0-2
+setenv	OPENCMISS_REDHAT_RELEASE 6.4
+setenv	INTEL_MPI_VERSION 4.1.0.024
+setenv	BINAPI	bin64
+setenv	GNU_MINOR_VERSION 4
+#setenv	OPENCMISSEXTRAS_RUN_CONFIG 
+setenv	OPENCMISS_COMPILER_PATH gnu_4.8
+setenv	GNU_COMPILER_VERSION 4.8
+setenv	GNU_MAJOR_VERSION 4
+setenv	TOTALVIEW_PATH /usr/toolworks
+setenv	OPENCMISS_GFORTRAN_LIBPATH /usr/local/gcc/4.8.1/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/
+setenv  OPENCMISS_GFORTRAN_EXISTS true
+setenv	LIBAPI lib64
+setenv	OPENCMISSEXTRAS_ARCHITECTURE x86_64-linux
+setenv	archname x86_64-linux
+setenv	OPENCMISS_MPI_PATH openmpi
+setenv	FLFXLM_VERSION 10.8.0-3
+setenv	OPENCMISS_LINUX_DISTRIBUTION redhat
+setenv	OPENCMISS_GFORTRAN_LIBGCC /usr/local/gcc/4.8.1/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/libgcc.a
+setenv	TAUAPI x86_64
+setenv	COMPILER gnu
+
+
+setenv	OPENCMISS_USE_CELLML true
+setenv	OPENCMISS_USE_CHOLMOD true
+setenv	OPENCMISS_USE_CUBPACK true
+setenv	OPENCMISS_USE_CUDA false
+setenv	OPENCMISS_USE_FIELDML true
+setenv	OPENCMISS_USE_HDF5 true
+setenv	OPENCMISS_USE_HYPRE true 
+setenv	OPENCMISS_USE_LIBXML2 true
+setenv	OPENCMISS_USE_MUMPS true
+setenv	OPENCMISS_USE_NETCDF false
+setenv	OPENCMISS_USE_OMNIORB false 
+setenv	OPENCMISS_USE_PAPI false 
+setenv	OPENCMISS_USE_PARMETIS true
+setenv	OPENCMISS_USE_PASTIX true
+setenv	OPENCMISS_USE_PETSC true
+setenv	OPENCMISS_USE_PLAPACK true
+setenv	OPENCMISS_USE_SCOTCH true
+setenv	OPENCMISS_USE_SLEPC true
+setenv	OPENCMISS_USE_SUITESPARSE true
+setenv	OPENCMISS_USE_SUNDIALS true
+setenv	OPENCMISS_USE_SUPERLU true
+setenv	OPENCMISS_USE_SUPERLU_DIST true
+setenv	OPENCMISS_USE_SZIP true
+setenv	OPENCMISS_USE_TAO true
+setenv	OPENCMISS_USE_TAU true
+setenv  OPENCMISS_TAU_PROFILE_MEMORY true
+setenv  OPENCMISS_TAU_PROFILE_PHASE true
+setenv  OPENCMISS_TAU_PROFILE_MPI true
+setenv	OPENCMISS_USE_UMFPACK true
+setenv	OPENCMISS_USE_ZLIB true
+setenv	FORCE_OCE_LAPACK false
+setenv	FORCE_OCE_FIELDML false
+setenv	FORCE_OCE_CELLML false
+setenv	FORCE_OCE_CHOLMOD false 
+setenv	FORCE_OCE_FIELDML true
+setenv	FORCE_OCE_HDF5 false
+setenv	FORCE_OCE_HYPRE false
+setenv	FORCE_OCE_LIBXML2 false
+setenv	FORCE_OCE_MPI false
+setenv	FORCE_OCE_MUMPS false 
+setenv	FORCE_OCE_NETCDF false 
+setenv	FORCE_OCE_OMNIORB false
+setenv	FORCE_OCE_PAPI false
+setenv	FORCE_OCE_PARMETIS false
+setenv	FORCE_OCE_PASTIX false
+setenv	FORCE_OCE_PETSC false
+setenv	FORCE_OCE_PLAPACK false 
+setenv	FORCE_OCE_SCOTCH false
+setenv	FORCE_OCE_SLEPC false
+setenv	FORCE_OCE_SPARSESUITE false
+setenv	FORCE_OCE_SUNDIALS false
+setenv	FORCE_OCE_SZIP false
+setenv	FORCE_OCE_TAO false
+setenv	FORCE_OCE_TAU false
+setenv	FORCE_OCE_UMFPACK false
+setenv	FORCE_OCE_ZLIB false
+setenv	OPENCMISS_TAU_PROFILE_PHASE true
+setenv	OPENCMISS_TAU_PROFILE_MEMORY true
+setenv	OPENCMISS_TAU_PROFILE_MPI true
+setenv	MPI openmpi
+
+

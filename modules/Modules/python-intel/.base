@@ -1,0 +1,43 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded openmpi ] } {
+  module load openmpi
+}
+
+if { ![ is-loaded intel/15.0.0 ] } {
+  # module load $compiler
+  module load intel/15.0.0
+}
+
+# if { ![ is-loaded openblas-gcc/0.2.8 ] } {
+  # module load openblas-gcc/0.2.8
+# }
+
+# if { ![ is-loaded R-gcc/3.0.1 ] } {
+  # module load R-gcc/3.0.1
+# }
+
+
+prepend-path --delim " " CPPFLAGS -I/usr/local/$subname/$ver-$compiler/include
+prepend-path --delim " " LDFLAGS -L/usr/local/$subname/$ver-$compiler/lib
+
+prepend-path LD_LIBRARY_PATH /usr/local/$subname/$ver-$compiler/lib
+prepend-path MANPATH /usr/local/$subname/$ver-$compiler/share/man
+prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
+
+setenv  PYTHON_DIR              /usr/local/$subname/$ver-$compiler/
+setenv  PYTHON_HOME        /usr/local/$subname/$ver-$compiler/

@@ -1,0 +1,27 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded mpc ] } {
+	module load mpc
+}
+
+setenv ZLIB_HOME /usr/local/$subname/$ver-$compiler
+setenv ZLIB_DIR /usr/local/$subname/$ver-$compiler
+setenv ZLIB_LIBDIR $env(ZLIB_HOME)/lib
+
+prepend-path --delim " " CPPFLAGS -I$env(ZLIB_DIR)/include
+prepend-path --delim " " LDFLAGS -L$env(ZLIB_LIBDIR)
+
+prepend-path LD_LIBRARY_PATH $env(ZLIB_LIBDIR)
+prepend-path MANPATH $env(ZLIB_HOME)share/man
+

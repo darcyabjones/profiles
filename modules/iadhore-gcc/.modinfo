@@ -1,0 +1,6 @@
+#%licence: CUSTOM (@see /usr/local/iadhore/3.0.01-gcc/LICENSE.txt)
+#%cite: Vandepoele et al. (2002) Genome Res. 12, 1792-1801 AND
+#* Proost, S., * Fostier, J., De Witte, D., Dhoedt, B., Demeester, P., Van de Peer, Y., Vandepoele, K. (2012) i-ADHoRe 3.0 - Fast and Sensitive Detection of Genomic Homology in Extremely Large Data Sets. Nucleic Acids Res. 40,e11. *contributed equally
+#%url: http://bioinformatics.psb.ugent.be/software/details/i--ADHoRe3.0
+#%docs: /usr/local/iadhore/3.0.01-gcc/iADHoRe_manual_3_0.pdf 
+#%desc: This novel version of i-ADHoRe is designed to detect genomic homology in extremely large-scale data sets

@@ -1,0 +1,27 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name"
+}
+
+module-whatis   "Set environment variables to use $name"
+
+if { ![ is-loaded java ] } {
+  module load java
+}
+
+prepend-path PATH /usr/local/$name/$ver/
+
+set-alias igv    "java -Xmx2G  -Dapple.laf.useScreenMenuBar=true -Djava.net.preferIPv4Stack=true -jar /usr/local/$name/$ver/bin/igv.jar"
+set-alias igv4g  "java -Xmx4G  -Dapple.laf.useScreenMenuBar=true -Djava.net.preferIPv4Stack=true -jar /usr/local/$name/$ver/bin/igv.jar"
+set-alias igv8g  "java -Xmx8G  -Dapple.laf.useScreenMenuBar=true -Djava.net.preferIPv4Stack=true -jar /usr/local/$name/$ver/bin/igv.jar"
+set-alias igv16g "java -Xmx16G -Dapple.laf.useScreenMenuBar=true -Djava.net.preferIPv4Stack=true -jar /usr/local/$name/$ver/bin/igv.jar"
+set-alias igv32g "java -Xmx32G -Dapple.laf.useScreenMenuBar=true -Djava.net.preferIPv4Stack=true -jar /usr/local/$name/$ver/bin/igv.jar"
+set-alias igv64g "java -Xmx64G -Dapple.laf.useScreenMenuBar=true -Djava.net.preferIPv4Stack=true -jar /usr/local/$name/$ver/bin/igv.jar"
+

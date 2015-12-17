@@ -1,0 +1,30 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded bowtie2-intel  ] } {
+  module load bowtie2-intel/2.2.3
+}
+
+if { ![ is-loaded blat-intel  ] } {
+  module load blat-intel/35
+}
+
+prepend-path PATH /usr/local/$subname/$ver-$compiler/AlignGraph
+prepend-path PATH /usr/local/$subname/$ver-$compiler/Eval-AlignGraph
+
+setenv  ALIGNFRAPH_DIR        /usr/local/$subname/$ver-$compiler/
+setenv  ALIGNGRAPH_HOME       /usr/local/$subname/$ver-$compiler/
+

@@ -1,0 +1,40 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set loading [module-info mode load]
+
+proc ModulesHelp { } {
+puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis "Set environment variables to use $name version $ver"
+
+if { [ is-loaded java ] } {
+        module unload java
+}
+
+module load java/1.7.0_25
+
+if { ![ is-loaded postgresql-intel ] } {
+        module load postgresql-intel
+}
+
+prepend-path LD_LIBRARY_PATH /usr/local/$name/$ver/$name-$ver/lib
+
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/blast/2.2.19
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/gene3d/
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/nucleotide
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/coils
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/hmmer/hmmer2/2.3.2
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/hmmer/hmmer3/3.0b2
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/hmmer/hmmer3/3.1b1
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/prints
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/prosite
+prepend-path PATH /usr/local/$name/$ver/$name-$ver/bin/superfamily
+
+

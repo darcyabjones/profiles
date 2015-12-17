@@ -1,0 +1,7 @@
+#%licence: LGPL
+#%cite: Wheeler, T.J. 2009. Large-scale neighbor-joining with NINJA. In S.L. Salzberg and T. Warnow (Eds.), Proceedings of the 9th Workshop on Algorithms in Bioinformatics. WABI 2009, pp. 375-389. Springer, Berlin.
+#%url: http://nimbletwist.com/software/ninja/index.html
+#%docs: http://link.springer.com/chapter/10.1007%2F978-3-642-04241-6_31
+#%desc: NINJA is software for inferring large-scale neighbor-joining phylogenies
+#%licence:verbose:
+http://www.gnu.org/licenses/lgpl.html

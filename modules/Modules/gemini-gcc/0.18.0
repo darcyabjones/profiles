@@ -1,0 +1,26 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis {Set environment variables to use $name version $ver.
+
+GEMINI (GEnome MINIng) is a flexible framework for exploring genetic variation in the context of the wealth of genome annotations available for the human genome. By placing genetic variants, sample phenotypes and genotypes, as well as genome annotations into an integrated database framework, GEMINI provides a simple, flexible, and powerful system for exploring genetic variation for disease and population genetics. -- Homepage: https://github.com/arq5x/gemini
+}
+
+module load $compiler
+
+setenv  GEMINI_DIR    /usr/local/$subname/$ver-$compiler
+setenv  GEMINI_ROOT   $env(GEMINI_DIR)
+setenv  GEMINI_DATA   $env(GEMINI_DIR)/gemini_data
+
+prepend-path PATH $env(GEMINI_DIR)/bin

@@ -1,0 +1,37 @@
+#%Module1.0#####################################################################
+##
+## $name modulefile
+##
+
+set ver [lrange [split [ module-info name ] / ] 1 1 ]
+set name [lrange [split [ module-info name ] / ] 0 0 ]
+set subname [lrange [split $name - ] 0 0 ]
+set compiler [lrange [split $name - ] 1 1 ]
+
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for $name v$ver"
+}
+
+module-whatis   "Set environment variables to use $name version $ver"
+
+if { ![ is-loaded python-gcc ] } {
+  module load python-gcc
+}
+
+if { ![ is-loaded java ] } {
+  module load java
+}
+
+
+prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
+
+setenv QIIME_CONFIG_FP ~/.qiime_config
+#setenv LAPACK None
+#setenv BLAS None
+setenv TEST_DB 1
+setenv BLASTMAT /usr/local/blast/2.2.26/data/
+#setenv ATLAS None
+
+setenv RDP_JAR_PATH /usr/local/$subname/$ver-$compiler/app/rdp_classifier_2.2/rdp_classifier-2.2.jar
+

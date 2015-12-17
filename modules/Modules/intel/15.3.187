@@ -1,0 +1,45 @@
+#%Module1.0#####################################################################
+##
+## intel compiler modulefile
+##
+
+proc ModulesHelp { } {
+  puts stderr "\tThis module sets the envinronment for intel compiler v15.3.187"
+}
+
+set ipath /usr/local/intel/composer_xe_2015.3.187
+
+module-whatis   "Set environment variables to use the intel compiler version 15.3.187"
+
+prepend-path    PATH            $ipath/bin/intel64
+
+prepend-path    LD_LIBRARY_PATH $ipath/compiler/lib/intel64/
+prepend-path    LD_LIBRARY_PATH $ipath/mkl/lib/intel64/
+
+# Required for Phi offload
+prepend-path    LD_LIBRARY_PATH /opt/intel/mic/coi/host-linux-release/lib
+prepend-path	MIC_LD_LIBRARY_PATH /opt/intel/mic/coi/device-linux-release/lib
+prepend-path	MIC_LD_LIBRARY_PATH /opt/intel/mic/myo/lib
+prepend-path	MIC_LD_LIBRARY_PATH $ipath/mkl/lib/mic
+prepend-path	MIC_LD_LIBRARY_PATH $ipath/mkl/lib/mic
+prepend-path	MIC_LD_LIBRARY_PATH $ipath/compiler/lib/mic/
+
+prepend-path    MANPATH         $ipath/man/en_US/
+
+prepend-path    LM_LICENSE_FILE         28518@silver.pcf.vlsci.unimelb.edu.au
+setenv          INTEL_LICENSE_FILE      28518@silver.pcf.vlsci.unimelb.edu.au
+
+setenv          MKL_HOME        $ipath/mkl/
+
+# These are to make OpenMPI use the Intel compilers
+setenv	OMPI_CC		icc
+setenv	OMPI_CXX	icpc
+setenv	OMPI_F77	ifort
+setenv	OMPI_FC		ifort
+setenv	OMPI_CFLAGS	"-xHOST -O3 -mkl=sequential"
+setenv	OMPI_FFLAGS	"-xHOST -O3 -mkl=sequential"
+setenv	OMPI_FCFLAGS	"-xHOST -O3 -mkl=sequential"
+setenv	OMPI_CXXFLAGS	"-xHOST -O3 -mkl=sequential"
+
+setenv	I_MPI_PMI_LIBRARY	/usr/local/slurm/latest/lib/libpmi.so
+setenv	I_MPI_NETMASK		10.4.0.0/16
