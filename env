@@ -1,2 +1,7 @@
 export SHELL=/usr/bin/zsh
+export SOURCES=/home/darcy/bin/sources
+
 stty -ixon
+
+export MODULEPATH=/home/darcy/.modules:$MODULEPATH
+

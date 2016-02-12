@@ -44,7 +44,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle rupa/z
 antigen bundle docker
 antigen bundle ssh-agent
-antigen bundle atom
 
 
 # Python Plugins

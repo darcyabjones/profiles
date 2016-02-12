@@ -14,38 +14,6 @@ proc ModulesHelp { } {
 
 module-whatis   "Set environment variables to use $name version $ver"
 
-#if { ![ is-loaded $compiler ] } {
-#  module load $compiler
-#}
-
-#if { ![ is-loaded openmpi-$compiler ] } {
-#  module load openmpi-$compiler
-#}
-
-#if { ![ is-loaded openblas-$compiler ] } {
-#  module load openblas-$compiler
-#}
-
-#if { ![ is-loaded R-$compiler ] } {
-#  module load R-$compiler
-#}
-
-#if { ![ is-loaded netcdf-$compiler ] } {
-#  module load netcdf-$compiler
-#}
-
-#if { ![ is-loaded sqlite-$compiler ] } {
-#  module load sqlite-$compiler
-#}
-
-#if { ![ is-loaded bzip2-$compiler ] } {
-#  module load bzip2-$compiler
-#}
-
-#if { ![ is-loaded atlas-$compiler ] } {
-#  module load atlas-$compiler
-#}
-
 prepend-path --delim " " CPPFLAGS -I/usr/local/$subname/$ver-$compiler/include
 prepend-path --delim " " LDFLAGS -L/usr/local/$subname/$ver-$compiler/lib
 
@@ -53,6 +21,6 @@ prepend-path LD_LIBRARY_PATH /usr/local/$subname/$ver-$compiler/lib
 prepend-path MANPATH /usr/local/$subname/$ver-$compiler/share/man
 prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
 
-setenv  PYTHON_DIR              /usr/local/$subname/$ver-$compiler/
-setenv  PYTHON_HOME        /usr/local/$subname/$ver-$compiler/
+setenv  NODE_DIR              /usr/local/$subname/$ver-$compiler/
+setenv  NODE_HOME        /usr/local/$subname/$ver-$compiler/
 

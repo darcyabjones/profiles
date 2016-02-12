@@ -14,9 +14,9 @@ proc ModulesHelp { } {
 
 module-whatis   "Set environment variables to use $name version $ver"
 
-if { ![ is-loaded $compiler ] } {
-  module load $compiler
-}
+#if { ![ is-loaded $compiler ] } {
+#  module load $compiler
+#}
 
 prepend-path --delim " " OMPI_CPPFLAGS -I/usr/local/$subname/$ver-$compiler/include
 prepend-path --delim " " OMPI_LDFLAGS -L/usr/local/$subname/$ver-$compiler/lib

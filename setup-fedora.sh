@@ -57,12 +57,15 @@ mkdir $HOME/data
 #
 sudo dnf -y update
 sudo dnf install -y \
+	binutils \
 	bibutils* \
+	cairo cairo-devel cairo-tools \l
 	cups cups-libs \
 	curl \
 	docker-io \
 	emacs emacs-common emacs-filesystem emacs-nox \
 	gawk \
+	gcc gcc-c++ gcc-gfortran \
 	ghc-base ghc-base-devel \
 	ghc-pandoc ghc-pandoc-citeproc ghc-pandoc-devel ghc-pandoc-types ghc-pandoc-types-devel \
 	gimp gimp-libs \
@@ -74,8 +77,11 @@ sudo dnf install -y \
 	htop \
 	inkscape \
 	java \
+	libpng libpng-devel libpng-tools \
+	libtiff libtiff-devel libtiff-tools \
 	json-c-devel \
 	kernel-devel \
+	kernel-tools \
 	latexmk \
 	levien-inconsolata-fonts \
 	libgnome-keyring-devel \
@@ -89,10 +95,12 @@ sudo dnf install -y \
 	postgresql postgresql-contrib postgresql-libs postgresql-server \
 	qt qt-devel qt-x11 \
 	qtwebkit qtwebkit-devel \
+	redhat-lsb-core \
 	rpm rpm-build rpm-build-libs rpm-libs rpm-python \
 	rpmdevtools \
 	samba-client samba-common samba-libs \
 	sed \
+	sqlite-devel \
 	tcsh \
 	texlive texlive-* \
 	tmux \
@@ -140,16 +148,27 @@ sudo dnf -y install atom
 
 
 #
+# 
+#
+
+#
+# binutils
+#
+
+
+#
 # GCC
 #
 sudo mkdir -p /usr/local/gcc
 
-wget -t 3 ftp://ftp.gnu.org/gnu/gcc/gcc-5.3.0/gcc-5.3.0.tar.gz -O $SOURCES/gcc-5.3.0.tar.gz
-tar -zxf $SOURCES/gcc-5.3.0.tar.gz -C $SOURCES
-cd $SOURCES/gcc-5.3.0
+wget -t 3 -O $SOURCES/gcc-5.3.0.tar.gz ftp://ftp.gnu.org/gnu/gcc/gcc-5.3.0/gcc-5.3.0.tar.gz
+tar -zxf -C $SOURCES $SOURCES/gcc-5.3.0.tar.gz
+cd $SOURCES/gcc-5.3.0 && \
+./configure --prefix=/usr/local/gcc/ --disble-multilib && \
+make
 
-wget -t 3 ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.gz -O $SOURCES/gcc-4.9.3.tar.gz
-tar -zxf $SOURCES/gcc-4.9.3.tar.gz -C $SOURCES
+wget -t 3 -O $SOURCES/gcc-4.9.3.tar.gz ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.gz
+tar -zxf -C $SOURCES $SOURCES/gcc-4.9.3.tar.gz
 cd $SOURCES/gcc-4.9.3
 
 
@@ -158,9 +177,12 @@ cd $SOURCES/gcc-4.9.3
 #
 sudo mkdir -p /usp/local/openmpi
 
-wget -t 3 http://www.open-mpi.org/software/ompi/v1.10/downloads/openmpi-1.10.1.tar.gz -O $SOURCE/openmpi-1.10.1.tar.gz
+wget -t 3 http://www.open-mpi.org/software/ompi/v1.10/downloads/openmpi-1.10.1.tar.gz -O $SOURCES/openmpi-1.10.1.tar.gz
 tar -zxf $SOURCES/openmpi-1.10.1.tar.gz -C $SOURCES
-cd $SOURCES/openmpi-1.10.1
+cd $SOURCES/openmpi-1.10.1 && \
+./configure --prefix=/usr/local/openmpi/1.10.1-gcc && \
+make && \
+sudo make install
 
 
 #
@@ -168,19 +190,11 @@ cd $SOURCES/openmpi-1.10.1
 #
 sudo mkdir -p /usr/local/openblas
 
-wget -t 3 http://github.com/xianyi/OpenBLAS/archive/v0.2.15.tar.gz -O $SOURCE/v0.2.15.tar.gz
-tar -zxf $SOURCE/v0.2.15.tar.gz -C $SOURCES
-cd $SOURCE/v0.2.15
-
-
-#
-# ATLAS
-#
-sudo mkdir -p /usr/local/atlas
-
-wget -t 3 http://downloads.sourceforge.net/project/math-atlas/Stable/3.10.2/atlas3.10.2.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fmath-atlas%2Ffiles%2FStable%2F3.10.2%2F&ts=1450322771&use_mirror=internode -O $SOURCES/atlas3.10.2.tar.bz2
-tar -jxf $SOURCES/atlas3.10.2.tar.bz2 -C $SOURCES
-cd $SOURCES/atlas3.10.2
+wget -t 3 http://github.com/xianyi/OpenBLAS/archive/v0.2.15.tar.gz -O $SOURCES/OpenBLAS-0.2.15.tar.gz
+tar -zxf $SOURCES/OpenBLAS-0.2.15.tar.gz -C $SOURCES
+cd $SOURCE/OpenBLAS-0.2.15 && \
+make && \
+make PREFIX=/usr/local/openblas/0.2.15-gcc install
 
 
 #
@@ -190,7 +204,27 @@ sudo mkdir -p /usr/local/lapack
 
 wget -t 3 http://www.netlib.org/lapack/lapack-3.6.0.tgz -O $SOURCES/lapack-3.6.0.tgz
 tar -zxf $SOURCES/lapack-3.6.0.tgz -C $SOURCES
-cd $SOURCES/lapack-3.6.0
+cd $SOURCES/lapack-3.6.0 && \
+cp make.inc.example make.inc && \
+echo "PREFIX=/usr/local/lapack/3.6.0-gcc" >> make.inc && \
+make blaslib && \
+make lapack_install && \
+make lib && \
+make blas_testing && \
+sudo mkdir -p /usr/local/lapack/3.6.0-gcc/lib && \
+sudo cp *.a /usr/local/lapack/3.6.0-gcc/lib
+
+
+#
+# ATLAS
+#
+sudo mkdir -p /usr/local/atlas
+
+wget -t 3 http://downloads.sourceforge.net/project/math-atlas/Stable/3.10.2/atlas3.10.2.tar.bz2 -O $SOURCES/atlas3.10.2.tar.bz2
+tar -jxf $SOURCES/atlas3.10.2.tar.bz2 -C $SOURCES && mv $SOURCES/ATLAS $SOURCES/atlas3.10.2
+cd $SOURCES/atlas3.10.2 && \
+./configure --prefix=/usr/local/atlas/3.10.2-gcc
+
 
 
 #
@@ -200,7 +234,10 @@ sudo mkdir -p /usr/local/parallel
 
 wget -t 3 ftp://ftp.gnu.org/gnu/parallel/parallel-20151122.tar.bz2 -O $SOURCES/parallel-20151122.tar.bz2
 tar -jxf $SOURCES/parallel-20151122.tar.bz2 -C $SOURCES
-cd $SOURCES/parallel-20151122
+cd $SOURCES/parallel-20151122 && \
+./configure --prefix=/usr/local/parallel/20151122-gcc && \
+make && \
+sudo make install
 
 
 #
@@ -208,9 +245,19 @@ cd $SOURCES/parallel-20151122
 #
 sudo mkdir -p /usr/local/boost
 
-wget -t 3 http://downloads.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fboost%2Ffiles%2Fboost%2F1.59.0%2F&ts=1450326319&use_mirror=internode -O $SOURCES/boost_1_59_0.tar.gz
+# requires a python2 lib loaded.
+
+wget -t 3 http://downloads.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz -O $SOURCES/boost_1_59_0.tar.gz
 tar -zxf $SOURCES/boost_1_59_0.tar.gz -C $SOURCES
-cd $SOURCES/boost_1_59_0
+cd $SOURCES/boost_1_59_0 && \
+./bootstrap.sh --prefix=/usr/local/boost/1.59.0-gcc && \
+sudo ./bjam install
+
+wget -t 3 http://downloads.sourceforge.net/project/boost/boost/1.52.0/boost_1_52_0.tar.gz -O $SOURCES/boost_1_52_0.tar.gz
+tar -zxf $SOURCES/boost_1_52_0.tar.gz -C $SOURCES
+cd $SOURCES/boost_1_52_0 && \
+./bootstrap.sh --prefix=/usr/local/boost/1.52.0-gcc && \
+sudo ./bjam install
 
 
 #
@@ -220,7 +267,11 @@ sudo mkdir -p /usr/local/R
 
 wget -t 3 http://cran.ms.unimelb.edu.au/src/base/R-3/R-3.2.3.tar.gz -O $SOURCES/R-3.2.3.tar.gz
 tar -zxf $SOURCES/R-3.2.3.tar.gz -C $SOURCES
-cd $SOURCES/R-3.2.3
+cd $SOURCES/R-3.2.3 && \
+./configure --prefix=/usr/local/R/3.2.3-gcc --with-blas --with-lapack && \
+make && \
+sudo make install
+
 
 
 #
@@ -239,23 +290,43 @@ sudo mkdir -p /usr/local/python
 
 wget -t 3 https://www.python.org/ftp/python/3.5.1/Python-3.5.1.tgz -O $SOURCES/Python-3.5.1.tgz
 tar -zxf $SOURCES/Python-3.5.1.tgz -C $SOURCES
-cd $SOURCES/Python-3.5.1 &&
+cd $SOURCES/Python-3.5.1 && \
+./configure --prefix=/usr/local/python/3.5.1-gcc && \
+make && \
+make test && \
+sudo make install
 
 wget -t 3 https://www.python.org/ftp/python/3.4.3/Python-3.4.3.tgz -O $SOURCES/Python-3.4.3.tgz
 tar -zxf $SOURCES/Python-3.4.3.tgz -C $SOURCES
-cd $SOURCES/Python-3.4.3 &&
+cd $SOURCES/Python-3.4.3 && \
+./configure --prefix=/usr/local/python/3.4.3-gcc && \
+make && \
+make test && \
+sudo make install
 
 wget -t 3 https://www.python.org/ftp/python/3.3.6/Python-3.3.6.tgz -O $SOURCES/Python-3.3.6.tgz
 tar -zxf $SOURCES/Python-3.3.6.tgz -C $SOURCES
-cd $SOURCES/Python-3.3.6 &&
+cd $SOURCES/Python-3.3.6 && \
+./configure --prefix=/usr/local/python/3.3.6-gcc && \
+make && \
+make test && \
+sudo make install
 
-wget -t 3 https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz -0 $SOURCES/Python-2.7.11.tgz
+wget -t 3 https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz -O $SOURCES/Python-2.7.11.tgz
 tar -zxf $SOURCES/Python-2.7.11.tgz -C $SOURCES
-cd $SOURCES/Python-2.7.11 &&
+cd $SOURCES/Python-2.7.11 && \
+./configure --prefix=/usr/local/python/2.7.11-gcc && \
+make && \
+make test && \
+sudo make install
 
-wget -t 3 https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz -0 $SOURCES/Python-2.6.9.tgz
+wget -t 3 https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz -O $SOURCES/Python-2.6.9.tgz
 tar -zxf $SOURCES/Python-2.6.9.tgz -C $SOURCES
-cd $SOURCES/Python-2.6.9 &&
+cd $SOURCES/Python-2.6.9 && \
+./configure --prefix=/usr/local/python/2.6.9-gcc && \
+make && \
+make test && \
+sudo make install
 
 
 #
@@ -268,19 +339,40 @@ cd $SOURCES/julia-0.4.2-full
 
 
 #
+# NODE
+#
+sudo mkdir -p /usr/local/nodejs
+
+wget -t 3 https://nodejs.org/dist/v4.2.3/node-v4.2.3.tar.gz -O $SOURCES/node-v4.2.3.tar.gz
+tar -zxf $SOURCES/node-v4.2.3.tar.gz -C $SOURCES
+cd $SOURCES/node-v4.2.3 && \
+./configure --prefix /usr/local/nodejs/4.2.3-gcc && \
+make && \
+make test && \
+make doc && \
+sudo make install
+
+
+
+#
 # Perl
 #
 sudo mkdir -p /usr/local/perl
 
 wget -t 3 http://www.cpan.org/src/5.0/perl-5.22.1.tar.gz -O $SOURCES/perl-5.22.1.tar.gz
 tar -xzf $SOURCES/perl-5.22.1.tar.gz -C $SOURCES
-cd $SOURCES/perl-5.22.1 && ./Configure -des -Dprefix=/usr/local/perl/5.22.1 && make && make test && sudo make install
+cd $SOURCES/perl-5.22.1 && \
+./Configure -des -Dprefix=/usr/local/perl/5.22.1 && \
+make && \
+make test && \
+sudo make install
 
 #sudo perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 1); $c->edit(prerequisites_policy => "follow"); $c->edit(build_requires_install_policy => "yes"); $c->commit'
 #sudo cpan -u
 #sudo cpan -i SOAP::Lite
 #sudo cpan -i Archive::Tar
 #sudo cpan -i List::MoreUtils
+
 
 #
 # Heroku
@@ -332,11 +424,28 @@ sudo mv $SOURCES/BEASTv1.8.1 /usr/local/beast/1.8.1
 #
 sudo mkdir -p /usr/local/bedtools
 
-wget -t 3 -O $SOURCES/Bedtools2-2.22.0.tar.gz https://github.com/arq5x/bedtools2/archive/v2.22.0.tar.gz
-tar -zxf $SOURCES/Bedtools2-2.22.0.tar.gz -C $SOURCES
-cd $SOURCES/bedtools2-2.22.0
+wget -t 3 -O $SOURCES/Bedtools2-2.25.0.tar.gz https://github.com/arq5x/bedtools2/archive/v2.25.0.tar.gz
+tar -zxf $SOURCES/Bedtools2-2.25.0.tar.gz -C $SOURCES
+cd $SOURCES/bedtools2-2.25.0 && \
 make && \
-sudo mv $SOURCES/bedtools2-2.22.0 /usr/local/bedtools/2.22.0
+sudo make prefix="/usr/local/bedtools/2.25.0-gcc" install && \
+sudo cp -r ./data /usr/local/bedtools/2.25.0-gcc && \
+sudo cp -r ./genomes /usr/local/bedtools/2.25.0-gcc
+
+
+#
+# BLAST+
+#
+sudo mkdir -p /usr/local/blast+
+
+wget -t 3 -O $SOURCES/ncbi-blast-2.2.30+-src.tar.gz ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.30/ncbi-blast-2.2.30+-src.tar.gz
+tar -zxf $SOURCES/ncbi-blast-2.2.30+-src.tar.gz -C $SOURCES
+cd $SOURCES/ncbi-blast-2.2.30+-src/c++ && \
+sed -e '/if test "$with_mt" != "no" ; then/i compiler=GCC' -i src/build-system/configure && \
+./configure --prefix=/usr/local/blast+/2.2.30-gcc --with-boost=/usr/local/boost-gcc/1.52.0 && \
+make && \
+make check && \
+sudo make install
 
 
 #
@@ -344,16 +453,10 @@ sudo mv $SOURCES/bedtools2-2.22.0 /usr/local/bedtools/2.22.0
 #
 sudo mkdir -p /usr/local/blast
 
-wget -t 3 -O $SOURCES/ncbi-blast-2.2.30+-src.tar.gz ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.30/ncbi-blast-2.2.30+-src.tar.gz
-tar -zxf $SOURCES/ncbi-blast-2.2.30+-src.tar.gz -C $SOURCES
-cd $SOURCES/ncbi-blast-2.2.30+-src/c++
-$SOURCES/ncbi-blast-2.2.30+-src/c++/configure && \
-make && \
-sudo mv $SOURCES/ncbi-blast-2.2.30+-src /usr/local/blast/2.2.30+
-
 wget -t 3 -O $SOURCES/blast-2.2.26-x64-linux.tar.gz ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/LATEST/blast-2.2.26-x64-linux.tar.gz
 tar -zxf $SOURCES/blast-2.2.26-x64-linux.tar.gz -C $SOURCES
-cd $SOURCES/blast-2.2.26-x64-linux
+sudo mkdir -p /usr/local/blast/2.2.26
+cp -r $SOURCES/blast-2.2.26/* /usr/local/blast/2.2.26
 
 
 #
@@ -363,11 +466,11 @@ sudo mkdir -p /usr/local/clustalo
 
 wget -t 3 -O $SOURCES/clustal-omega-1.2.1.tar.gz http://www.clustal.org/omega/clustal-omega-1.2.1.tar.gz
 tar -zxf $SOURCES/clustal-omega-1.2.1.tar.gz -C $SOURCES
-cd $SOURCES/clustal-omega-1.2.1
-$SOURCES/clustal-omega-1.2.1/configure && \
+cd $SOURCES/clustal-omega-1.2.1 && \
+$SOURCES/clustal-omega-1.2.1/configure --prefix=/usr/local/clustalo/1.2.1-gcc && \
 make && \
 make check && \
-sudo mv $SOURCES/clustal-omega-1.2.1 /usr/local/clustalo/1.2.1
+sudo make install
 
 
 #
@@ -377,11 +480,11 @@ sudo mkdir -p /usr/local/clustalw
 
 wget -t 3 -O $SOURCES/clustalw-2.1.tar.gz http://www.clustal.org/download/current/clustalw-2.1.tar.gz
 tar -zxf $SOURCES/clustalw-2.1.tar.gz -C $SOURCES
-cd $SOURCES/clustalw-2.1
-$SOURCES/clustalw-2.1/configure && \
+cd $SOURCES/clustalw-2.1 && \
+$SOURCES/clustalw-2.1/configure --prefix=/usr/local/clustalw/2.1-gcc && \
 make && \
 make check && \
-sudo mv $SOURCES/clustalw-2.1 /usr/local/clustalw/2.1
+sudo make install
 
 
 #
@@ -389,14 +492,15 @@ sudo mv $SOURCES/clustalw-2.1 /usr/local/clustalw/2.1
 #
 sudo mkdir -p /usr/local/dialign
 
-wget -t 3 -O $SOURCES/dialign_package.tgz http://dialign.gobics.de/download/dialign_package.tgz
+wget -t 3 -O $SOURCES/dialign_package.tgz http://dialign.gobics.de/downlyoad/dialign_package.tgz
 tar -zxf $SOURCES/dialign_package.tgz -C $SOURCES
 cd $SOURCES/dialign_package/src/
 make && \
-sudo rm *.o && \
-sudo mv $SOURCES/dialign_package /usr/local/dialign/2
+rm *.o && \
+mkdir $SOURCES/dialign_package/bin && \
+mv $SOURCES/dialign_package/src/dialign2-2 $SOURCES/dialign_package/bin/dialign2-2 && \
+sudo mv $SOURCES/dialign_package /usr/local/dialign/2.2.1-gcc
 
-# Note that setenv DIALIGN2_DIR /your_path/dialign2_dir/ is already in the .envs file
 
 #
 # Dialign-TX
@@ -405,8 +509,7 @@ sudo mkdir -p /usr/local/dialign-tx
 
 wget -t 3 http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz -O $SOURCES/DIALIGN-TX_1.0.2.tar.gz
 tar -zxf $SOURCES/DIALIGN-TX_1.0.2.tar.gz -C $SOURCES
-mv $SOURCES/DIALIGN-TX_1.0.2/source/Makefile $SOURCES/DIALIGN-TX_1.0.2/source/Makefile.old
-cat $SOURCES/DIALIGN-TX_1.0.2/source/Makefile.old | sed s/-march=i686/-march=x86-64/ > $SOURCES/DIALIGN-TX_1.0.2/source/Makefile
+sed -i "s/-march=i686/-march=x86-64/" $SOURCES/DIALIGN-TX_1.0.2/source/Makefile
 cd $SOURCES/DIALIGN-TX_1.0.2/source
 make && \
 mv $SOURCES/DIALIGN-TX_1.0.2/source/dialign-tx $SOURCES/DIALIGN-TX_1.0.2/bin/dialign-tx && \
@@ -454,7 +557,7 @@ sudo mkdir -p /usr/local/fsa
 
 wget -t 3 -O $SOURCES/fsa-1.15.9.tar.gz http://downloads.sourceforge.net/project/fsa/fsa-1.15.9.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Ffsa%2F\&ts=1417869476\&use_mirror=softlayer-sng
 tar -zxf $SOURCES/fsa-1.15.9.tar.gz -C $SOURCES
-cd $SOURCES/fsa-1.15.9
+cd $SOURCES/fsa-1.15.9 && \
 $SOURCES/fsa-1.15.9/configure && \
 make && \
 sudo mv $SOURCES/fsa-1.15.9 /usr/local/fsa/1.15.9

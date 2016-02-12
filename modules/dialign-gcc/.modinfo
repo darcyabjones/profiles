@@ -1,0 +1,5 @@
+#%licence: BSD (mafft) and Others (for extensions @see http://mafft.cbrc.jp/alignment/software/license66.txt)
+#%cite: Katoh, Misawa, Kuma, Miyata 2002 (Nucleic Acids Res. 30:3059-3066) MAFFT: a novel method for rapid multiple sequence alignment based on fast Fourier transform.
+#%url: http://mafft.cbrc.jp/alignment/software/
+#%docs: http://mafft.cbrc.jp/alignment/software/
+#%desc: MAFFT is a multiple sequence alignment program for unix-like operating systems.

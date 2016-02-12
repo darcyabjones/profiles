@@ -14,9 +14,9 @@ proc ModulesHelp { } {
 
 module-whatis   "Set environment variables to use $name version $ver"
 
-if { ![ is-loaded $compiler ] } {
-  module load $compiler
-}
+#if { ![ is-loaded $compiler ] } {
+#  module load $compiler
+#}
 
 prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
 
