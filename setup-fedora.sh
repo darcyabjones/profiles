@@ -57,12 +57,16 @@ mkdir $HOME/data
 #
 sudo dnf -y update
 sudo dnf install -y \
+	binutils \
 	bibutils* \
+	bzlib2 bzlib2-devel \
+	cairo cairo-devel cairo-tools \l
 	cups cups-libs \
 	curl \
 	docker-io \
 	emacs emacs-common emacs-filesystem emacs-nox \
 	gawk \
+	gcc gcc-c++ gcc-gfortran \
 	ghc-base ghc-base-devel \
 	ghc-pandoc ghc-pandoc-citeproc ghc-pandoc-devel ghc-pandoc-types ghc-pandoc-types-devel \
 	gimp gimp-libs \
@@ -75,11 +79,15 @@ sudo dnf install -y \
 	htop \
 	inkscape \
 	java \
+	libpng libpng-devel libpng-tools \
+	libtiff libtiff-devel libtiff-tools \
 	json-c-devel \
 	kernel-devel \
+	kernel-tools \
 	latexmk \
 	levien-inconsolata-fonts \
 	libgnome-keyring-devel \
+	gcc gcc-*
 	gmp gmp-devel \
 	mpfr mpfr-devel \
 	libmpc libmpc-devel \
@@ -90,10 +98,12 @@ sudo dnf install -y \
 	postgresql postgresql-contrib postgresql-libs postgresql-server \
 	qt qt-devel qt-x11 \
 	qtwebkit qtwebkit-devel \
+	redhat-lsb-core \
 	rpm rpm-build rpm-build-libs rpm-libs rpm-python \
 	rpmdevtools \
 	samba-client samba-common samba-libs \
 	sed \
+	sqlite-devel \
 	tcsh \
 	texlive texlive-* \
 	tmux \
@@ -146,18 +156,4 @@ sudo dnf -y install atom
 
 sudo perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 1); $c->edit(prerequisites_policy => "follow"); $c->edit(build_requires_install_policy => "yes"); $c->commit'
 sudo cpan -u
-#sudo cpan -i SOAP::Lite
-#sudo cpan -i Archive::Tar
-#sudo cpan -i List::MoreUtils
-
-#
-# Heroku
-#
-wget -qO- https://toolbelt.heroku.com/install.sh | sudo sh
-sudo ln -sf /usr/local/heroku/bin/heroku /usr/local/bin/heroku
-
-#
-# Change the default shell to zsh
-#
-sudo chsh -s /usr/bin/zsh $USER
-
+ 

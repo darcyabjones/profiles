@@ -14,49 +14,49 @@ proc ModulesHelp { } {
 
 module-whatis   "Set environment variables to use $name version $ver"
 
-if { ![ is-loaded $compiler ] } {
-  module load $compiler
-}
+#if { ![ is-loaded $compiler ] } {
+#  module load $compiler
+#}
 
-if { ![ is-loaded gsl-intel ] } {
-  module load gsl-intel
-}
+#if { ![ is-loaded gsl-intel ] } {
+#  module load gsl-intel
+#}
 
-if { ![ is-loaded libxml2-$compiler ] } {
-  module load libxml2-$compiler
-}
+#if { ![ is-loaded libxml2-$compiler ] } {
+#  module load libxml2-$compiler
+#}
 
-if { ![ is-loaded zlib-$compiler ] } {
-  module load zlib-$compiler
-}
+#if { ![ is-loaded zlib-$compiler ] } {
+#  module load zlib-$compiler
+#}
 
-if { ![ is-loaded curl-$compiler ] } {
-  module load curl-$compiler
-}
+#if { ![ is-loaded curl-$compiler ] } {
+#  module load curl-$compiler
+#}
 
-if { ![ is-loaded libjpeg-$compiler ] } {
-  module load libjpeg-$compiler
-}
+#if { ![ is-loaded libjpeg-$compiler ] } {
+#  module load libjpeg-$compiler
+#}
 
-if { ![ is-loaded libpng-$compiler ] } {
-  module load libpng-$compiler
-}
+#if { ![ is-loaded libpng-$compiler ] } {
+#  module load libpng-$compiler
+#}
 
-if { ![ is-loaded libtiff-$compiler ] } {
-  module load libtiff-$compiler
-}
+#if { ![ is-loaded libtiff-$compiler ] } {
+#  module load libtiff-$compiler
+#}
 
-if { ![ is-loaded icu2c-$compiler ] } {
-  module load icu4c-$compiler
-}
+#if { ![ is-loaded icu2c-$compiler ] } {
+#  module load icu4c-$compiler
+#}
 
-if { ![ is-loaded sqlite-$compiler ] } {
-  module load sqlite-$compiler
-}
+#if { ![ is-loaded sqlite-$compiler ] } {
+#  module load sqlite-$compiler
+#}
 
-if { ![ is-loaded java/1.7.0_51 ] } {
-  module load java/1.7.0_51
-}
+#if { ![ is-loaded java/1.7.0_51 ] } {
+#  module load java/1.7.0_51
+#}
 
 
 prepend-path --delim " " CPPFLAGS -I/usr/local/$subname/$ver-$compiler/lib64/$subname/include
@@ -68,5 +68,5 @@ prepend-path INFOPATH /usr/local/$subname/$ver-$compiler/share/info
 prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
 
 setenv  R_DIR           /usr/local/$subname/$ver-$compiler/
-setenv  R_HOME        /usr/local/$subname/$ver-$compiler/lib64/R
+#setenv  R_HOME        /usr/local/$subname/$ver-$compiler/lib64/R
 

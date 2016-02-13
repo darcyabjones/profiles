@@ -18,10 +18,9 @@ module-whatis   "Set environment variables to use $name version $ver"
 #  module load $compiler
 #}
 
-prepend-path --delim " " LDFLAGS -L/usr/local/$subname/$ver-$compiler/lib
 
 prepend-path LD_LIBRARY_PATH /usr/local/$subname/$ver-$compiler/lib
+prepend-path PATH /usr/local/$subname/$ver-$compiler/bin
+prepend-path MANPATH /usr/local/$subname/$ver-$compiler/share/man
 
-setenv  LAPACK_DIR      /usr/local/$subname/$ver-$compiler/
-setenv  LAPACK_HOME       /usr/local/$subname/$ver-$compiler/
-
+setenv  DIALIGN2_DIR        /usr/local/$subname/$ver-$compiler/
