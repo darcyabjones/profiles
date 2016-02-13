@@ -44,7 +44,11 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle rupa/z
 antigen bundle docker
 antigen bundle ssh-agent
-antigen bundle atom
+antigen bundle gnu-utils
+
+#antigen bundle atom
+
+antigen bundle node
 
 
 # Python Plugins
@@ -68,6 +72,7 @@ elif [[ $CURRENT_OS == 'Linux' ]]; then
     fi
     if [[ $DISTRO == 'Fedora' ]]; then
         antigen bundle dnf
+	antigen bundle fedora
     fi
 elif [[ $CURRENT_OS == 'Cygwin' ]]; then
     antigen bundle cygwin
