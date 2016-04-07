@@ -44,14 +44,11 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle rupa/z
 antigen bundle docker
 antigen bundle ssh-agent
-<<<<<<< HEAD
 antigen bundle gnu-utils
 
 #antigen bundle atom
 
 antigen bundle node
-=======
->>>>>>> 223f63d8b582164856c90974cd1319da3605e477
 
 
 # Python Plugins
