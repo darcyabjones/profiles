@@ -77,6 +77,7 @@ elif [[ $CURRENT_OS == 'Linux' ]]; then
 elif [[ $CURRENT_OS == 'Cygwin' ]]; then
     antigen bundle cygwin
 fi
+antigen bundle debian
 
 # Tell antigen that you're done.
 antigen apply
