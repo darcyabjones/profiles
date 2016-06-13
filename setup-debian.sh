@@ -27,8 +27,10 @@ sudo apt-get install -yq \
 	openmpi-bin openmpi-common \
 	parallel \
 	sqlite3 libsqlite3-dev \
-	xclip
-	
+	xclip \
+	google-chrome-stable \
+	fonts-inconsolata \
+
 sudo apt-get install -yq \
 	igv \
 	bedtools \
@@ -138,5 +140,13 @@ git clone https://github.com/zsh-users/antigen.git $HOME/.antigen
 sudo perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 1); $c->edit(prerequisites_policy => "follow"); $c->edit(build_requires_install_policy => "yes"); $c->commit'
 sudo cpan -u
 
+# Docker
+
+sudo apt-get install apt-transport-https ca-certificates
+apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
+echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list
+sudo apt-get update && sudo apt-cache policy docker-engine
+sudo apt-get update && sudo apt-get install docker-engine && sudo service docker start
 
 sudo chsh -s $(which zsh) darcy
