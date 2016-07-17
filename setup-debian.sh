@@ -6,7 +6,7 @@ wget -q -O - https://deb.nodesource.com/setup_4.x | sudo bash -
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get dist-upgrade
-sudo apt-get install -yq \
+sudo apt-get install -y --force-yes \
 	vim \
 	zsh \
 	git \
@@ -14,16 +14,14 @@ sudo apt-get install -yq \
 	tmux \
 	gparted \
 	julia \
-	nodejs nodejs-dev npm nodejs-legacy \
+	nodejs \
 	texlive texlive-base texlive-latex-base texlive-latex-extra texlive-latex-recommended \
 	pandoc \
 	nautilus-dropbox \
-	grive \
 	python3-dev python3-pip libpython3-dev \
 	python-dev python-pip libpython-dev \
 	libzmq3 libzmq3-dev \
 	libfreetype6 libfreetype6-dev \
-	libxft \
 	pkg-config \
 	openmpi-bin openmpi-common \
 	parallel \
@@ -35,12 +33,12 @@ sudo apt-get install -yq \
 	openjdk-7-jdk openjdk-7-jre openjdk-7-source \
 	libcairo2 libcairo2-dev \
 	libtiff5 libtiff5-dev \
-	libxml2-dev
+	libxml2-dev \
+	cifs-utils \
+	r-base r-base-core r-base-dev \
 
 
 sudo apt-get install -yq \
-	igv \
-	bedtools \
 	ncbi-blast+ ncbi-blast+-legacy blast2 \
 	emboss \
 	hmmer \
@@ -55,13 +53,10 @@ sudo apt-get install -yq \
 	mummer \
 	raxml \
 	phyml \
-	beast-mcmc \
 	figtree \
 	prank \
 	primer3 \
 	fastqc
-
-
 
 ssh-keygen -t rsa -C "darcy.ab.jones@gmail.com" -N ""
 eval "$(ssh-agent -s)"
@@ -69,6 +64,14 @@ ssh-add ~/.ssh/id_rsa
 
 git config --global user.name "Darcy Jones"
 git config --global user.email "darcy.ab.jones@gmail.com"
+
+# aria
+wget -O - https://github.com/aria2/aria2/releases/download/release-1.25.0/aria2-1.25.0.tar.bz2 | tar -xjf - -C $HOME/bin && \
+    cd $HOME/bin/aria2 && \
+    ./configure && \
+    make && \
+    sudo make install
+
 
 wget https://atom.io/download/deb -O ~/Downloads/atom-amd64.deb && sudo dpkg -i ~/Downloads/atom-amd64.deb
 
@@ -79,9 +82,17 @@ su -c "wget -qO - ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz 
 
 export PATH=$PATH:/usr/local/edirect
 
+sudo mkdir /usr/local/bedtools
+wget -O- https://github.com/arq5x/bedtools2/releases/download/v2.25.0/bedtools-2.25.0.tar.gz | tar -C $HOME/bin -zxf - && \
+    cd $HOME/bin/bedtools2 && \
+    make && \
+    cd $HOME/bin && \
+    sudo cp -r $HOME/bin/bedtools2 /usr/local/bedtools/2.25.0 && \
+    sudo ln -s /usr/local/bedtools/2.25.0/bin/* /usr/local/bin
+
 
 # Samtools ecosystem
-sudo apt-get update && apt-get install -yq zlib1g-dev libncurses5 libncurses5-dev
+sudo apt-get update && sudo apt-get install -yq zlib1g-dev libncurses5 libncurses5-dev
 
 su -c "wget -qO - https://github.com/samtools/htslib/releases/download/1.3.1/htslib-1.3.1.tar.bz2 \
     | tar xjf - -C /root && \
@@ -99,7 +110,7 @@ su -c "wget -qO - https://github.com/samtools/bcftools/releases/download/1.3.1/b
     make && make install"
 
 # Rstudio
-wget https://download1.rstudio.org/rstudio-0.99.902-amd64.deb -O ~/Downloads/rstudio-0.99.902-amd64.deb && sudo dpkg -i ~/Downloads/rstudio-0.99.902-amd64.deb
+wget https://download1.rstudio.org/rstudio-0.99.902-amd64.deb -O $HOME/Downloads/rstudio-0.99.902-amd64.deb && sudo dpkg -i $HOME/Downloads/rstudio-0.99.902-amd64.deb
 
 # setup google drive
 grive -a
@@ -107,8 +118,6 @@ And follow the instructions (you will have to log into your account with a brows
 
 Then start the synchronisation for example like this:
 grive -p $HOME/Grive
-
-sudo pip3 install numpy pandas scipy sympy matplotlib biopython jupyter
 
 git clone git@github.com:darcyabjones/profiles.git $HOME/.profiles
 
@@ -150,9 +159,9 @@ sudo cpan -u
 # Docker
 
 sudo apt-get install apt-transport-https ca-certificates
-apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
-echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list
+sudo echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list
 sudo apt-get update && sudo apt-cache policy docker-engine
 sudo apt-get update && sudo apt-get install docker-engine && sudo service docker start
 
@@ -172,6 +181,10 @@ sudo Rscript -e "source('https://bioconductor.org/biocLite.R');biocLite()"
 
 
 sudo pip3 install cython
-sudo pip3 install numpy scipy sympy pandas matplotlib biopython
+sudo pip3 install numpy pandas scipy sympy matplotlib biopython jupyter ipykernel
+sudo pip install cython
+sudo pip install numpy pandas scipy sympy matplotlib biopython ipykernel ipython
+
+sudo python2 -m ipykernel.kernelspec
 
 sudo chsh -s $(which zsh) darcy
