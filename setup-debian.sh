@@ -1,6 +1,8 @@
 sudo echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list
 sudo echo "deb http://www.deb-multimedia.org jessie main non-free" >> /etc/apt/sources.list
 
+wget -q -O - https://deb.nodesource.com/setup_4.x | sudo bash -
+
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get dist-upgrade
@@ -11,15 +13,14 @@ sudo apt-get install -yq \
 	wget \
 	tmux \
 	gparted \
-	r-base r-base-dev \
 	julia \
-	nodejs nodejs-dev npm \
+	nodejs nodejs-dev npm nodejs-legacy \
 	texlive texlive-base texlive-latex-base texlive-latex-extra texlive-latex-recommended \
 	pandoc \
 	nautilus-dropbox \
 	grive \
 	python3-dev python3-pip libpython3-dev \
-	python-dev python-pip libpython-dev \ 
+	python-dev python-pip libpython-dev \
 	libzmq3 libzmq3-dev \
 	libfreetype6 libfreetype6-dev \
 	libxft \
@@ -30,6 +31,12 @@ sudo apt-get install -yq \
 	xclip \
 	google-chrome-stable \
 	fonts-inconsolata \
+	libcurl4-openssl-dev \
+	openjdk-7-jdk openjdk-7-jre openjdk-7-source \
+	libcairo2 libcairo2-dev \
+	libtiff5 libtiff5-dev \
+	libxml2-dev
+
 
 sudo apt-get install -yq \
 	igv \
@@ -53,8 +60,8 @@ sudo apt-get install -yq \
 	prank \
 	primer3 \
 	fastqc
-	
-	
+
+
 
 ssh-keygen -t rsa -C "darcy.ab.jones@gmail.com" -N ""
 eval "$(ssh-agent -s)"
@@ -98,7 +105,7 @@ wget https://download1.rstudio.org/rstudio-0.99.902-amd64.deb -O ~/Downloads/rst
 grive -a
 And follow the instructions (you will have to log into your account with a browser, confirm that you want to allow grive to access your drive and copy paste the given code to the terminal, pretty easy).
 
-Then start the synchronisation for example like this: 
+Then start the synchronisation for example like this:
 grive -p $HOME/Grive
 
 sudo pip3 install numpy pandas scipy sympy matplotlib biopython jupyter
@@ -148,5 +155,23 @@ apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E8
 echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list
 sudo apt-get update && sudo apt-cache policy docker-engine
 sudo apt-get update && sudo apt-get install docker-engine && sudo service docker start
+
+
+sudo npm install -g ijavascript
+
+## R
+wget -O - cran.ms.unimelb.edu.au/src/base/R-3/R-3.3.0.tar.gz | tar -C $HOME/bin -zxf -
+cd $HOME/bin/R-3.3.0 && ./configure --enable-R-shlib && make && sudo make install
+sudo ln -sf $HOME/.profiles/Rprofile /root/.Rprofile
+sudo Rscript -e "install.packages(c('pbdZMQ', 'repr', 'ggplot2', 'devtools', 'dplyr', 'knitr'))"
+sudo Rscript -e "devtools::install_github('IRkernel/IRdisplay', force = TRUE)"
+sudo Rscript -e "devtools::install_github('IRkernel/IRkernel', force = TRUE)"
+sudo Rscript -e "IRkernel::installspec(name = 'ir330', displayname = 'R 3.3.0')"
+Rscript -e "IRkernel::installspec(name = 'ir330', displayname = 'R 3.3.0')"
+sudo Rscript -e "source('https://bioconductor.org/biocLite.R');biocLite()"
+
+
+sudo pip3 install cython
+sudo pip3 install numpy scipy sympy pandas matplotlib biopython
 
 sudo chsh -s $(which zsh) darcy
