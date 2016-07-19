@@ -166,6 +166,13 @@ sudo apt-get update && sudo apt-cache policy docker-engine
 sudo apt-get update && sudo apt-get install docker-engine && sudo service docker start
 
 
+sudo pip3 install cython
+sudo pip3 install numpy pandas scipy sympy matplotlib biopython jupyter ipykernel
+sudo pip install cython
+sudo pip install numpy pandas scipy sympy matplotlib biopython ipykernel ipython
+
+sudo python2 -m ipykernel.kernelspec
+
 sudo npm install -g ijavascript
 
 ## R
@@ -178,13 +185,5 @@ sudo Rscript -e "devtools::install_github('IRkernel/IRkernel', force = TRUE)"
 sudo Rscript -e "IRkernel::installspec(name = 'ir330', displayname = 'R 3.3.0')"
 Rscript -e "IRkernel::installspec(name = 'ir330', displayname = 'R 3.3.0')"
 sudo Rscript -e "source('https://bioconductor.org/biocLite.R');biocLite()"
-
-
-sudo pip3 install cython
-sudo pip3 install numpy pandas scipy sympy matplotlib biopython jupyter ipykernel
-sudo pip install cython
-sudo pip install numpy pandas scipy sympy matplotlib biopython ipykernel ipython
-
-sudo python2 -m ipykernel.kernelspec
 
 sudo chsh -s $(which zsh) darcy

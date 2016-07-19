@@ -40,31 +40,3 @@ utils::rc.settings(ipck=TRUE)
     savehistory(hist_file)
   }
 }
-
-if(Sys.getenv("TERM") == "xterm-256color")
-  library("colorout")
-
-sshhh <- function(a.package){
-  suppressWarnings(suppressPackageStartupMessages(
-    library(a.package, character.only=TRUE)))
-}
-
-auto.loads <-c("dplyr", "ggplot2")
-
-if(interactive()){
-  invisible(sapply(auto.loads, sshhh))
-}
-
-.env <- new.env()
-attach(.env)
-
-.env$unrowname <- function(x) {
-  rownames(x) <- NULL
-  x
-}
-
-.env$unfactor <- function(df){
-  id <- sapply(df, is.factor)
-  df[id] <- lapply(df[id], as.character)
-  df
-}

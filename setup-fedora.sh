@@ -57,13 +57,11 @@ mkdir $HOME/data
 #
 sudo dnf -y update
 sudo dnf install -y \
+	atlas atlas-devel atlas-sse2 atlas-sse3 \
 	binutils \
-	bibutils* \
-	bzlib2 bzlib2-devel \
-	cairo cairo-devel cairo-tools \l
-	cups cups-libs \
+	blas blas-devel \
+	cairo cairo-devel cairo-tools \
 	curl \
-	docker-io \
 	emacs emacs-common emacs-filesystem emacs-nox \
 	gawk \
 	gcc gcc-c++ gcc-gfortran \
@@ -85,9 +83,10 @@ sudo dnf install -y \
 	kernel-devel \
 	kernel-tools \
 	latexmk \
+	lapack lapack-devel \
 	levien-inconsolata-fonts \
 	libgnome-keyring-devel \
-	gcc gcc-*
+	gcc gcc-* \
 	gmp gmp-devel \
 	mpfr mpfr-devel \
 	libmpc libmpc-devel \
@@ -112,6 +111,7 @@ sudo dnf install -y \
 	vpnc \
 	wget \
 	xclip \
+	zeromq zeromq-devel \
 	zsh
 
 #
@@ -123,6 +123,22 @@ sudo dnf install -y \
 	vlc vlc-core \
 	dropbox
 
+#
+# Docker
+#
+
+sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/fedora/$releasever/
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+
+sudo dnf install -yq docker-engine
+sudo systemctl enable docker.socket docker.service
+sudo systemctl start docker
 
 #
 # clone my own git repos
@@ -149,11 +165,87 @@ git clone https://github.com/zsh-users/antigen.git $HOME/.antigen
 #
 # Atom
 #
-sudo rpm -Uhv https://atom.io/download/rpm
-sudo dnf -y install atom
+wget -O $HOME/bin/sources/atom.rpm https://github.com/atom/atom/releases/download/v1.8.0/atom.x86_64.rpm
+sudo dnf -y install $HOME/bin/sources/atom.rpm
 
 
 
 sudo perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 1); $c->edit(prerequisites_policy => "follow"); $c->edit(build_requires_install_policy => "yes"); $c->commit'
 sudo cpan -u
- 
+
+# Samtools
+
+sudo dnf install -yq ncurses ncurses-libs ncurses-devel
+
+su -c "wget -qO - https://github.com/samtools/htslib/releases/download/1.3.1/htslib-1.3.1.tar.bz2 \
+    | tar xjf - -C /root && \
+    cd /root/htslib-1.3.1 && \
+    ./configure && make && make install"
+
+su -c "wget -qO - https://github.com/samtools/samtools/releases/download/1.3.1/samtools-1.3.1.tar.bz2 \
+    | tar xjf - -C /root && \
+    cd /root/samtools-1.3.1 && \
+    ./configure && make && make install"
+
+su -c "wget -qO - https://github.com/samtools/bcftools/releases/download/1.3.1/bcftools-1.3.1.tar.bz2 \
+    | tar xjf - -C /root && \
+    cd /root/bcftools-1.3.1 && \
+    make && make install"
+
+# Bedtools
+
+sudo mkdir /usr/local/bedtools
+wget -O- https://github.com/arq5x/bedtools2/releases/download/v2.25.0/bedtools-2.25.0.tar.gz | tar -C $HOME/bin -zxf - && \
+    cd $HOME/bin/bedtools2 && \
+    make && \
+    cd $HOME/bin && \
+    sudo cp -r $HOME/bin/bedtools2 /usr/local/bedtools/2.25.0 && \
+    sudo ln -s /usr/local/bedtools/2.25.0/bin/* /usr/local/bin
+
+# install chrome
+su -c "cat << EOF > /etc/yum.repos.d/google-chrome.repo \
+[google-chrome] \
+name=google-chrome - \$basearch \
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/\$basearch \
+enabled=1 \
+gpgcheck=1 \
+gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub \
+EOF \
+"
+sudo dnf install -yq google-chrome-stable
+
+#
+# Python
+#
+
+
+sudo pip3 install --upgrade pip
+sudo pip2 install --upgrade pip
+
+sudo pip3 install cython
+sudo pip3 install numpy pandas scipy sympy matplotlib biopython jupyter virtualenv
+sudo pip2 install cython
+sudo pip2 install numpy pandas scipy sympy matplotlib biopython ipykernel ipython
+
+sudo python2 -m ipykernel.kernelspec
+
+
+#
+# Nodejs
+#
+sudo dnf install -yq nodejs
+
+sudo npm install -g ijavascript
+
+#
+# R
+#
+sudo dnf install -yq R-core R-core-devel libcurl libcurl-devel
+
+sudo ln -sf $HOME/.profiles/Rprofile /root/.Rprofile
+sudo Rscript -e "install.packages(c('pbdZMQ', 'repr', 'ggplot2', 'devtools', 'dplyr', 'knitr'))"
+sudo Rscript -e "devtools::install_github('IRkernel/IRdisplay', force = TRUE)"
+sudo Rscript -e "devtools::install_github('IRkernel/IRkernel', force = TRUE)"
+sudo Rscript -e "IRkernel::installspec(name = 'ir330', displayname = 'R 3.3.0')"
+Rscript -e "IRkernel::installspec(name = 'ir330', displayname = 'R 3.3.0')"
+sudo Rscript -e "source('https://bioconductor.org/biocLite.R');biocLite()"
