@@ -109,6 +109,14 @@ su -c "wget -qO - https://github.com/samtools/bcftools/releases/download/1.3.1/b
     cd /root/bcftools-1.3.1 && \
     make && make install"
 
+# fastqc
+wget -O $HOME/bin/sources/fastqc_v0.11.5.zip http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
+unzip $HOME/bin/sources/fastqc_v0.11.5.zip -d $HOME/bin/sources
+chmod a+x $HOME/bin/sources/FastQC/fastqc
+sudo mkdir -p /usr/local/fastqc
+sudo mv $HOME/bin/sources/FastQC /usr/local/fastqc/0.11.5
+sudo ln -sf /usr/local/fastqc/0.11.5/fastqc /usr/local/bin/fastqc
+
 # Rstudio
 wget https://download1.rstudio.org/rstudio-0.99.902-amd64.deb -O $HOME/Downloads/rstudio-0.99.902-amd64.deb && sudo dpkg -i $HOME/Downloads/rstudio-0.99.902-amd64.deb
 

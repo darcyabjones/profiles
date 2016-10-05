@@ -77,6 +77,7 @@ sudo dnf install -y \
 	htop \
 	inkscape \
 	java \
+	julia julia-devel \
 	libpng libpng-devel libpng-tools \
 	libtiff libtiff-devel libtiff-tools \
 	json-c-devel \
@@ -202,6 +203,19 @@ wget -O- https://github.com/arq5x/bedtools2/releases/download/v2.25.0/bedtools-2
     sudo cp -r $HOME/bin/bedtools2 /usr/local/bedtools/2.25.0 && \
     sudo ln -s /usr/local/bedtools/2.25.0/bin/* /usr/local/bin
 
+# Blast
+
+wget -O $HOME/bin/sources/ncbi-blast-2.4.0+-2.x86_64.rpm ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.4.0+-2.x86_64.rpm
+sudo dnf install -yq $HOME/bin/sources/ncbi-blast-2.4.0+-2.x86_64.rpm
+
+# fastqc
+wget -O $HOME/bin/sources/fastqc_v0.11.5.zip http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
+unzip $HOME/bin/sources/fastqc_v0.11.5.zip -d $HOME/bin/sources
+chmod a+x $HOME/bin/sources/FastQC/fastqc
+sudo mkdir -p /usr/local/fastqc
+sudo mv $HOME/bin/sources/FastQC /usr/local/fastqc/0.11.5
+sudo ln -sf /usr/local/fastqc/0.11.5/fastqc /usr/local/bin/fastqc
+
 # install chrome
 su -c "cat << EOF > /etc/yum.repos.d/google-chrome.repo \
 [google-chrome] \
@@ -249,3 +263,8 @@ sudo Rscript -e "devtools::install_github('IRkernel/IRkernel', force = TRUE)"
 sudo Rscript -e "IRkernel::installspec(name = 'ir330', displayname = 'R 3.3.0')"
 Rscript -e "IRkernel::installspec(name = 'ir330', displayname = 'R 3.3.0')"
 sudo Rscript -e "source('https://bioconductor.org/biocLite.R');biocLite()"
+
+# Rstudio
+
+wget -O $HOME/bin/sources/rstudio-0.99.903-x86_64.rpm https://download1.rstudio.org/rstudio-0.99.903-x86_64.rpm
+sudo dnf install -y $HOME/bin/sources/rstudio-0.99.903-x86_64.rpm
