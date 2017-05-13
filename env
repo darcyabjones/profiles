@@ -5,3 +5,5 @@ stty -ixon
 
 export MODULEPATH=/home/darcy/.modules:$MODULEPATH
 export PATH=$PATH:/usr/local/ugene/1.23.0
+
+export BLASTDB=/home/darcy/data/BLASTDB
