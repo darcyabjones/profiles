@@ -1,5 +1,8 @@
 " Basic stuff
 
+" mouse stuff
+set mouse=a
+
 " Line numbers
 set number
 
@@ -55,6 +58,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'dracula/vim' " Colour theme
+Plugin 'christoomey/vim-tmux-navigator'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

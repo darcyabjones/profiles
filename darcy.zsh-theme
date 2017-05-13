@@ -6,6 +6,18 @@ git_custom_status() {
   fi
 } #$(work_in_progress)
 
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%} git:"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[yellow]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+
+ZSH_THEME_HG_PROMPT_PREFIX="%{$fg_bold[blue]%} hg:"
+ZSH_THEME_HG_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_HG_PROMPT_DIRTY="%{$fg[red]%}" # ✗
+ZSH_THEME_HG_PROMPT_CLEAN="%{$fg[green]%}"
+
+
 function _ssh_prompt_info {
   [[ -n $SSH_CONNECTION ]] && echo '%n@%M:'
 }
@@ -43,15 +55,6 @@ ret_status="%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%}%s)" #➜
 RPS1='$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info)$(_virtualenv_prompt_info) $EPS1'
 PROMPT='${ret_status}$(_ssh_prompt_info)%p%c % %{$reset_color%}'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%} git:"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}" # ✗
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
-
-ZSH_THEME_HG_PROMPT_PREFIX="%{$fg_bold[blue]%} hg:"
-ZSH_THEME_HG_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_HG_PROMPT_DIRTY="%{$fg[red]%}" # ✗
-ZSH_THEME_HG_PROMPT_CLEAN="%{$fg[green]%}"
 
 ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="%{$fg_bold[blue]%} python:%{$fg[green]%}"
 ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="%{$reset_color%}"

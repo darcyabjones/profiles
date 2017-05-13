@@ -6,7 +6,7 @@ setopt extendedglob
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/darcy/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -30,7 +30,9 @@ antigen bundle robbyrussell/oh-my-zsh lib/
 #
 # Antigen Theme
 #
+
 antigen theme darcyabjones/profiles darcy
+#antigen theme https://github.com/dracula/zsh.git dracula
 
 #
 # Antigen Bundles
