@@ -22,6 +22,29 @@ set colorcolumn=+1
 set splitbelow
 set splitright
 
+" Enable xterm style C-Arrow cursor movements when in TMUX
+" See https://sunaku.github.io/vim-256color-bce.html for more
+if &term =~ '^screen'
+	" tmux will send xterm-style keys when its xterm-keys option is on
+	execute "set <xUp>=\e[1;*A"
+	execute "set <xDown>=\e[1;*B"
+	execute "set <xRight>=\e[1;*C"
+	execute "set <xLeft>=\e[1;*D"
+	
+	" Page Keys
+	" Seems to work without these
+	" execute "set t_kP=\e[5;*~"
+	" execute "set t_kN=\e[6;*~"
+endif
+
+" Clean up some colour stuff that gets weird in xterm-256 envs
+if &term =~ '256color'
+	" disable Background Color Erase (BCE) so that color schemes
+	" render properly when inside 256-color tmux and GNU screen.
+	" see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+	set t_ut=
+endif       
+
 " Setup Vundle package manager 
 
 set nocompatible              " be iMproved, required
