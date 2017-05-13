@@ -3,6 +3,21 @@
 " Line numbers
 set number
 
+set ruler " Always show cursor
+
+"Refresh rate in milliseconds
+set updatetime=250
+
+set incsearch " do incremental searching
+set showcmd " display incomplete commands
+
+" make it obvious where 80 chars is
+set textwidth=80
+set colorcolumn=+1
+
+" Open new splits to right and bottom
+set splitbelow
+set splitright
 
 " Setup Vundle package manager 
 
@@ -39,6 +54,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'dracula/vim' " Colour theme
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -69,4 +85,6 @@ let g:syntastic_check_on_wq = 0
 " Enables status bar to be always on
 set laststatus=2
 
-
+" Set theme
+syntax on
+color dracula
