@@ -3,7 +3,8 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt extendedglob
-bindkey -e
+
+
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
@@ -83,3 +84,10 @@ antigen bundle debian
 
 # Tell antigen that you're done.
 antigen apply
+
+# Vim style keybindings
+set -o vi
+bindkey -v
+
+# Update mode change register to 0.1 sec
+export KEYTIMEOUT=1

@@ -22,6 +22,17 @@ set colorcolumn=+1
 set splitbelow
 set splitright
 
+" Slightly nicer tab completion in ex
+set wildmenu
+
+" Enable invisible characters
+set list
+set listchars=tab:˒\ ,eol:¬,trail:-
+
+" Search into subfolders
+" Tab completion when matching files in buffer
+"set path+=**
+
 " Enable xterm style C-Arrow cursor movements when in TMUX
 " See https://sunaku.github.io/vim-256color-bce.html for more
 if &term =~ '^screen'
@@ -43,7 +54,7 @@ if &term =~ '256color'
 	" render properly when inside 256-color tmux and GNU screen.
 	" see also http://snk.tuxfamily.org/log/vim-256color-bce.html
 	set t_ut=
-endif       
+endif
 
 " Setup Vundle package manager 
 
@@ -82,6 +93,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'dracula/vim' " Colour theme
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'kien/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -115,3 +127,10 @@ set laststatus=2
 " Set theme
 syntax on
 color dracula
+		
+
+" invisible character colours
+highlight NonText ctermfg=61
+highlight SpecialKey ctermfg=61 ctermbg=none
+
+
