@@ -72,7 +72,7 @@ VIINS="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[yellow]%}insert${ZSH_THEME_VIM_PROMPT
 VINOR="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[red]%}normal${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 
 
-function vi_mode_prompt_info() {
+function _vim_prompt_info() {
   echo "${${KEYMAP/vicmd/$VINOR}/(main|viins)/$VIINS}"
 }
 
@@ -80,7 +80,7 @@ function vi_mode_prompt_info() {
 ret_status="%(?:%{$fg_bold[yellow]%}:%{$fg_bold[red]%}%s)" #➜
 
 # Combine it all into a final right-side prompt
-RPS1='$(vi_mode_prompt_info)$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info)$(_virtualenv_prompt_info) $EPS1'
+RPS1='$(_vim__prompt_info)$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info)$(_virtualenv_prompt_info) $EPS1'
 PROMPT='${ret_status}$(_ssh_prompt_info)%p%c % %{$reset_color%}'
 
 
