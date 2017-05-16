@@ -88,7 +88,7 @@ antigen bundle debian
 antigen apply
 
 # Vim style keybindings
-set -o vi
+#set -o vi
 bindkey -v
 
 # Update mode change register to 0.1 sec

@@ -76,3 +76,4 @@ ZSH_THEME_PYENV_PROMPT_SUFFIX="%{$reset_color%}"
 
 ZSH_THEME_RVM_PROMPT_PREFIX="%{$fg_bold[blue]%} ruby:%{$fg[yellow]%}"
 ZSH_THEME_RVM_PROMPT_SUFFIX="%{$reset_color%}"
+
