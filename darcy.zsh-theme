@@ -53,12 +53,14 @@ function _pyenv_prompt_info {
 
 # set VIMODE according to the current mode (default “[i]”)
 VIMODE='insert'
+VIINFO="${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
+
 function zle-keymap-select() {
   VIMODE="${${KEYMAP/vicmd/%{$fg[red]%}normal}/(main|viins)/insert}"
   VIINFO="${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 
   zle reset-prompt
-  #zle -R
+  zle -R
 }
 zle -N zle-keymap-select
 
