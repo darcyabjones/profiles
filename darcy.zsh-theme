@@ -56,8 +56,9 @@ VIMODE='insert'
 function zle-keymap-select() {
   VIMODE="${${KEYMAP/vicmd/%{$fg[red]%}normal}/(main|viins)/insert}"
   zle reset-prompt
-  zle -R
+  #zle -R
 }
+zle -N zle-keymap-select
 
 function _vim_prompt_info {
   echo "${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
