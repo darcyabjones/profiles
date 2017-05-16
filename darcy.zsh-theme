@@ -51,6 +51,18 @@ function _pyenv_prompt_info {
 
 # Vi mode indicator
 
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+}
+
+# Ensure that the prompt is redrawn when the terminal size changes.
+TRAPWINCH() {
+  zle &&  zle -R
+}
+
+zle -N zle-keymap-select
+
 # set VIMODE according to the current mode (default “[i]”)
 VIMODE='insert'
 VIINFO="${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
