@@ -62,7 +62,7 @@ if [[ "$MODE_INDICATOR" == "" ]]; then
 fi
 
 function vi_mode_prompt_info() {
-  echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+  echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/test(main|viins)/}"
 }
 
 
