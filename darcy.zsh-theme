@@ -51,20 +51,17 @@ function _pyenv_prompt_info {
 
 # Vi mode indicator
 
-# if mode indicator wasn't setup by theme, define default
+# set VIMODE according to the current mode (default “[i]”)
+VIMODE='insert'
 function zle-keymap-select() {
+  VIMODE="${${KEYMAP/vicmd/normal}/(main|viins)/insert}"
   zle reset-prompt
   zle -R
 }
 
-if [[ "$MODE_INDICATOR" == "" ]]; then
-  MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
-fi
-
-function vi_mode_prompt_info() {
-  echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/test(main|viins)/}"
+function _vim_prompt_info {
+  echo "${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 }
-
 
 ret_status="%(?:%{$fg_bold[yellow]%}:%{$fg_bold[red]%}%s)" #➜
 
@@ -72,6 +69,9 @@ ret_status="%(?:%{$fg_bold[yellow]%}:%{$fg_bold[red]%}%s)" #➜
 RPS1='$(vi_mode_prompt_info)$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info)$(_virtualenv_prompt_info) $EPS1'
 PROMPT='${ret_status}$(_ssh_prompt_info)%p%c % %{$reset_color%}'
 
+
+ZSH_THEME_VIM_PROMPT_PREFIX="%{fg_bold[blue]%} vim:%{$fg[yellow]%}"
+ZSH_THEME_VIM_PROMPT_SUFFIX="%{$reset_color%}"
 
 ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="%{$fg_bold[blue]%} python:%{$fg[yellow]%}"
 ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="%{$reset_color%}"
