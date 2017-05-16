@@ -55,27 +55,24 @@ function _pyenv_prompt_info {
 VIMODE='insert'
 VIINFO="${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 
-function zle-keymap-select() {
-  VIMODE="${${KEYMAP/vicmd/%{$fg[red]%}normal}/(main|viins)/insert}"
-  VIINFO="${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 
-  zle reset-prompt
-  zle -R
-}
-zle -N zle-keymap-select
+VIINS="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[yellow]%}insert${ZSH_THEME_VIM_PROMPT_SUFFIX}"
+VINOR="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[red]%}normal${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 
-function _vim_prompt_info {
-  echo "${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
+
+function vi_mode_prompt_info() {
+  echo "${${KEYMAP/vicmd/$VINOR}/(main|viins)/$VIINS}"
 }
+
 
 ret_status="%(?:%{$fg_bold[yellow]%}:%{$fg_bold[red]%}%s)" #➜
 
 # Combine it all into a final right-side prompt
-RPS1='${VIINFO}$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info)$(_virtualenv_prompt_info) $EPS1'
+RPS1='$(vi_mode_prompt_info)$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info)$(_virtualenv_prompt_info) $EPS1'
 PROMPT='${ret_status}$(_ssh_prompt_info)%p%c % %{$reset_color%}'
 
 
-ZSH_THEME_VIM_PROMPT_PREFIX="%{$fg_bold[blue]%} vim:%{$fg[yellow]%}"
+ZSH_THEME_VIM_PROMPT_PREFIX="%{$fg_bold[blue]%} vim:"
 ZSH_THEME_VIM_PROMPT_SUFFIX="%{$reset_color%}"
 
 ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="%{$fg_bold[blue]%} python:%{$fg[yellow]%}"
