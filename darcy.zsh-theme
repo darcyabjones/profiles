@@ -54,7 +54,7 @@ function _pyenv_prompt_info {
 # set VIMODE according to the current mode (default “[i]”)
 VIMODE='insert'
 function zle-keymap-select() {
-  VIMODE="${${KEYMAP/vicmd/%{%fg[red]%}normal}/(main|viins)/insert}"
+  VIMODE="${${KEYMAP/vicmd/%{$fg[red]%}normal}/(main|viins)/insert}"
   zle reset-prompt
   zle -R
 }
@@ -70,7 +70,7 @@ RPS1='$(_vim_prompt_info)$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info
 PROMPT='${ret_status}$(_ssh_prompt_info)%p%c % %{$reset_color%}'
 
 
-ZSH_THEME_VIM_PROMPT_PREFIX="%{fg_bold[blue]%} vim:%{$fg[yellow]%}"
+ZSH_THEME_VIM_PROMPT_PREFIX="%{$fg_bold[blue]%} vim:%{$fg[yellow]%}"
 ZSH_THEME_VIM_PROMPT_SUFFIX="%{$reset_color%}"
 
 ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="%{$fg_bold[blue]%} python:%{$fg[yellow]%}"
