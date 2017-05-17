@@ -51,7 +51,7 @@ function _pyenv_prompt_info {
 
 # Vi mode indicator
 
-function zle-keymap-select() {
+function zsle-line-init zle-keymap-select {
   zle reset-prompt
   zle -R
 }
@@ -91,4 +91,3 @@ ZSH_THEME_PYENV_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_RVM_PROMPT_PREFIX="%{$fg_bold[blue]%} ruby:%{$fg[yellow]%}"
 ZSH_THEME_RVM_PROMPT_SUFFIX="%{$reset_color%}"
 
-zle reset-prompt
