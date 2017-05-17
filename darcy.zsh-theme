@@ -60,16 +60,13 @@ zle -N zle-keymap-select
 zle -N zle-line-init
 
 # set VIMODE according to the current mode (default “[i]”)
-VIMODE='insert'
-VIINFO="${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
-
 
 VIINS="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[yellow]%}insert${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 VINOR="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[red]%}normal${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 
 
 function _vim_state {
-  echo "${${KEYMAP/vicmd/nor}/(main|viins)/ins}"
+  echo "${${KEYMAP/vicmd/%{$fg[red]%}nor}/(main|viins)/%{$fg[yellow]%}ins}"
 }
 
 function _vim_prompt_info() {
