@@ -49,7 +49,7 @@ antigen bundle docker
 antigen bundle ssh-agent
 antigen bundle gnu-utils
 antigen bundle vi-mode
-
+antigen bundle history-substring-search
 
 #antigen bundle atom
 
@@ -98,3 +98,10 @@ bindkey -M viins "^[[1;5C" forward-word
 bindkey -M viins "^[[1;5D" backward-word
 bindkey -M vicmd "^[[1;5C" forward-word
 bindkey -M vicmd "^[[1;5D" backward-word
+
+# Re-enable default UP/Down history search
+
+bindkey '^R' history-incremental-search-backward
+
+bindkey -M viins '^[[A' up-line-or-search
+bindkey -M viins '^[[B' down-line-or-search

@@ -56,11 +56,6 @@ function zle-keymap-select() {
   zle -R
 }
 
-# Ensure that the prompt is redrawn when the terminal size changes.
-TRAPWINCH() {
-  zle &&  zle -R
-}
-
 zle -N zle-keymap-select
 
 # set VIMODE according to the current mode (default “[i]”)
@@ -84,7 +79,7 @@ RPS1='$(_vim_prompt_info)$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info
 PROMPT='${ret_status}$(_ssh_prompt_info)%p%c % %{$reset_color%}'
 
 
-ZSH_THEME_VIM_PROMPT_PREFIX="%{$fg_bold[blue]%} vim:"
+ZSH_THEME_VIM_PROMPT_PREFIX="%{$fg_bold[blue]%} vi:"
 ZSH_THEME_VIM_PROMPT_SUFFIX="%{$reset_color%}"
 
 ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="%{$fg_bold[blue]%} python:%{$fg[yellow]%}"
@@ -96,3 +91,4 @@ ZSH_THEME_PYENV_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_RVM_PROMPT_PREFIX="%{$fg_bold[blue]%} ruby:%{$fg[yellow]%}"
 ZSH_THEME_RVM_PROMPT_SUFFIX="%{$reset_color%}"
 
+zle reset-prompt
