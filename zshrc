@@ -48,6 +48,8 @@ antigen bundle rupa/z
 antigen bundle docker
 antigen bundle ssh-agent
 antigen bundle gnu-utils
+antigen bundle vi-mode
+
 
 #antigen bundle atom
 
@@ -86,8 +88,13 @@ antigen bundle debian
 antigen apply
 
 # Vim style keybindings
-set -o vi
+#set -o vi
 bindkey -v
 
 # Update mode change register to 0.1 sec
 export KEYTIMEOUT=1
+
+bindkey -M viins "^[[1;5C" forward-word
+bindkey -M viins "^[[1;5D" backward-word
+bindkey -M vicmd "^[[1;5C" forward-word
+bindkey -M vicmd "^[[1;5D" backward-word

@@ -49,12 +49,43 @@ function _pyenv_prompt_info {
   echo "${ZSH_THEME_PYENV_PROMPT_PREFIX}$(pyenv_prompt_info)${ZSH_THEME_PYENV_PROMPT_SUFFIX}"
 }
 
+# Vi mode indicator
+
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+}
+
+# Ensure that the prompt is redrawn when the terminal size changes.
+TRAPWINCH() {
+  zle &&  zle -R
+}
+
+zle -N zle-keymap-select
+
+# set VIMODE according to the current mode (default “[i]”)
+VIMODE='insert'
+VIINFO="${ZSH_THEME_VIM_PROMPT_PREFIX}${VIMODE}${ZSH_THEME_VIM_PROMPT_SUFFIX}"
+
+
+VIINS="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[yellow]%}insert${ZSH_THEME_VIM_PROMPT_SUFFIX}"
+VINOR="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[red]%}normal${ZSH_THEME_VIM_PROMPT_SUFFIX}"
+
+
+function _vim_prompt_info() {
+  echo "${${KEYMAP/vicmd/$VINOR}/(main|viins)/$VIINS}"
+}
+
+
 ret_status="%(?:%{$fg_bold[yellow]%}:%{$fg_bold[red]%}%s)" #➜
 
 # Combine it all into a final right-side prompt
-RPS1='$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info)$(_virtualenv_prompt_info) $EPS1'
+RPS1='$(_vim_prompt_info)$(_git_prompt_info)$(_hg_prompt_info)$(_rvm_prompt_info)$(_virtualenv_prompt_info) $EPS1'
 PROMPT='${ret_status}$(_ssh_prompt_info)%p%c % %{$reset_color%}'
 
+
+ZSH_THEME_VIM_PROMPT_PREFIX="%{$fg_bold[blue]%} vim:"
+ZSH_THEME_VIM_PROMPT_SUFFIX="%{$reset_color%}"
 
 ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="%{$fg_bold[blue]%} python:%{$fg[yellow]%}"
 ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="%{$reset_color%}"
@@ -64,3 +95,4 @@ ZSH_THEME_PYENV_PROMPT_SUFFIX="%{$reset_color%}"
 
 ZSH_THEME_RVM_PROMPT_PREFIX="%{$fg_bold[blue]%} ruby:%{$fg[yellow]%}"
 ZSH_THEME_RVM_PROMPT_SUFFIX="%{$reset_color%}"
+
