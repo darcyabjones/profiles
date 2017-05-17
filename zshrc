@@ -78,16 +78,6 @@ elif [[ $CURRENT_OS == 'Cygwin' ]]; then
 fi
 antigen bundle debian
 
-#
-# Antigen Theme
-#
-
-antigen theme darcyabjones/profiles darcy
-#antigen theme https://github.com/dracula/zsh.git dracula
-
-# Tell antigen that you're done.
-antigen apply
-
 # Vim style keybindings
 #set -o vi
 bindkey -v
@@ -106,3 +96,14 @@ bindkey '^R' history-incremental-search-backward
 
 bindkey -M viins '^[[A' up-line-or-search
 bindkey -M viins '^[[B' down-line-or-search
+
+#
+# Antigen Theme
+#
+
+antigen theme darcyabjones/profiles darcy
+#antigen theme https://github.com/dracula/zsh.git dracula
+
+# Tell antigen that you're done.
+antigen apply
+

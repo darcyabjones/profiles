@@ -57,6 +57,7 @@ function zle-line-init zle-keymap-select {
 }
 
 zle -N zle-keymap-select
+zle -N zle-line-init
 
 # set VIMODE according to the current mode (default “[i]”)
 VIMODE='insert'
