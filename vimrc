@@ -1,5 +1,8 @@
 " Basic stuff
 
+" Use system clipboard by default
+set clipboard=unnamedplus
+
 " mouse stuff
 set mouse=a
 
