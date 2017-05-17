@@ -68,8 +68,12 @@ VIINS="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[yellow]%}insert${ZSH_THEME_VIM_PROMPT
 VINOR="${ZSH_THEME_VIM_PROMPT_PREFIX}%{$fg[red]%}normal${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 
 
+function _vim_state {
+  echo "${${KEYMAP/vicmd/nor}/(main|viins)/ins}"
+}
+
 function _vim_prompt_info() {
-  echo "${${KEYMAP/vicmd/$VINOR}/(main|viins)/$VIINS}"
+  echo "${ZSH_THEME_VIM_PROMPT_PREFIX}$(_vim_state)${ZSH_THEME_VIM_PROMPT_SUFFIX}"
 }
 
 
