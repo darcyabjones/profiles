@@ -51,7 +51,7 @@ function _pyenv_prompt_info {
 
 # Vi mode indicator
 
-function zsle-line-init zle-keymap-select {
+function zle-line-init zle-keymap-select {
   zle reset-prompt
   zle -R
 }
