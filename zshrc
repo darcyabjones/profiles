@@ -28,12 +28,6 @@ source $HOME/.antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle robbyrussell/oh-my-zsh lib/
 
-#
-# Antigen Theme
-#
-
-antigen theme darcyabjones/profiles darcy
-#antigen theme https://github.com/dracula/zsh.git dracula
 
 #
 # Antigen Bundles
@@ -83,6 +77,13 @@ elif [[ $CURRENT_OS == 'Cygwin' ]]; then
     antigen bundle cygwin
 fi
 antigen bundle debian
+
+#
+# Antigen Theme
+#
+
+antigen theme darcyabjones/profiles darcy
+#antigen theme https://github.com/dracula/zsh.git dracula
 
 # Tell antigen that you're done.
 antigen apply
