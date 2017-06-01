@@ -17,9 +17,16 @@ set updatetime=250
 set incsearch " do incremental searching
 set showcmd " display incomplete commands
 
+" this enables "visual" wrapping
+set wrap
+
 " make it obvious where 80 chars is
-set textwidth=80
-set colorcolumn=+1
+set colorcolumn=80
+
+" this turns off physical line wrapping (ie: automatic insertion of newlines)
+set textwidth=0
+set wrapmargin=0
+
 
 " Open new splits to right and bottom
 set splitbelow
@@ -137,3 +144,12 @@ highlight NonText ctermfg=61
 highlight SpecialKey ctermfg=61 ctermbg=none
 
 
+" Indentation defaults
+" by default, the indent is 4 spaces.
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+" for html/rb files, 2 spaces
+autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
