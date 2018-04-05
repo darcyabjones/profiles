@@ -28,7 +28,6 @@ source $HOME/.antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle robbyrussell/oh-my-zsh lib/
 
-
 #
 # Antigen Bundles
 #
