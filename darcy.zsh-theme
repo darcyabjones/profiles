@@ -51,7 +51,7 @@ function _pyenv_prompt_info {
 
 function _conda_prompt_info {
     if [[ -n $CONDA_DEFAULT_ENV ]]; then
-    echo "{ZSH_THEME_CONDA_PROMPT_PREFIX}${CONDA_DEFAULT_ENV}${ZSH_THEME_CONDA_PROMPT_SUFFIX}"
+    echo "${ZSH_THEME_CONDA_PROMPT_PREFIX}${CONDA_DEFAULT_ENV}${ZSH_THEME_CONDA_PROMPT_SUFFIX}"
     fi
 }
 
