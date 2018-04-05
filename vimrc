@@ -104,6 +104,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'dracula/vim' " Colour theme
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
+Plugin 'jpalardy/vim-slime'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -134,6 +135,10 @@ let g:syntastic_check_on_wq = 0
 " Enables status bar to be always on
 set laststatus=2
 
+" Set slime target to be tmux terminal by default
+" Requires that a tmux session be active
+let g:slime_target = "tmux"
+
 " Set theme
 syntax on
 color dracula
@@ -153,3 +158,7 @@ set expandtab
 
 " for html/rb files, 2 spaces
 autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
+
+" for html/rb files, 2 spaces
+autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
