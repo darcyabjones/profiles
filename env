@@ -1,7 +1,3 @@
-export SHELL=/usr/bin/zsh
-export SOURCES=/home/darcy/bin/sources
-
 stty -ixon
 
-export MODULEPATH=$HOME/.modules:$MODULEPATH
 export PATH=$PATH:$HOME/.miniconda/bin

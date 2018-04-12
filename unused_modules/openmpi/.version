@@ -1,5 +1,0 @@
-#%Module1.0###########################################################
-##
-## version file for Open-MPI
-##
-set ModulesVersion  "1.6.6rc1"

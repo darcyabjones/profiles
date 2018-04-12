@@ -1,5 +1,0 @@
-#%licence: (CUSTOM, Binary) The software is provided "as is" without warranty of any kind. In no event shall the author be held responsible for any damage resulting from the use of this software, including but not limited to the frustration that you may experience in using the package. The program package, including source codes, example data sets, executables, and the user guide, is distributed free of charge for academic use only.
-#%cite: "New Algorithms and Methods to Estimate Maximum-Likelihood Phylogenies: Assessing the Performance of PhyML 3.0." Guindon S., Dufayard J.F., Lefort V., Anisimova M., Hordijk W., Gascuel O. Systematic Biology, 59(3):307-21, 2010.
-#%url: http://www.atgc-montpellier.fr/phyml/
-#%docs: http://www.atgc-montpellier.fr/download/papers/phyml_manual_2012.pdf
-#%desc: PhyML is a phylogeny software based on the maximum-likelihood principle
