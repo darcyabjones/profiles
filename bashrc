@@ -17,4 +17,3 @@ source $HOME/.aliases
 # ENV variables
 
 source $HOME/.env
-

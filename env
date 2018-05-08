@@ -3,4 +3,8 @@
 export VISUAL=vim
 export EDITOR="${VISUAL}"
 
-export PATH=$PATH:$HOME/.miniconda/bin
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$PATH:$HOME/.miniconda3/bin
+
+export GOPATH=${HOME}/go
+export PATH=${PATH}:${GOPATH}/bin
