@@ -39,6 +39,12 @@ set wildmenu
 set list
 set listchars=tab:˒\ ,eol:¬,trail:-
 
+" Enable omnifunc completion
+" use C-x C-o
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+
 " Search into subfolders
 " Tab completion when matching files in buffer
 "set path+=**
@@ -97,6 +103,8 @@ Plugin 'tpope/vim-fugitive'
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9}
 
+
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
