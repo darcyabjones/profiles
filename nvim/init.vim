@@ -14,6 +14,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dracula/vim',{'as':'dracula'}
+Plug 'kassio/neoterm'
+Plug 'JuliaEditorSupport/julia-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
@@ -92,11 +97,25 @@ endif
 set background=dark
 colorscheme dracula "palenight
 
-" Italics for my favorite color scheme
-let g:palenight_terminal_italics=1
-
 " Deoplete - autocompletion
 let g:deoplete#enable_at_startup = 1
+
+filetype off
+let &runtimepath.=',~/.vim/bundle/neoterm'
+filetype plugin on
+
+" Use gx{text-object} in normal mode
+nmap gf <Plug>(neoterm-repl-send)
+
+" Send selected contents in visual mode.
+xmap gf <Plug>(neoterm-repl-send)
+
+nmap gff <Plug>(neoterm-repl-send-line)
+let g:neoterm_autoinsert = 0
+let g:neoterm_autoscroll = 1
+
+tnoremap <Esc> <C-\><C-n>
+
 
 " Airline settings
 " Enables status bar to be always on
@@ -108,3 +127,6 @@ let g:airline_theme='dracula'
 highlight NonText ctermfg=59 guifg=#697098
 highlight SpecialKey ctermfg=59 ctermbg=none guifg=#697098
 highlight ColorColumn ctermbg=59 guibg=#282a36
+
+
+silent! helptags ALL
