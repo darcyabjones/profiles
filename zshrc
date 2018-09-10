@@ -18,6 +18,9 @@ compinit
 source $HOME/.aliases
 source $HOME/.env
 
+### AWS autocompletion
+source ~/.local/bin/aws_zsh_completer.sh
+
 
 ### Antigen Stuff ###
 source $HOME/.antigen/antigen.zsh

@@ -104,8 +104,8 @@ Plugin 'tpope/vim-fugitive'
 " Plugin 'ascenator/L9', {'name': 'newL9}
 
 
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'scrooloose/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
@@ -113,6 +113,8 @@ Plugin 'dracula/vim' " Colour theme
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jpalardy/vim-slime'
+Plugin 'fatih/vim-go'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
