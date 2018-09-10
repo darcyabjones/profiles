@@ -1,7 +1,9 @@
 alias la='ls -la'
 alias ll='ls -l'
 
-if [ -e  /usr/bin/gvim ]; then
+if [ -e /usr/bin/nvim ]; then
+    alias vim='nvim'
+elif [ -e /usr/bin/gvim ]; then
     alias vim='gvim -v'
+else
 fi
-

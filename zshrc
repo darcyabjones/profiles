@@ -44,9 +44,7 @@ antigen bundle rupa/z
 antigen bundle docker
 antigen bundle ssh-agent
 antigen bundle gnu-utils
-#antigen bundle vi-mode
 antigen bundle history-substring-search
-
 
 antigen bundle node
 
