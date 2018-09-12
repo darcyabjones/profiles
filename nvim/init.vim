@@ -83,6 +83,8 @@ autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " for html/rb files, 2 spaces
 autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
+" Disable automatic folding of markdown
+let g:vim_markdown_folding_disabled = 1
 
 " Colour and font settings
 if (has("nvim"))
