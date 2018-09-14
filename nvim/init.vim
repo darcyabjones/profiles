@@ -51,7 +51,7 @@ set wrap
 
 " make it obvious where 80 chars is
 set colorcolumn=80
-let &colorcolumn=join(range(81,999),",")
+"let &colorcolumn=join(range(81,999),",")
 
 " this turns off physical line wrapping (ie: automatic insertion of newlines)
 set textwidth=0
@@ -83,6 +83,8 @@ autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " for html/rb files, 2 spaces
 autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
+" Disable automatic folding of markdown
+let g:vim_markdown_folding_disabled = 1
 
 " Colour and font settings
 if (has("nvim"))
@@ -126,7 +128,7 @@ let g:airline_theme='dracula'
 " invisible character colours
 highlight NonText ctermfg=59 guifg=#697098
 highlight SpecialKey ctermfg=59 ctermbg=none guifg=#697098
-highlight ColorColumn ctermbg=59 guibg=#282a36
+highlight ColorColumn ctermbg=236 guibg=#44475a
 
 
 silent! helptags ALL
