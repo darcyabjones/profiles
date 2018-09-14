@@ -6,4 +6,5 @@ if [ -e /usr/bin/nvim ]; then
 elif [ -e /usr/bin/gvim ]; then
     alias vim='gvim -v'
 else
+    echo ''
 fi
