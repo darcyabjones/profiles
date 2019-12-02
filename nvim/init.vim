@@ -83,6 +83,16 @@ autocmd Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " for html/rb files, 2 spaces
 autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
+" for html/rb files, 2 spaces
+autocmd Filetype r setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
+" Disable weird R indentation
+let r_indent_align_args = 0
+
+" Set vim-r-plugin to mimics ess :
+let r_indent_ess_comments = 0
+let r_indent_ess_compatible = 0
+
 " Disable automatic folding of markdown
 let g:vim_markdown_folding_disabled = 1
 

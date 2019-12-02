@@ -76,6 +76,21 @@ elif [[ $CURRENT_OS == 'Cygwin' ]]; then
     antigen bundle cygwin
 fi
 
+
+# Temporary fix for mv cannot stat error.
+# See: https://github.com/robbyrussell/oh-my-zsh/issues/7094
+if [ "$_Z_NO_RESOLVE_SYMLINKS" ]; then
+    _z_precmd() {
+        (_z --add "${PWD:a}" &)
+		: $RANDOM
+    }
+else
+    _z_precmd() {
+        (_z --add "${PWD:A}" &)
+		: $RANDOM
+    }
+fi
+
 # Vim style keybindings
 #set -o vi
 #bindkey -v
@@ -104,4 +119,3 @@ antigen theme darcyabjones/profiles darcy
 
 # Tell antigen that you're done.
 antigen apply
-

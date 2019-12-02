@@ -5,5 +5,8 @@ if [ -e /usr/bin/nvim ]; then
     alias vim='nvim'
 elif [ -e /usr/bin/gvim ]; then
     alias vim='gvim -v'
-else
 fi
+
+start_conda () {
+    source /home/darcyabjones/miniconda3/etc/profile.d/conda.sh
+}

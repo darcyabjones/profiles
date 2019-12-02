@@ -1,3 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/run/media/darcyabjones/scratch/projects/projects/20170512-pnod_pangenomics'
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/darcyabjones/Libs/panann/containers'
+let g:netrw_dirhist_2='/home/darcyabjones/Libs/my_predector/containers/sources/AUCpreD_v1.03_release'
+let g:netrw_dirhist_3='/home/darcyabjones/Libs/pypafgraph/pypafgraph'
+let g:netrw_dirhist_4='/home/darcyabjones/Libs/pypafgraph/pypafgraph/scripts'
+let g:netrw_dirhist_5='/home/darcyabjones/Libs/pypafgraph/pypafgraph'
+let g:netrw_dirhist_6='/home/darcyabjones/Libs/pypafgraph/pypafgraph/scripts'
+let g:netrw_dirhist_7='/home/darcyabjones/Libs/pypafgraph/seqwish_example'
+let g:netrw_dirhist_8='/home/darcyabjones/Libs/pypafgraph/pypafgraph'
+let g:netrw_dirhist_9='/home/darcyabjones/Libs/seguid/src'
