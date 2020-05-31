@@ -19,7 +19,7 @@ source $HOME/.aliases
 source $HOME/.env
 
 ### AWS autocompletion
-source ~/.local/bin/aws_zsh_completer.sh
+#source ~/.local/bin/aws_zsh_completer.sh
 
 
 ### Antigen Stuff ###
