@@ -2,13 +2,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'tpope/vim-sensible'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
@@ -19,6 +12,19 @@ Plug 'JuliaEditorSupport/julia-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'plasticboy/vim-markdown'
+Plug 'LukeGoodsell/nextflow-vim'
+
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+" Deoplete - autocompletion
+let g:deoplete#enable_at_startup = 1
+
 
 call plug#end()
 
@@ -108,9 +114,6 @@ endif
 
 set background=dark
 colorscheme dracula "palenight
-
-" Deoplete - autocompletion
-let g:deoplete#enable_at_startup = 1
 
 filetype off
 let &runtimepath.=',~/.vim/bundle/neoterm'

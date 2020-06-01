@@ -1,7 +1,7 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 setopt extendedglob
 
 
@@ -15,21 +15,18 @@ compinit
 
 
 ### Paths etc
-source $HOME/.aliases
-source $HOME/.env
-
-### AWS autocompletion
-source ~/.local/bin/aws_zsh_completer.sh
+source "${HOME}/.profiles/aliases"
+source "${HOME}/.profiles/env"
 
 
 ### Antigen Stuff ###
-source $HOME/.antigen/antigen.zsh
+source ${HOME}/.antigen/antigen.zsh
 
 #
 # Load the oh-my-zsh's library.
 #
 antigen use oh-my-zsh
-antigen bundle robbyrussell/oh-my-zsh lib/
+#antigen bundle robbyrussell/oh-my-zsh lib/
 
 #
 # Antigen Bundles
@@ -37,16 +34,13 @@ antigen bundle robbyrussell/oh-my-zsh lib/
 antigen bundle git
 antigen bundle git-extras
 
-# antigen bundle tmuxinator
-# antigen bundle tmux
+antigen bundle tmux
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle rupa/z
 antigen bundle docker
 antigen bundle ssh-agent
 antigen bundle gnu-utils
+antigen bundle command-not-found
 antigen bundle history-substring-search
-
-antigen bundle node
 
 
 # Python Plugins
@@ -55,6 +49,9 @@ antigen bundle pyenv
 # antigen bundle python
 antigen bundle virtualenv
 antigen bundle pep8
+
+antigen bundle cargo
+antigen bundle rust
 
 # OS specific plugins
 if [[ $CURRENT_OS == 'OS X' ]]; then
@@ -119,3 +116,6 @@ antigen theme darcyabjones/profiles darcy
 
 # Tell antigen that you're done.
 antigen apply
+
+# added by travis gem
+[ -f /home/darcyabjones/.travis/travis.sh ] && source /home/darcyabjones/.travis/travis.sh
