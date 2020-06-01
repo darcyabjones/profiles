@@ -1,7 +1,7 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000
+SAVEHIST=1000
 setopt extendedglob
 
 
@@ -118,4 +118,4 @@ antigen theme darcyabjones/profiles darcy
 antigen apply
 
 # added by travis gem
-[ -f /home/darcyabjones/.travis/travis.sh ] && source /home/darcyabjones/.travis/travis.sh
+[ -f "${HOME}.travis/travis.sh" ] && source "${HOME}/.travis/travis.sh" || true

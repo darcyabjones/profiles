@@ -2,4 +2,5 @@ channels:
   - bioconda
   - conda-forge
   - defaults
-changeps1: False
+changeps1: false
+auto_activate_base: false
