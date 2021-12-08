@@ -36,7 +36,46 @@ call plug#end()
 set nocompatible
 
 " Use system clipboard by default
-set clipboard=unnamedplus
+
+set clipboard+=unnamedplus
+"     " WSL yank support
+"     let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+"     if executable(s:clip)
+"         augroup WSLYank
+"             autocmd!
+"             autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+"         augroup END
+"     endif
+" endif
+if system('uname -a | egrep [Mm]icrosoft') != ''
+    if executable('win32yank.exe')
+        let g:clipboard = {
+                  \   'name': 'win32yank-wsl',
+                  \   'copy': {
+                  \      '+': 'win32yank.exe -i --crlf',
+                  \      '*': 'win32yank.exe -i --crlf',
+                  \    },
+                  \   'paste': {
+                  \      '+': 'win32yank.exe -o --lf',
+                  \      '*': 'win32yank.exe -o --lf',
+                  \   },
+                  \   'cache_enabled': 0,
+                  \ }
+    else
+        let g:clipboard = {
+                  \ 'name': 'defaultyank',
+                  \   'copy': {
+                  \      '+': 'clip.exe',
+                  \      '*': 'clip.exe',
+                  \    },
+                  \   'paste': {
+                  \      '+': 'powershell.exe Get-Clipboard',
+                  \      '*': 'powershell.exe Get-Clipboard',
+                  \   },
+                  \   'cache_enabled': 0,
+                  \ }
+    endif
+endif
 
 syntax on
 
@@ -111,9 +150,9 @@ if (has("nvim"))
 endif
 
 
-if (has("termguicolors"))
-  set termguicolors
-endif
+" if (has("termguicolors"))
+"  set termguicolors
+" endif
 
 set background=dark
 colorscheme dracula "palenight
