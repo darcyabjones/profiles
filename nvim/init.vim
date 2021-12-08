@@ -150,9 +150,9 @@ if (has("nvim"))
 endif
 
 
-if (has("termguicolors"))
-  set termguicolors
-endif
+" if (has("termguicolors"))
+"  set termguicolors
+" endif
 
 set background=dark
 colorscheme dracula "palenight
